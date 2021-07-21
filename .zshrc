@@ -6,7 +6,6 @@ plugins=(
   git
   themes
   alias-finder
-  archlinux
   cp
   gitfast
   sudo
@@ -37,14 +36,33 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 
 export EDITOR='vim'
 
+# general Aliases
 alias btop="bpytop"
 alias r="ranger"
 alias tmux="tmux -2"
 alias cp="cpv -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
+
+alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc && echo 'Update successful'"
+
+# wireguard aliases
 alias wg0="sudo systemctl stop wg-quick@wg1 && sudo systemctl start wg-quick@wg0"
 alias wg1="sudo systemctl stop wg-quick@wg0 && sudo systemctl start wg-quick@wg1"
 
+# ctf aliases
+rs() {
+  rustscan -b 500 -a $1 -- -A | tee rustscan.log
+}
+
+gob() {
+  gobuster dir -u $1 -w /usr/share/dirbuster/directory-list-2.3-medium.txt | tee gobuster.log
+}
+
+nik() {
+  nikto -h $1 | tee nikto.log
+}
+
+# pfetch
 echo
 pfetch
