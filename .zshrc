@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
-export PATH="$HOME/.local/bin/:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 ZSH_THEME="agnoster"
 
@@ -45,25 +45,44 @@ alias cp="cpv -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
 
-alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc && echo 'Update successful'"
+alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
 # wireguard aliases
 alias wg0="sudo systemctl stop wg-quick@wg1 && sudo systemctl start wg-quick@wg0"
 alias wg1="sudo systemctl stop wg-quick@wg0 && sudo systemctl start wg-quick@wg1"
 
+# clipboard aliases
+command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias getclip="xclip -selection c -o" }
+command -v wl-copy >/dev/null && { alias setclip="wl-copy" && alias getclip="wl-paste" }
+
 # ctf aliases
 rs() {
-  rustscan -b 500 -a $1 -- -A | tee rustscan.log
+  rustscan -b 5000 -a "$1" -- -A | tee rustscan.txt
 }
 
-gob() {
-  gobuster dir -u $1 -w /usr/share/dirbuster/directory-list-2.3-medium.txt | tee gobuster.log
+grip() {
+  grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' $1
 }
 
-nik() {
-  nikto -h $1 | tee nikto.log
+gettun() {
+  echo "$(ip a s tun0 | grip)"
 }
 
-# pfetch
+cptun() {
+  gettun | setclip
+}
+
+newctf() {
+  target_name="$1"
+  myip="$(gettun)"
+
+  mkdir "$target_name"
+  echo "# $target_name\n\nMy IP:         $myip\nTarget IP:     " > "$target_name"/notes.md
+}
+
+alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.txt -u"
+alias ferb="feroxbuster -o feroxbuster.txt -u"
+alias nik="nikto -o '$(pwd)'/nikto.txt -h"
+
 echo
 pfetch
