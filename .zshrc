@@ -56,33 +56,73 @@ command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias get
 command -v wl-copy >/dev/null && { alias setclip="wl-copy" && alias getclip="wl-paste" }
 
 # ctf aliases
+ctf_interface="tun0"
+
 rs() {
-  rustscan -b 5000 -a "$1" -- -A | tee rustscan.txt
+  if [[ "$1" != "" ]]; then
+    target_ip="$1"
+  fi
+  rustscan -b 2000 --ulimit 5000 -a "$target_ip" -- -A | tee rustscan.log
 }
 
 grip() {
   grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' $1
 }
 
-gettun() {
-  echo "$(ip a s tun0 | grip)"
+getip() {
+  echo "$(ip a s $ctf_interface | grip)"
 }
 
-cptun() {
-  gettun | setclip
+cpip() {
+  getip | setclip
 }
 
 newctf() {
   target_name="$1"
-  myip="$(gettun)"
+  target_name_upper="$(tr '[:lower:]' '[:upper:]' <<< ${target_name:0:1})${target_name:1}"
+  target_ip="$2"
+  my_ip="$(getip)"
 
-  mkdir "$target_name"
-  echo "# $target_name\n\nMy IP:         $myip\nTarget IP:     " > "$target_name"/notes.md
+  mkdir "$target_name" && cd "$target_name"
+  echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $target_ip" > notes.md
+  echo "$target_ip" > target_ip
 }
 
-alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.txt -u"
-alias ferb="feroxbuster -o feroxbuster.txt -u"
-alias nik="nikto -o '$(pwd)'/nikto.txt -h"
+sett() {
+  target_ip="$1"
+}
 
+genrev() {
+  if [[ "$2" != "" ]]; then
+    rev_port="$2"
+  else
+    rev_port="9999"
+  fi
+  echo "$(pms -i $(getip) -p $rev_port -s -t $1)"
+}
+
+genrevc() {
+  revshell="$(genrev $@)"
+  echo "$revshell" && setclip "$revshell"
+}
+
+revpayload() {
+  echo "#!/bin/sh\n$(genrev $@)" > payload
+  python -m http.server
+}
+
+alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u"
+alias gobt="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u http://$target_ip"
+alias ferb="feroxbuster -o feroxbuster.log -u"
+alias ferbt="feroxbuster -o feroxbuster.log -u https://$target_ip"
+alias nik="nikto -o '$(pwd)'/nikto_log.txt -h"
+alias nikt="nikto -o '$(pwd)'/nikto_log.txt -h http://$target_ip"
+alias pnt="ping $target_ip"
+
+if test -f target_ip; then
+  target_ip="$(cat target_ip)"
+fi
+
+# pfetch
 echo
 pfetch
