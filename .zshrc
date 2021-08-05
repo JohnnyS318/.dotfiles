@@ -84,7 +84,7 @@ newctf() {
   my_ip="$(getip)"
 
   mkdir "$target_name" && cd "$target_name"
-  echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $target_ip" > notes.md
+  echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $target_ip\n\n" > notes.md
   echo "$target_ip" > target_ip
 }
 
@@ -118,6 +118,7 @@ alias ferbt="feroxbuster -o feroxbuster.log -u https://$target_ip"
 alias nik="nikto -o '$(pwd)'/nikto_log.txt -h"
 alias nikt="nikto -o '$(pwd)'/nikto_log.txt -h http://$target_ip"
 alias pnt="ping $target_ip"
+alias up="python -m http.server"
 
 if test -f target_ip; then
   target_ip="$(cat target_ip)"
