@@ -129,6 +129,7 @@ alias up="python -m http.server"
 gobt() { gob "$tip" }
 ferbt() { ferb http://"$tip" }
 nikt() { nik "$tip" }
+pnt() { ping "$tip" }
 
 if test -f target_ip; then
   tip="$(cat target_ip)"
