@@ -35,6 +35,9 @@ ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=5
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=208,bold
 ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 
+# Fix slow pasting with zsh-autosuggest
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+
 export EDITOR='vim'
 
 # general Aliases
