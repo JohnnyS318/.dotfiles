@@ -39,6 +39,7 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 export EDITOR='vim'
+export MAKEFLAGS="-j$(nproc)"
 
 # general Aliases
 alias btop="bpytop"
