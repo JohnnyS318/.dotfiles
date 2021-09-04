@@ -39,7 +39,12 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 export EDITOR='vim'
+
+# Kernel build variables
 export MAKEFLAGS="-j$(nproc)"
+lscpu | grep "AMD Ryzen 5 3600" >/dev/null &&
+  export _microarchitecture=14;
+  export use_numa=n;
 
 # general Aliases
 alias btop="bpytop"
