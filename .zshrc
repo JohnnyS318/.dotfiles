@@ -44,7 +44,8 @@ export EDITOR='vim'
 export MAKEFLAGS="-j$(nproc)"
 lscpu | grep "AMD Ryzen 5 3600" >/dev/null &&
   export _microarchitecture=14;
-  export use_numa=n;
+  export _localmodcfg=y;
+  export use_tracers=n;
 
 # general Aliases
 alias btop="bpytop"
