@@ -42,6 +42,11 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 export EDITOR='vim'
 
+# Kernel build variables
+export MAKEFLAGS="-j$(nproc)"
+lscpu | grep "AMD Ryzen 5 3600" >/dev/null &&
+  export _microarchitecture=14;
+
 # general Aliases
 alias btop="bpytop"
 alias r="ranger"
