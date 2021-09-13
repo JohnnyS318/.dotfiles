@@ -12,6 +12,8 @@ plugins=(
   sudo
   vi-mode
   vscode
+  archlinux
+  ubuntu
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
