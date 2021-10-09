@@ -48,9 +48,9 @@ lscpu | grep "AMD Ryzen 5 3600" >/dev/null &&
   export _microarchitecture=14;
 
 # general Aliases
-alias btop="bpytop"
 alias r="ranger"
 alias tmux="tmux -2"
+alias pubip="curl ipinfo.io/ip"
 alias cp="cpv -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
