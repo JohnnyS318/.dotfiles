@@ -54,6 +54,7 @@ alias pubip="curl ipinfo.io/ip"
 alias cp="cpv -iv"
 alias mv="mv -iv"
 alias rm="rm -v"
+alias ip="ip -c"
 
 alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
