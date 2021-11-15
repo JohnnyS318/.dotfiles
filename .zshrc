@@ -58,11 +58,10 @@ alias r="ranger"
 alias tmux="tmux -2"
 alias pubip="curl ipinfo.io/ip"
 alias cp="cpv -iv"
-alias l="exa -lahg --icons --octal-permissions"
-alias ll="exa -lhg --icons --octal-permissions"
 alias mv="mv -iv"
 alias rm="rm -v"
 alias ip="ip -c"
+command -v exa >/dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions" }
 
 alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
