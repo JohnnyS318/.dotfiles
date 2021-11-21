@@ -76,6 +76,16 @@ alias gsync="git pull && git commit -am 'Update personal notes' && git push"
 command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias getclip="xclip -selection c -o" }
 command -v wl-copy >/dev/null && { alias setclip="wl-copy" && alias getclip="wl-paste" }
 
+# latex aliases
+java2pdf() {
+  echo "LS0tCmhlYWRlci1pbmNsdWRlczoKIC0gXHVzZXBhY2thZ2V7ZnZleHRyYX0KIC0gXERlZmluZVZlcmJhdGltRW52aXJvbm1lbnR7SGlnaGxpZ2h0aW5nfXtWZXJiYXRpbX17YnJlYWtsaW5lcyxjb21tYW5kY2hhcnM9XFxce1x9fQotLS0=" | base64 -d \
+    > "$(echo $1 | grep ".*\." --only-matching)md"
+  echo "\n\`\`\`java\n$(cat $1)\n\`\`\`" >> "$(echo $1 | grep ".*\." --only-matching)md"
+  pandoc "$(echo $1 | grep ".*\." --only-matching)md" --pdf-engine=xelatex -s -V geometry:margin=2cm -o \
+  "$(echo $1 | grep ".*\." --only-matching)pdf"
+  rm "$(echo $1 | grep ".*\." --only-matching)md" >/dev/null
+}
+
 # ctf aliases
 ctf_interface="tun0"
 
