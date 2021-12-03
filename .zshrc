@@ -42,7 +42,7 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # Fix sddm not unlocking keyring
 if [ "$DESKTOP_SESSION" = "plasma" ]; then
-  eval $(gnome-keyring-daemon --start)
+  command -v gnome-keyring-daemon && eval $(gnome-keyring-daemon --start)
   export SSH_AUTH_SOCK
 fi
 
