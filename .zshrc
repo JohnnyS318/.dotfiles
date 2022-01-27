@@ -48,11 +48,6 @@ fi
 
 export EDITOR='vim'
 
-# Kernel build variables
-export MAKEFLAGS="-j$(nproc)"
-lscpu | grep "AMD Ryzen 5 3600" >/dev/null &&
-  export _microarchitecture=14;
-
 # general Aliases
 alias r="ranger"
 alias tmux="tmux -2"
