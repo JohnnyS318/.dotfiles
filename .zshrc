@@ -40,12 +40,6 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 # Fix slow pasting with zsh-autosuggest
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
-# Fix sddm not unlocking keyring
-if [ "$DESKTOP_SESSION" = "plasma" ]; then
-  command -v gnome-keyring-daemon && eval $(gnome-keyring-daemon --start)
-  export SSH_AUTH_SOCK
-fi
-
 export EDITOR='vim'
 
 # general Aliases
