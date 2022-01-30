@@ -4,16 +4,10 @@ export PATH="$HOME/.local/bin:$PATH"
 ZSH_THEME="agnoster"
 
 plugins=(
-  git
   themes
-  alias-finder
   cp
-  gitfast
   sudo
   vi-mode
-  vscode
-  archlinux
-  ubuntu
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
