@@ -71,7 +71,7 @@ code2pdf() {
 }
 
 xconvert() {
-  xournalpp -p "$(echo "$1" | sed -e "s/.xopp//g").pdf" "$1"
+  xournalpp -p "$(echo "$1" | sed -e "s/.xopp//g")_x.pdf" "$1"
 }
 
 xconvertall() {
