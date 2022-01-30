@@ -70,6 +70,14 @@ code2pdf() {
   rm "$(echo $1 | grep ".*\." --only-matching)md" >/dev/null
 }
 
+xconvert() {
+  xournalpp -p "$(echo "$1" | sed -e "s/.xopp//g").pdf" "$1"
+}
+
+xconvertall() {
+  for file in *.xopp(.); do xconvert "$file"; done
+}
+
 # ctf aliases
 ctf_interface="tun0"
 
