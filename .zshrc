@@ -34,6 +34,9 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 # Fix slow pasting with zsh-autosuggest
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+# History size
+SAVEHIST=100000
+
 export EDITOR='vim'
 
 # general Aliases
