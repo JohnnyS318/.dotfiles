@@ -35,7 +35,7 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # History size
-SAVEHIST=100000
+SAVEHIST=50001
 
 export EDITOR='vim'
 
