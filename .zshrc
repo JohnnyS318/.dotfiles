@@ -49,6 +49,16 @@ alias rm="rm -v"
 alias ip="ip -c"
 command -v exa >/dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions" }
 
+# Quickly generate a password
+pwgen() {
+  if [ -z ${1} ]; then
+    _PWLENGTH=20
+  else
+    _PWLENGTH="$1"
+  fi
+  tr -dc _\!\"\%\&\/\(\)\=A-Z-a-z-0-9 < /dev/urandom | head -c "$_PWLENGTH"; echo
+}
+
 alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
 # wireguard aliases
