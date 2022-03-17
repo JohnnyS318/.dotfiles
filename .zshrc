@@ -49,6 +49,10 @@ alias rm="rm -v"
 alias ip="ip -c"
 command -v exa >/dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions" }
 
+portforward() {
+  socat TCP4-LISTEN:"$1",fork TCP4:"$2"
+}
+
 # Quickly generate a password
 pwgen() {
   if [ -z ${1} ]; then
