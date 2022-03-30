@@ -40,7 +40,6 @@ SAVEHIST=50001
 export EDITOR='vim'
 
 # general Aliases
-alias r="ranger"
 alias tmux="tmux -2"
 alias pubip="curl ipinfo.io/ip"
 alias cp="cpv -iv"
