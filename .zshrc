@@ -47,6 +47,7 @@ alias mv="mv -iv"
 alias rm="rm -v"
 alias ip="ip -c"
 command -v exa >/dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions" }
+command -v lf &>/dev/null || alias lf="ranger"
 
 portforward() {
   socat TCP4-LISTEN:"$1",fork TCP4:"$2"
