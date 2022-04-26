@@ -69,7 +69,7 @@ alias wg0="sudo systemctl stop wg-quick@wg1 && sudo systemctl start wg-quick@wg0
 alias wg1="sudo systemctl stop wg-quick@wg0 && sudo systemctl start wg-quick@wg1"
 
 # git aliases
-alias gsync="git pull && git commit -am 'Update personal notes' && git push"
+alias gsync="git pull && git add . && git commit -am 'Update' && git push"
 
 # clipboard aliases
 command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias getclip="xclip -selection c -o" }
