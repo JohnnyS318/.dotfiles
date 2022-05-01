@@ -95,6 +95,11 @@ xconvertall() {
   for file in *.xopp(.); do xconvert "$file"; done
 }
 
+# Compile and run c program
+crun() {
+  gcc -Wall -Wextra -pedantic -std=c17 -o "$(basename $1 .c).out" "$1" && ./"$(basename $1 .c).out"
+}
+
 # ctf aliases
 ctf_interface="tun0"
 
