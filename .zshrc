@@ -34,6 +34,12 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 # Fix slow pasting with zsh-autosuggest
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
+# Autojump
+[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+
+# thefuck
+command -v thefuck &>/dev/null && eval $(thefuck --alias)
+
 # History size
 SAVEHIST=50001
 
