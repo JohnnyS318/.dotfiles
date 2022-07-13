@@ -35,7 +35,10 @@ ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # Autojump
+# Arch
 [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+# Debian
+[[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh
 
 # thefuck
 command -v thefuck &>/dev/null && eval $(thefuck --alias)
