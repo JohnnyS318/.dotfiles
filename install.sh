@@ -90,8 +90,10 @@ install_file () {
 }
 
 # remove SpaceVim if installed
-[ -e ~/.SpaceVim ] && curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
-
+[ -e ~/.SpaceVim ] && {
+    curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
+    rm -rf ~/.SpaceVim
+}
 # create symlinks of dotfiles
 install_file .zshrc
 
