@@ -1,5 +1,5 @@
 # source environment variables
-source ~/.dotfiles/.config/env
+source ~/.config/env
 
 # set zsh theme
 ZSH_THEME="agnoster"
@@ -44,10 +44,10 @@ DISABLE_MAGIC_FUNCTIONS=1
 alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
 # source aliasrc for aliases
-source ~/.dotfiles/.config/aliasrc
+source ~/.config/aliasrc
 
 # more aliases for ctfs, disabled most of the time
-#source ~/.dotfiles/.config/ctfrc
+#source ~/.config/ctfrc
 
 echo
 pfetch
