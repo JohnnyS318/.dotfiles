@@ -8,6 +8,7 @@ plugins=(
   cp
   sudo
   vi-mode
+  git
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
