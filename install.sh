@@ -62,7 +62,7 @@ install_zsh_custom () {
 # install zsh plugins used in .zshrc
 install_zsh_custom plugins zsh-users zsh-autosuggestions
 install_zsh_custom plugins zsh-users zsh-syntax-highlighting
-install_zsh_custom plugins jeffreytse zsh-vi-mode
+#install_zsh_custom plugins jeffreytse zsh-vi-mode
 
 ########### dotfiles Installation ###########
 # create symlink of dotfiles, backup existing files if present
