@@ -2,14 +2,17 @@
 source ~/.config/env
 
 # set zsh theme
-ZSH_THEME="agnoster"
+ZSH_THEME="agnoster-custom" # modified version of agnoster theme, source in dotfiles repo
 
 # enable oh-my-zsh plugins
 plugins=(
+  # default oh-my-zsh plugins
   cp  # define cpv command that uses rsync
   sudo  # press double escape to add sudo to command
-  vi-mode   # vi-keybinds
   git   # git aliases
+
+  # have to be installed externally, handled by install.sh
+  zsh-vi-mode   # vi-keybinds
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -40,14 +43,12 @@ DISABLE_MAGIC_FUNCTIONS=1
 # Autojump
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
 
-# TODO update
-alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
-
 # source aliasrc for aliases
 source ~/.config/aliasrc
 
 # more aliases for ctfs, disabled most of the time
 #source ~/.config/ctfrc
 
+# run pfetch after initialization if installed
 echo
-pfetch
+command -v pfetch >/dev/null && pfetch
