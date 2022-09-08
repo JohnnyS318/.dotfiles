@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# general Aliases
+alias tmux="tmux -2"    # launch tmux with 256 color
+command -v rsync &> /dev/null && alias cp="cpv -iv"  # use rsync instead of cp if installed
+alias mv="mv -iv"   # ask before overwrite and verbose output for mv
+alias rm="rm -v"    # verbose output for rm
+alias ip="ip -c"    # enable colors for ip
+alias srm="shred -u -n 1"   # shred and deallocate file
+# use exa instead of ls if installed
+command -v exa &>/dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions"; }
+# alias lf to ranger if not installed
+command -v lf &>/dev/null || alias lf="ranger"
+
+# quickly sync git repo
+alias gsync="git pull && git add . && git commit -am 'Update' && git push"
+
+# clipboard aliases
+command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias getclip="xclip -selection c -o"; }
+command -v wl-copy >/dev/null && { alias setclip="wl-copy" && alias getclip="wl-paste"; }
+
+# spawn python http server
+alias up="python -m http.server"
+
+# print public ip address
+pubip() {
+    curl ipinfo.io/ip && echo
+}
+
+# Quickly generate a password from /dev/urandom
+pwgen() {
+  if [ -z "${1}" ]; then
+    _PWLENGTH=20
+  else
+    _PWLENGTH="$1"
+  fi
+  tr -dc _\!\"\%\&\/\(\)\=A-Z-a-z-0-9 < /dev/urandom | head -c "$_PWLENGTH"; echo
+  unset _PWLENGTH
+}
+
+# convert code file to pdf using pandoc
+# TODO rewrite
+code2pdf() {
+  echo "LS0tCmhlYWRlci1pbmNsdWRlczoKIC0gXHVzZXBhY2thZ2V7ZnZleHRyYX0KIC0gXERlZmluZVZlcmJhdGltRW52aXJvbm1lbnR7SGlnaGxpZ2h0aW5nfXtWZXJiYXRpbX17YnJlYWtsaW5lcyxjb21tYW5kY2hhcnM9XFxce1x9fQotLS0=" | base64 -d \
+    > "$(echo $1 | grep ".*\." --only-matching)md"
+  echo "\n\`\`\`$(echo $1 | grep -E "\.\w+" --only-matching | sed "s/\.//g")\n$(cat $1)\n\`\`\`" \
+    >> "$(echo $1 | grep ".*\." --only-matching)md"
+  pandoc "$(echo $1 | grep ".*\." --only-matching)md" --pdf-engine=xelatex -s -V geometry:margin=2cm -o \
+  "$(echo $1 | grep ".*\." --only-matching)pdf"
+  rm "$(echo $1 | grep ".*\." --only-matching)md" >/dev/null
+}
+
+# Convert xournalpp file to pdf
+xconvert() {
+  xournalpp -p "$(basename "$1" .xopp)_x.pdf" "$1"
+}
+
+# Convert all xopp files in current directory to pdf
+xconvertall() {
+  for file in ./*.xopp; do xconvert "$file"; done
+}
+
+# Compile and run c program
+crun() {
+  gcc -g -DDEBUG -Wall -Wextra -pedantic -std=c17 -o "$(basename "$1" .c).out" "$1" && ./"$(basename "$1" .c).out"
+}
+
