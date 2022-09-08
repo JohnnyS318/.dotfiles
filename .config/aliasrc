@@ -19,6 +19,21 @@ alias gsync="git pull && git add . && git commit -am 'Update' && git push"
 command -v xclip >/dev/null && { alias setclip="xclip -selection c" && alias getclip="xclip -selection c -o"; }
 command -v wl-copy >/dev/null && { alias setclip="wl-copy" && alias getclip="wl-paste"; }
 
+# function to automatically update dotfiles
+updaterc () {
+    pwd="$(pwd)"
+    cd ~/.dotfiles || {
+        echo 'The .dotfiles folder should be at ~/.dotfiles to auto update'
+        return 1
+    }
+    git pull
+    ./install.sh only-link
+    cd "$pwd" || return 1
+    # Reload shell
+    unset pwd
+    exec "$SHELL"
+}
+
 # spawn python http server
 alias up="python -m http.server"
 
