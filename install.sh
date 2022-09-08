@@ -105,6 +105,7 @@ install_file .config/tmux/tmux.conf
 install_file .config/paru/paru.conf
 install_file .config/btop/btop.conf
 install_file .config/terminator/config
+install_file .config/nvim/init.vim
 
 # install custom zsh theme
 install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
