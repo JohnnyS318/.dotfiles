@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# add .local/bin to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# always use all awailable cores for compiling
+procs="$(nproc)" # use variable due to shellcheck SC2155
+export MAKEFLAGS="-j$procs"
+unset procs
+
+# xdg default directories
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
+
+# editor
+export EDITOR='vim'

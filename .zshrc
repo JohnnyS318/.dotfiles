@@ -1,25 +1,27 @@
-export ZSH="$HOME/.oh-my-zsh"
-export PATH="$HOME/.local/bin:$PATH"
+# source environment variables
+source ~/.dotfiles/.config/env
 
+# set zsh theme
 ZSH_THEME="agnoster"
 
+# enable oh-my-zsh plugins
 plugins=(
-  themes
-  cp
-  sudo
-  vi-mode
-  git
+  cp  # define cpv command that uses rsync
+  sudo  # press double escape to add sudo to command
+  vi-mode   # vi-keybinds
+  git   # git aliases
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
 
+# configure autosuggest plugin
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-typeset -gA ZSH_HIGHLIGHT_STYLES
-
+# customize syntax highlighting colors
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=4
 ZSH_HIGHLIGHT_STYLES[command]=fg=4
 ZSH_HIGHLIGHT_STYLES[alias]=fg=4
@@ -33,21 +35,19 @@ ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=208,bold
 ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 
 # Fix slow pasting with zsh-autosuggest
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+DISABLE_MAGIC_FUNCTIONS=1
 
 # Autojump
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
-
-export EDITOR='vim'
 
 # TODO update
 alias updaterc="wget https://raw.githubusercontent.com/Gobidev/dotfiles/main/.zshrc -O ~/.zshrc &>/dev/null && echo 'Update successful'"
 
 # source aliasrc for aliases
-source ~/.dotfiles/aliasrc
+source ~/.dotfiles/.config/aliasrc
 
 # more aliases for ctfs, disabled most of the time
-#source ~/.dotfiles/ctfrc
+#source ~/.dotfiles/.config/ctfrc
 
 echo
 pfetch
