@@ -10,9 +10,8 @@ plugins=(
   cp  # define cpv command that uses rsync
   sudo  # press double escape to add sudo to command
   git   # git aliases
-
   # have to be installed externally, handled by install.sh
-  zsh-vi-mode   # vi-keybinds
+  vi-mode   # vi-keybinds
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
