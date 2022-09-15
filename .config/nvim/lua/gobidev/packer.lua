@@ -13,10 +13,10 @@ end
 local packer_bootstrap = ensure_packer()
 
 vim.cmd([[
-augroup packer_user_config
-autocmd!
-autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-augroup end
+    augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    augroup end
 ]])
 
 vim.cmd [[packadd packer.nvim]]
@@ -59,7 +59,24 @@ return require('packer').startup(function(use)
         config = function()
             require("better_escape").setup()
         end,
-
     }
+
+    -- Language Server
+    use "neovim/nvim-lspconfig"
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/nvim-cmp"
+    use "hrsh7th/cmp-path"
+    use "onsails/lspkind-nvim"
+    use "nvim-lua/lsp_extensions.nvim"
+    use "glepnir/lspsaga.nvim"
+    use "simrat39/symbols-outline.nvim"
+    use "L3MON4D3/LuaSnip"
+    use "saadparwaiz1/cmp_luasnip"
+    
+    -- treesitter
+    use("nvim-treesitter/nvim-treesitter", {
+        run = ":TSUpdate"
+    })
 
 end)
