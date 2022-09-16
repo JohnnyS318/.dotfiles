@@ -10,7 +10,7 @@ local ensure_packer = function()
     return false
 end
 
-local packer_bootstrap = ensure_packer()
+ensure_packer()
 
 -- reload nvim when packer.lua is written
 vim.cmd([[
@@ -98,6 +98,12 @@ return packer.startup(function(use)
 
     -- Telescope
     use "nvim-telescope/telescope.nvim"
+
+    -- faster load times
+    use "lewis6991/impatient.nvim"
+
+    -- git
+    use "lewis6991/gitsigns.nvim"
 
 
 end)
