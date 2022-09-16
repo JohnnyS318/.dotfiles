@@ -12,21 +12,35 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- reload nvim when packer.lua is written
 vim.cmd([[
     augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
     augroup end
 ]])
 
-vim.cmd [[packadd packer.nvim]]
+-- use protected call to require packer so we don't get an error on first launch
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+    return
+end
 
-return require('packer').startup(function(use)
+-- use popout window for packer
+packer.init({
+    display = {
+        open_fn = function()
+            return require("packer.util").float({ border = "single" })
+        end,
+    },
+})
+
+return packer.startup(function(use)
     -- Packer
     use 'wbthomason/packer.nvim'
 
     -- Colorscheme
-    use"gruvbox-community/gruvbox"
+    use "gruvbox-community/gruvbox"
 
     -- VIM enhancements
     use 'editorconfig/editorconfig-vim'
@@ -41,7 +55,6 @@ return require('packer').startup(function(use)
     }
 
     -- GUI enhancements
-    use 'kyazdani42/nvim-web-devicons'
     use 'lukas-reineke/indent-blankline.nvim'
     use 'feline-nvim/feline.nvim'
     use {
@@ -61,22 +74,30 @@ return require('packer').startup(function(use)
         end,
     }
 
-    -- Language Server
-    use "neovim/nvim-lspconfig"
+    -- cmp plugins
+    use "hrsh7th/nvim-cmp" -- The completion plugin
+    use "hrsh7th/cmp-buffer" -- buffer completions
+    use "hrsh7th/cmp-path" -- path completions
+    use "hrsh7th/cmp-cmdline" -- cmdline completions
+    use "saadparwaiz1/cmp_luasnip" -- snippet completions
     use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-path"
-    use "onsails/lspkind-nvim"
-    use "nvim-lua/lsp_extensions.nvim"
-    use "glepnir/lspsaga.nvim"
-    use "simrat39/symbols-outline.nvim"
-    use "L3MON4D3/LuaSnip"
-    use "saadparwaiz1/cmp_luasnip"
-    
+    use "hrsh7th/cmp-nvim-lua"
+
+    -- snippets
+    use "L3MON4D3/LuaSnip" --snippet engine
+    use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+
+    -- LSP
+    use "neovim/nvim-lspconfig" -- enable LSP
+    use "williamboman/nvim-lsp-installer" -- simple to use language server installer
+
     -- treesitter
     use("nvim-treesitter/nvim-treesitter", {
         run = ":TSUpdate"
     })
+
+    -- Telescope
+    use "nvim-telescope/telescope.nvim"
+
 
 end)
