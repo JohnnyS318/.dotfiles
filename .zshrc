@@ -37,7 +37,7 @@ ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=208,bold
 ZSH_HIGHLIGHT_STYLES[assign]=fg=14
 
 # Fix slow pasting with zsh-autosuggest
-DISABLE_MAGIC_FUNCTIONS=1
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # Autojump
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
