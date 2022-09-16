@@ -1,6 +1,9 @@
 -- space as leader key
 vim.g.mapleader = " "
 
+-- Encoding
+vim.opt.fileencoding = "utf-8"
+
 -- linenumber column
 vim.opt.nu = true
 vim.opt.relativenumber = true
