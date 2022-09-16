@@ -38,9 +38,13 @@ nnoremap("<leader>x", '"_x')
 nnoremap("<leader>D", '"_D')
 nnoremap("<leader>C", '"_C')
 
+-- jk to exit insert mode
+inoremap("jk", "<ESC>")
+
 -- git
-nnoremap("<leader>ga", "<cmd>:Git add -p<CR>")
-nnoremap("<leader>gc", "<cmd>:Git commit -v<CR>")
-nnoremap("<leader>gp", "<cmd>:Git push<CR>")
-nnoremap("<leader>gl", "<cmd>:Git pull<CR>")
+-- nnoremap("<leader>ga", "<cmd>:Git add -p<CR>")
+-- nnoremap("<leader>gc", "<cmd>:Git commit -v<CR>")
+-- nnoremap("<leader>gp", "<cmd>:Git push<CR>")
+-- nnoremap("<leader>gl", "<cmd>:Git pull<CR>")
+
 

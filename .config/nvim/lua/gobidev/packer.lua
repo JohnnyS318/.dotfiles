@@ -39,40 +39,30 @@ return packer.startup(function(use)
     -- Packer
     use 'wbthomason/packer.nvim'
 
+    -- Plugin dependencies
+    use "nvim-lua/plenary.nvim"
+
     -- Colorscheme
     use "gruvbox-community/gruvbox"
 
     -- VIM enhancements
     use 'editorconfig/editorconfig-vim'
     use 'andymass/vim-matchup'
-    use 'jiangmiao/auto-pairs'
+    use 'windwp/nvim-autopairs'
     use 'tpope/vim-abolish'
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+    use "numToStr/Comment.nvim"
 
     -- GUI enhancements
     use 'lukas-reineke/indent-blankline.nvim'
     use 'feline-nvim/feline.nvim'
-    use {
-        'wellle/context.vim',
-        config = function()
-            vim.g.context_add_mappings = false
-            vim.g.context_highlight_border = '<hide>'
-            vim.g.context_highlight_normal = 'PMenu'
-        end,
-    }
-
-    -- better escape
-    use {
-        "max397574/better-escape.nvim",
-        config = function()
-            require("better_escape").setup()
-        end,
-    }
+    -- use {
+    --     'wellle/context.vim',
+    --     config = function()
+    --         vim.g.context_add_mappings = false
+    --         vim.g.context_highlight_border = '<hide>'
+    --         vim.g.context_highlight_normal = 'PMenu'
+    --     end,
+    -- }
 
     -- cmp plugins
     use "hrsh7th/nvim-cmp" -- The completion plugin
