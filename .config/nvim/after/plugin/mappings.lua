@@ -32,11 +32,11 @@ nnoremap("<leader>w", "<cmd>:w<CR>")
 nnoremap("<leader>q", "<cmd>:q<CR>")
 
 -- delete without yanking
-nnoremap("<leader>d", "_d")
-nnoremap("<leader>c", "_c")
-nnoremap("<leader>x", "_x")
-nnoremap("<leader>D", "_D")
-nnoremap("<leader>C", "_C")
+nnoremap("<leader>d", '"_d')
+nnoremap("<leader>c", '"_c')
+nnoremap("<leader>x", '"_x')
+nnoremap("<leader>D", '"_D')
+nnoremap("<leader>C", '"_C')
 
 -- git
 nnoremap("<leader>ga", "<cmd>:Git add -p<CR>")
