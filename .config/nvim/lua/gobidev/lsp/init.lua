@@ -3,5 +3,5 @@ if not status_ok then
     return
 end
 
-require("gobidev.lsp.lsp-installer")
+require("gobidev.lsp.configs")
 require("gobidev.lsp.handlers").setup()
