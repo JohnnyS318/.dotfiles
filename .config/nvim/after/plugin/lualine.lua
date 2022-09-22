@@ -117,9 +117,9 @@ lualine.setup {
     },
     sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", diagnostics_component },
+        lualine_b = { "branch", diagnostics_component },
         lualine_c = { filename_component },
-        lualine_x = { lsp_progress_component, "filetype" },
+        lualine_x = { lsp_progress_component, "filetype", "diff" },
         lualine_y = { "encoding", "fileformat" },
         lualine_z = { "%l:%c", "%p%%" },
     },
