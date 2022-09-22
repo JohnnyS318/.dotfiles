@@ -59,6 +59,12 @@ return packer.startup(function(use)
         requires = "kyazdani42/nvim-web-devicons",
     }
 
+    -- Fuzzy Finder
+    use {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
+    }
+
     -- cmp plugins
     use("hrsh7th/nvim-cmp") -- The completion plugin
     use("hrsh7th/cmp-buffer") -- buffer completions
