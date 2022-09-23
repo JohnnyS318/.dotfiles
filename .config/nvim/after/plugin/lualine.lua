@@ -57,6 +57,14 @@ local buffers_component = {
     },
 }
 
+local diff_component = {
+    'diff',
+    symbols = {
+        added = ' ',
+        modified = '柳',
+        removed = ' ',
+    }
+}
 local diagnostics_component = {
     "diagnostics",
     sources = { "nvim_diagnostic" },
@@ -119,7 +127,7 @@ lualine.setup {
         lualine_a = { "mode" },
         lualine_b = { "branch", diagnostics_component },
         lualine_c = { filename_component },
-        lualine_x = { lsp_progress_component, "filetype", "diff" },
+        lualine_x = { lsp_progress_component, "filetype", diff_component},
         lualine_y = { "encoding", "fileformat" },
         lualine_z = { "%l:%c", "%p%%" },
     },
