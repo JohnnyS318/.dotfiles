@@ -21,27 +21,27 @@ local gruvbox_custom = {
     normal = {
         a = { bg = colors.blue, fg = colors.black, gui = "bold" },
         b = { bg = colors.lightgray, fg = colors.white },
-        c = { bg = colors.darkgray, fg = colors.gray },
+        c = { bg = colors.darkgray, fg = colors.blue },
     },
     insert = {
         a = { bg = colors.green, fg = colors.black, gui = "bold" },
         b = { bg = colors.lightgray, fg = colors.white },
-        c = { bg = colors.darkgray, fg = colors.white },
+        c = { bg = colors.darkgray, fg = colors.green },
     },
     visual = {
         a = { bg = colors.purple, fg = colors.black, gui = "bold" },
         b = { bg = colors.lightgray, fg = colors.white },
-        c = { bg = colors.darkgray, fg = colors.black },
+        c = { bg = colors.darkgray, fg = colors.purple },
     },
     replace = {
         a = { bg = colors.red, fg = colors.black, gui = "bold" },
         b = { bg = colors.lightgray, fg = colors.white },
-        c = { bg = colors.darkgray, fg = colors.white },
+        c = { bg = colors.darkgray, fg = colors.red },
     },
     command = {
         a = { bg = colors.orange, fg = colors.black, gui = "bold" },
         b = { bg = colors.lightgray, fg = colors.white },
-        c = { bg = colors.darkgray, fg = colors.black },
+        c = { bg = colors.darkgray, fg = colors.orange },
     },
     inactive = {
         a = { bg = colors.darkgray, fg = colors.gray, gui = "bold" },
