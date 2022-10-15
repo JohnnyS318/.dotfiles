@@ -63,6 +63,43 @@ local function lsp_highlight_document(client)
 	end
 end
 
+local function format()
+    local disabled_formatter = {
+        svelte = true,
+        tsserver = true,
+        cssls = true,
+        html = true,
+        jsonls = true,
+        sumneko_lua = true,
+        pylsp = true,
+        taplo = true,
+        dockerls = true,
+    }
+
+    vim.lsp.buf.format {
+        filter = function(client)
+            -- Disable formatting for some language servers
+            if disabled_formatter[client.name] then return false end
+
+            -- Disable formatter of null-ls if formatting is provided by another LSP
+            if client.name ~= 'null-ls' then return true end
+            local clients = vim.lsp.buf_get_clients()
+            local has_other_formatter = false
+            for _, lsp in ipairs(clients) do
+                if
+                    lsp.name ~= 'null-ls'
+                    and lsp.server_capabilities.documentFormattingProvider
+                    and not disabled_formatter[lsp.name]
+                then
+                    has_other_formatter = true
+                end
+            end
+            if has_other_formatter then return false end
+            return true
+        end,
+    }
+end
+
 local function lsp_keymaps(bufnr)
 	local opts = { buffer = bufnr, silent = true }
 	local map = vim.keymap.set
@@ -81,7 +118,7 @@ local function lsp_keymaps(bufnr)
 	map("n", "[d", vim.diagnostic.goto_prev, opts)
 	map("n", "]d", vim.diagnostic.goto_next, opts)
 	map("n", "]D", builtin.diagnostics, opts)
-	map("n", "<leader>lf", vim.lsp.buf.formatting, opts)
+	map("n", "<leader>lf", format, opts)
 	-- Get signatures (and _only_ signatures) when in argument lists.
 	local lsp_signature_status_ok, lsp_signature = pcall(require, "lsp_signature")
 	if not lsp_signature_status_ok then
@@ -96,19 +133,6 @@ local function lsp_keymaps(bufnr)
 end
 
 M.on_attach = function(client, bufnr)
-	-- Disable formatting for some language servers
-	local disabled_formatter = {
-		svelte = true,
-		tsserver = true,
-		cssls = true,
-		html = true,
-		jsonls = true,
-		sumneko_lua = true,
-	}
-	if disabled_formatter[client.name] then
-		client.resolved_capabilities.document_formatting = false
-	end
-
 	-- Add mappings
 	lsp_keymaps(bufnr)
 	-- LSP based highlighting
