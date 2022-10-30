@@ -3,6 +3,8 @@ local default_opts = {
 	on_attach = handlers.on_attach,
 	capabilities = handlers.capabilities,
 }
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
 
 local function merge_opts(new_opts)
 	return vim.tbl_deep_extend("force", new_opts, default_opts)
@@ -63,7 +65,7 @@ require("lspconfig").gopls.setup(default_opts)
 require("lspconfig").jdtls.setup(default_opts)
 require("lspconfig").kotlin_language_server.setup(default_opts)
 require("lspconfig").gdscript.setup(default_opts)
-require("lspconfig").clangd.setup(default_opts)
+require("lspconfig").clangd.setup({ capabilities = capabilities, on_attach = handlers.on_attach })
 require("lspconfig").taplo.setup(default_opts)
 require("lspconfig").ltex.setup(with_settings({
 	ltex = {
