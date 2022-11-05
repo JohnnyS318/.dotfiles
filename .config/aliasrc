@@ -92,3 +92,7 @@ crun() {
   gcc -g -DDEBUG -Wall -Wextra -pedantic -std=c17 -o "$(basename "$1" .c).out" "$1" && ./"$(basename "$1" .c).out"
 }
 
+pspmake () {
+    sed -e 's:avr-gcc:/opt/avr8-gnu-toolchain-linux_x86_64/bin/avr-gcc:g' \
+        -e 's:\(CFLAGS =\):\1 -I\"$AVR_DFP_INCLUDE\":g' Makefile | make -f - "$@"
+}
