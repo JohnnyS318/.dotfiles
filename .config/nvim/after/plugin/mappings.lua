@@ -5,6 +5,10 @@ local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
+-- Shorten function name
+local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
 -- centered jumping
 nnoremap("n", "nzz")
 nnoremap("N", "Nzz")
@@ -34,17 +38,27 @@ nnoremap("<leader>q", "<cmd>:q<CR>")
 -- delete without yanking
 nnoremap("<leader>d", '"_d')
 nnoremap("<leader>c", '"_c')
-nnoremap("<leader>x", '"_x')
 nnoremap("<leader>D", '"_D')
 nnoremap("<leader>C", '"_C')
 
 -- jk to exit insert mode
 inoremap("jk", "<ESC>")
 
--- git
--- nnoremap("<leader>ga", "<cmd>:Git add -p<CR>")
--- nnoremap("<leader>gc", "<cmd>:Git commit -v<CR>")
--- nnoremap("<leader>gp", "<cmd>:Git push<CR>")
--- nnoremap("<leader>gl", "<cmd>:Git pull<CR>")
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
+-- Move text up and down
+keymap("v", "<A-j>", ":m .+1<CR>==", opts)
+keymap("v", "<A-k>", ":m .-2<CR>==", opts)
+keymap("v", "p", '"_dP', opts)
 
+-- Visual Block --
+-- Move text up and down
+keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- close buffer
+nnoremap("<leader>x", ":bd<CR>")
