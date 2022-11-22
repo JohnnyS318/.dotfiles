@@ -3,7 +3,6 @@
 [profiles]
   [[default]]
     background_color = "#282828"
-    cursor_color = "#aaaaaa"
     foreground_color = "#ebdbb2"
     show_titlebar = False
     scrollbar_position = hidden
