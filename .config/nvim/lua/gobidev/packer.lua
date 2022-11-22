@@ -59,6 +59,16 @@ return packer.startup(function(use)
         requires = "kyazdani42/nvim-web-devicons",
     }
 
+    use {
+        "nvim-neo-tree/neo-tree.nvim",
+        branch = "v2.x",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        },
+    }
+
     -- Fuzzy Finder
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -80,11 +90,10 @@ return packer.startup(function(use)
 
     -- LSP
     use("neovim/nvim-lspconfig") -- enable LSP
-    use "williamboman/mason.nvim"
-    use "williamboman/mason-lspconfig.nvim"
-    use "jayp0521/mason-null-ls.nvim"
-    use "RubixDev/mason-update-all"
-
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
+    use("jayp0521/mason-null-ls.nvim")
+    use("RubixDev/mason-update-all")
 
     use {
         "jose-elias-alvarez/null-ls.nvim",

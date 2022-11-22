@@ -62,3 +62,6 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- close buffer
 nnoremap("<leader>x", ":bd<CR>")
+
+-- open neo-tree
+nnoremap("<leader>e", ":Neotree<cr>")
