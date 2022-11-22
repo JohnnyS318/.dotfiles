@@ -42,8 +42,11 @@ vim.opt.colorcolumn = "120"
 vim.opt.showmode = false
 
 -- VIMSCRIPT SECTION
--- jump to last cursor position when opening previously opened file
 vim.cmd [[
+    " Highlight yanking
+    au TextYankPost * silent! lua vim.highlight.on_yank()
+
+    " Jump to last open pos
     autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
