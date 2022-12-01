@@ -1,0 +1,7 @@
+[user]
+  name = Adrian Groh
+  email = adrian.groh@t-online.de
+  signingkey = adrian.groh@t-online.de
+
+[commit]
+  gpgsign = true
