@@ -11,11 +11,10 @@ treesitter.setup {
         'cpp',
         'css',
         'dockerfile',
-        'gdscript',
+        'diff',
         -- 'gitattributes', -- currently experimental
         'gitignore',
         'go',
-        'godot_resource',
         'gomod',
         'html',
         'java',
@@ -31,9 +30,6 @@ treesitter.setup {
         'markdown_inline', -- currently experimental
         'python',
         'rust',
-        'scss',
-        'svelte',
-        'sxhkdrc',
         'toml',
         'typescript',
         'vim',
