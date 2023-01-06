@@ -97,7 +97,6 @@ install_file () {
 # create symlinks of dotfiles
 install_file .zshrc
 install_file .gitconfig
-install_file .gitconfig.user
 
 install_file .config/env
 install_file .config/aliasrc

@@ -1,5 +1,16 @@
+[user]
+    name = Adrian Groh
+    email = adrian.groh@t-online.de
+    signingkey = adrian.groh@t-online.de
+
 [core]
 	editor = nvim
 
-[include]
-	path = ~/.gitconfig.user
+[pull]
+	rebase = false
+
+[commit]
+    gpgsign = true
+
+[tag]
+    gpgSign = true
