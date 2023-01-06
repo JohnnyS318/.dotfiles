@@ -41,6 +41,12 @@ nnoremap("<leader>c", '"_c')
 nnoremap("<leader>D", '"_D')
 nnoremap("<leader>C", '"_C')
 
+-- splits
+nnoremap("<C-w>H", "<cmd>:top vs<CR>")
+nnoremap("<C-w>J", "<cmd>:bot sp<CR>")
+nnoremap("<C-w>K", "<cmd>:top sp<CR>")
+nnoremap("<C-w>L", "<cmd>:bot vs<CR>")
+
 -- jk to exit insert mode
 inoremap("jk", "<ESC>")
 
