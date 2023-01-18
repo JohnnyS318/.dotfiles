@@ -65,7 +65,7 @@ upd() {
     # refresh gpg keyring
     gpg --list-keys &>/dev/null && {
         upd_announce Updating gpg keyring
-        gpg --refresh-keys || return 1
+        gpg --keyserver keyserver.ubuntu.com --refresh-keys || return 1
         upd_announce done!
     }
 
