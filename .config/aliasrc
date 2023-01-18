@@ -53,9 +53,6 @@ upd() {
         upd_announce Updating nvim mason packages
         nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdateAll' || return 1
         upd_announce done!
-        upd_announce Updating nvim treesitter parsers
-        nvim --headless -c 'TSUpdate quitall' || return 1
-        upd_announce done!
     }
 
     # update flatpaks
