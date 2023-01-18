@@ -29,9 +29,67 @@ updaterc() {
     git pull
     ./install.sh only-link
     cd "$pwd" || return 1
-    # Reload shell
-    unset pwd
-    exec "$SHELL"
+}
+
+# print input in fancy way
+upd_announce() {
+    GREEN='\033[0;32m'
+    NC='\033[0m'
+    echo -e "${GREEN}>>> $*${NC}"
+}
+
+# update all the things
+upd() {
+    # update dotfiles
+    upd_announce Updating dotfiles
+    updaterc || return 1
+    upd_announce done!
+
+    # update nvim stuff
+    command -v nvim &>/dev/null && {
+        upd_announce Updating nvim packer packages
+        nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || return 1
+        upd_announce done!
+        upd_announce Updating nvim mason packages
+        nvim --headless -c 'autocmd User MasonUpdateAllComplete quitall' -c 'MasonUpdateAll' || return 1
+        upd_announce done!
+        upd_announce Updating nvim treesitter parsers
+        nvim --headless -c 'TSUpdate quitall' || return 1
+        upd_announce done!
+    }
+
+    # update flatpaks
+    command -v flatpak $>/dev/null && {
+        upd_announce Updating flatpaks
+        flatpak update || return 1
+        upd_announce done!
+    }
+
+    # refresh gpg keyring
+    gpg --list-keys &>/dev/null && {
+        upd_announce Updating gpg keyring
+        gpg --refresh-keys || return 1
+        upd_announce done!
+    }
+
+    # rust toolchain(s)
+    command -v rustup &>/dev/null && {
+        upd_announce Updating rust toolchain
+        rustup update || return 1
+        upd_announce done!
+    }
+
+    # cargo packages
+    command -v cargo &>/dev/null && {
+        upd_announce Updating cargo packages
+        cargo_pkg_list=()
+        while IFS='' read -r line; do cargo_pkg_list+=("$line"); done < <(cargo install --list | grep -E '^[a-z0-9_-]+ v[0-9.]+:$' | cut -f1 -d' ')
+        if [ "${#cargo_pkg_list[@]}" -ne 0 ]; then
+            cargo install "${cargo_pkg_list[@]}" || return 1
+        fi
+        unset cargo_pkg_list
+        upd_announce done!
+    }
 }
 
 # print public ip address
