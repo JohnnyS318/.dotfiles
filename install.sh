@@ -110,6 +110,7 @@ install_file .config/stylua/stylua.toml
 
 install_file .config/nvim
 
+install_file .config/BetterDiscord/themes/Nocturnal.theme.css
 
 # install custom zsh theme
 install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme

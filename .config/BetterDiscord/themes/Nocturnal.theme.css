@@ -1,0 +1,28 @@
+/**
+* @name Nocturnal
+* @author Spectra#4577
+* @description For when default discord just isn't dark enough, a theme for those who live a night
+* @invite PZdnCVD
+* @version 3.0.1
+* @website https://betterdiscord.app/theme/Nocturnal
+*/
+@import url("https://codedotspectra.github.io/themes/themes-cores/nocturnal.css");
+/*
+
+*/
+@import url("https://monstrousdev.github.io/themes/addons/user-tags.css");
+@import url("https://discord-custom-covers.github.io/usrbg/dist/usrbg.css");
+@import url("https://codedotspectra.github.io/themes/core/badges.css");
+@import url("https://codedotspectra.github.io/themes/core/hljs.css"); /* Better Hljs */
+@import url(https://cdn.statically.io/gh/Overimagine1/old-discord-font/main/source.min.css);
+:root {
+
+  --mainColor: #427b58;
+  --backgroundColor01: #32302fFF;
+  --backgroundColor02: #282828FF;
+  --gradientColor01: #458588;
+  --gradientColor02: #79740e;
+
+  /* Better Hljs */
+  --backgroundCode: #1e2731;
+  --backgroundName: rgba(0, 0, 0, .2);
