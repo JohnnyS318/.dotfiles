@@ -1,19 +1,14 @@
 env:
   TERM: xterm-256color
-# Font configuration
+
 font:
-  # Normal (roman) font face
   normal:
     family: Jetbrains Mono
-  # Font family
-  #
-  # Default:
-  #   - (macOS) Menlo
-  #   - (Linux/BSD) monospace
-  #   - (Windows) Consolas
   size: 10.0
 
-# Colors
+window:
+  startup_mode: Maximized
+
 colors:
   primary:
     background: "#282828"
