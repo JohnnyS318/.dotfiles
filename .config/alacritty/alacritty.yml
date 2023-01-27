@@ -4,7 +4,7 @@ env:
 font:
   # Normal (roman) font face
   normal:
-    family: Source Code Pro
+    family: Jetbrains Mono
   # Font family
   #
   # Default:
