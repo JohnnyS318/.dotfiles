@@ -46,7 +46,7 @@ upd() {
     upd_announce done!
 
     # update nvim stuff
-    command -v nvim &>/dev/null && {
+    command -v nvim &> /dev/null && {
         upd_announce Updating nvim packer packages
         nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync' || return 1
         upd_announce done!
@@ -56,28 +56,28 @@ upd() {
     }
 
     # update flatpaks
-    command -v flatpak $>/dev/null && {
+    command -v flatpak $ > /dev/null && {
         upd_announce Updating flatpaks
         flatpak update || return 1
         upd_announce done!
     }
 
     # refresh gpg keyring
-    gpg --list-keys &>/dev/null && {
+    gpg --list-keys &> /dev/null && {
         upd_announce Updating gpg keyring
         gpg --keyserver keyserver.ubuntu.com --refresh-keys || return 1
         upd_announce done!
     }
 
     # rust toolchain(s)
-    command -v rustup &>/dev/null && {
+    command -v rustup &> /dev/null && {
         upd_announce Updating rust toolchain
         rustup update || return 1
         upd_announce done!
     }
 
     # cargo packages
-    command -v cargo &>/dev/null && {
+    command -v cargo &> /dev/null && {
         upd_announce Updating cargo packages
         cargo_pkg_list=()
         while IFS='' read -r line; do cargo_pkg_list+=("$line"); done < <(cargo install --list | grep -E '^[a-z0-9_-]+ v[0-9.]+:$' | cut -f1 -d' ')
@@ -87,6 +87,22 @@ upd() {
         unset cargo_pkg_list
         upd_announce done!
     }
+}
+
+colortest() {
+    awk 'BEGIN{
+        s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
+        for (colnum = 0; colnum<77; colnum++) {
+            r = 255-(colnum*255/76);
+            g = (colnum*510/76);
+            b = (colnum*255/76);
+            if (g>255) g = 510-g;
+            printf "\033[48;2;%d;%d;%dm", r,g,b;
+            printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+            printf "%s\033[0m", substr(s,colnum+1,1);
+        }
+        printf "\n";
+    }'
 }
 
 # print public ip address
