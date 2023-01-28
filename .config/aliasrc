@@ -89,6 +89,15 @@ upd() {
     }
 }
 
+_paru_bin="$(command -v paru)"
+paru () {
+    (
+        unset CARGO_TARGET_DIR
+        unset GOPATH
+        $_paru_bin "$@"
+    )
+}
+
 colortest() {
     awk 'BEGIN{
         s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
