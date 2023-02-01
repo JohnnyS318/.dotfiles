@@ -104,6 +104,15 @@ return packer.startup(function(use)
     use("ray-x/lsp_signature.nvim")
     use("MunifTanjim/prettier.nvim")
 
+    use {
+        "preservim/vim-markdown",
+        requires = { "godlygeek/tabular" },
+    }
+    use { "jghauser/follow-md-links.nvim" }
+
+    -- Markdown preview
+    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
+
     -- treesitter
     use {
         "nvim-treesitter/nvim-treesitter",

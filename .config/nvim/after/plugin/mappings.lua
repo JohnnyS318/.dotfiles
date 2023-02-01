@@ -7,6 +7,7 @@ local nmap = Remap.nmap
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 -- centered jumping
@@ -49,6 +50,8 @@ nnoremap("<C-w>L", "<cmd>:bot vs<CR>")
 
 -- jk to exit insert mode
 inoremap("jk", "<ESC>")
+inoremap("Jk", "<ESC>")
+inoremap("JK", "<ESC>")
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -65,6 +68,12 @@ keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
+
+-- Markdown
+map('n', '<Leader>mp', ':MarkdownPreview<CR>')
+map('n', '<Leader>mP', ':MarkdownPreviewStop<CR>')
+map('n', '<Leader>mf', ':TableFormat<CR>')
+map('n', '<Leader>mw', ':setlocal invwrap<CR>')
 
 -- close buffer
 nnoremap("<leader>x", ":bd<CR>")
