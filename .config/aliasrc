@@ -12,6 +12,9 @@ command -v exa &> /dev/null && { alias l="exa -lahg --icons --octal-permissions"
 # alias lf to ranger if not installed
 command -v lf &> /dev/null || alias lf="ranger"
 
+# git aliases
+command -v dunk >/dev/null && alias gdd="git diff | dunk | less -R"
+
 # quickly sync git repo
 alias gsync="git pull && git add . && git commit -am 'Update' && git push"
 
