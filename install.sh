@@ -111,6 +111,7 @@ install_file .config/kitty/theme.conf
 install_file .config/terminator/config
 install_file .config/stylua/stylua.toml
 
+install_file .config/lf
 install_file .config/nvim
 
 install_file .config/BetterDiscord/themes/Nocturnal.theme.css
