@@ -106,6 +106,8 @@ install_file .config/tmux/tmux.conf
 install_file .config/paru/paru.conf
 install_file .config/btop/btop.conf
 install_file .config/alacritty/alacritty.yml
+install_file .config/kitty/kitty.conf
+install_file .config/kitty/theme.conf
 install_file .config/terminator/config
 install_file .config/stylua/stylua.toml
 
