@@ -45,7 +45,7 @@ require("lspconfig").rust_analyzer.setup(with_settings({
 }))
 require("lspconfig").vimls.setup(default_opts)
 require("lspconfig").bashls.setup(default_opts)
-require("lspconfig").sumneko_lua.setup(with_settings({
+require("lspconfig").lua_ls.setup(with_settings({
 	Lua = {
 		runtime = {
 			version = "LuaJIT",
