@@ -16,6 +16,9 @@ command -v lf &> /dev/null || alias lf="ranger"
 command -v dunk >/dev/null && alias gdd="git diff | dunk | less -R"
 command -v diff-so-fancy >/dev/null && alias gd="git diff | diff-so-fancy | less -R"
 
+# ssh
+if [[ -n $KITTY_WINDOW_ID ]]; then alias ssh="kitty +kitten ssh"; fi
+
 # quickly sync git repo
 alias gsync="git pull && git add . && git commit -am 'Update' && git push"
 
