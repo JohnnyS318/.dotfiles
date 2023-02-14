@@ -129,4 +129,7 @@ return packer.startup(function(use)
 
     -- git
     use("lewis6991/gitsigns.nvim")
+
+    -- clipboard
+    use {'ojroques/nvim-osc52'}
 end)
