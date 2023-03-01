@@ -150,6 +150,12 @@ lfcd() {
     fi
 }
 
+# shred and deallocate directory
+shreddir() {
+    find "$@" -type f -exec shred -uv -n 1 --random-source=/dev/urandom {} \;
+    rm -rv "$@"
+}
+
 # convert code file to pdf using pandoc
 # TODO rewrite
 code2pdf() {
