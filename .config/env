@@ -16,6 +16,7 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 # cargo
 export CARGO_TARGET_DIR="$XDG_CACHE_HOME/cargo"
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
