@@ -114,7 +114,7 @@ install_file .config/stylua/stylua.toml
 install_file .config/lf
 install_file .config/nvim
 
-install_file .config/BetterDiscord/themes/Nocturnal.theme.css
+install_file .config/BetterDiscord/themes/nocturnal_gruvbox.theme.css
 
 # install custom zsh theme
 install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
