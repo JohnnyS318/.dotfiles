@@ -13,11 +13,11 @@ command -v exa &> /dev/null && { alias l="exa -lahg --icons --octal-permissions"
 command -v lf &> /dev/null || alias lf="ranger"
 
 # git aliases
-command -v dunk >/dev/null && alias gdd="git diff | dunk | less -R"
-command -v diff-so-fancy >/dev/null && alias gd="git diff | diff-so-fancy | less -R"
+command -v dunk > /dev/null && alias gdd="git diff | dunk | less -R"
+command -v diff-so-fancy > /dev/null && alias gd="git diff | diff-so-fancy | less -R"
 
 # ssh
-if [[ -n $KITTY_WINDOW_ID ]]; then command -v kitty >/dev/null && alias ssh="kitty +kitten ssh"; fi
+if [[ -n $KITTY_WINDOW_ID ]]; then command -v kitty > /dev/null && alias ssh="kitty +kitten ssh"; fi
 
 # quickly sync git repo
 alias gsync="git pull && git add . && git commit -am 'Update' && git push"
@@ -94,10 +94,28 @@ upd() {
         unset cargo_pkg_list
         upd_announce done!
     }
+
+    # oh-my-zsh updates
+    command -v omz &> /dev/null && {
+        # Run omz update script
+        upd_announce Updating oh-my-zsh core
+        "$ZSH"/tools/upgrade.sh
+        upd_announce done!
+
+        # Update custom plugins
+        upd_announce Updating custom oh-my-zsh plugins
+        cd "$ZSH"/custom/plugins || return 1
+        for plugin in */; do
+            if [ -d "$plugin/.git" ]; then
+                git -C "$plugin" pull
+            fi
+        done
+        upd_announce done!
+    }
 }
 
 _paru_bin="$(command -v paru)"
-paru () {
+paru() {
     (
         unset CARGO_TARGET_DIR
         unset GOPATH
