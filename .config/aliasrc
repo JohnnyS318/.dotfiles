@@ -104,12 +104,15 @@ upd() {
 
         # Update custom plugins
         upd_announce Updating custom oh-my-zsh plugins
+        _upd_prev_path="$(pwd)"
         cd "$ZSH"/custom/plugins || return 1
         for plugin in */; do
             if [ -d "$plugin/.git" ]; then
                 git -C "$plugin" pull
             fi
         done
+        cd "$_upd_prev_path" || return 1
+        unset _upd_prev_path
         upd_announce done!
     }
 }
