@@ -112,6 +112,7 @@ install_file .config/terminator/config
 install_file .config/stylua/stylua.toml
 
 install_file .config/lf
+install_file .config/joshuto
 install_file .config/nvim
 
 install_file .config/BetterDiscord/themes/nocturnal_gruvbox.theme.css
