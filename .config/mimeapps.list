@@ -1,0 +1,13 @@
+[Default Applications]
+text/*=nvim.desktop
+text/xml=nvim.desktop
+text/plain=nvim.desktop
+application/json=nvim.desktop
+
+inode/directory=joshuto.desktop
+
+video/*=mpv.desktop
+video/x-msvideo=mpv.desktop
+video/quicktime=mpv.desktop
+video/mp4=mpv.desktop
+video/MP2T=mpv.desktop
