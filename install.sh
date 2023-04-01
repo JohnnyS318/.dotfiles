@@ -39,11 +39,6 @@ command_check git
 command_check curl
 command_check zsh
 
-# check for pfetch
-command -v >/dev/null pfetch || {
-    prompt "pfetch not found, install now?" && sudo curl -s https://raw.githubusercontent.com/Gobidev/pfetch/master/pfetch --output /usr/local/bin/pfetch && sudo chmod +x /usr/local/bin/pfetch
-}
-
 ########### Oh My ZSH ###########
 # install oh-my-zsh if not installed
 [ -e "${ZSH:-$HOME/.oh-my-zsh}" ] || {
