@@ -94,7 +94,6 @@ return packer.startup(function(use)
     use("williamboman/mason-lspconfig.nvim")
     use("jayp0521/mason-null-ls.nvim")
     use("RubixDev/mason-update-all")
-    use("fladson/vim-kitty")
     use {
         "jose-elias-alvarez/null-ls.nvim",
         requires = {
