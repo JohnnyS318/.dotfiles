@@ -9,9 +9,10 @@ config.hide_tab_bar_if_only_one_tab = true
 
 config.font_size = 10
 config.font_rules = {
-  { intensity = 'Bold',
-    font = wezterm.font('JetBrains Mono', { weight = 'Bold' })
-  },
+    {
+        intensity = 'Bold',
+        font = wezterm.font('JetBrains Mono', { weight = 'Bold' })
+    },
 }
 config.bold_brightens_ansi_colors = false
 
@@ -28,8 +29,8 @@ config.inactive_pane_hsb = {
 }
 
 wezterm.on('gui-startup', function(cmd)
-  local _, _, window = wezterm.mux.spawn_window(cmd or {})
-  window:gui_window():maximize()
+    local _, _, window = wezterm.mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
 end)
 
 config.keys = {
@@ -78,6 +79,10 @@ config.keys = {
         key = 'L',
         mods = 'CTRL|SHIFT',
         action = act.AdjustPaneSize { 'Right', 5 },
+    },
+    {
+        key = 'F11',
+        action = wezterm.action.ToggleFullScreen,
     },
 };
 
