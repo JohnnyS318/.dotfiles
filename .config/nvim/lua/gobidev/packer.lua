@@ -43,6 +43,7 @@ return packer.startup(function(use)
     use("nvim-lua/plenary.nvim")
 
     -- Colorscheme
+    -- use { "ellisonleao/gruvbox.nvim" }
     use("gruvbox-community/gruvbox")
 
     -- VIM enhancements
@@ -76,19 +77,22 @@ return packer.startup(function(use)
     }
 
     -- cmp plugins
-    use("hrsh7th/nvim-cmp") -- The completion plugin
-    use("hrsh7th/cmp-buffer") -- buffer completions
-    use("hrsh7th/cmp-path") -- path completions
-    use("hrsh7th/cmp-cmdline") -- cmdline completions
+    use("hrsh7th/nvim-cmp")         -- The completion plugin
+    use("hrsh7th/cmp-buffer")       -- buffer completions
+    use("hrsh7th/cmp-path")         -- path completions
+    use("hrsh7th/cmp-cmdline")      -- cmdline completions
     use("saadparwaiz1/cmp_luasnip") -- snippet completions
     use("hrsh7th/cmp-nvim-lsp")
     use("hrsh7th/cmp-nvim-lua")
 
     -- snippets
-    use("L3MON4D3/LuaSnip") --snippet engine
+    use("L3MON4D3/LuaSnip")             --snippet engine
     use("rafamadriz/friendly-snippets") -- a bunch of snippets to use
 
     -- LSP
+    use { 'ur4ltz/surround.nvim' }
+    use { 'tpope/vim-repeat' }
+    use { 'weilbith/nvim-code-action-menu' }
     use("neovim/nvim-lspconfig") -- enable LSP
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
@@ -110,7 +114,7 @@ return packer.startup(function(use)
     use { "jghauser/follow-md-links.nvim" }
 
     -- Markdown preview
-    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install"}
+    use { "iamcco/markdown-preview.nvim", run = "cd app && yarn install" }
 
     -- treesitter
     use {
@@ -130,5 +134,5 @@ return packer.startup(function(use)
     use("lewis6991/gitsigns.nvim")
 
     -- clipboard
-    use {'ojroques/nvim-osc52'}
+    -- use { 'ojroques/nvim-osc52' }
 end)
