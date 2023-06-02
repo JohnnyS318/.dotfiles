@@ -1,7 +1,5 @@
 local status_ok, telescope = pcall(require, 'telescope')
-if not status_ok then
-    return
-end
+if not status_ok then return end
 
 local actions = require('telescope.actions')
 
@@ -57,8 +55,6 @@ telescope.setup {
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<Leader>ff', builtin.find_files)
-vim.keymap.set('n', '<Leader>fF', function()
-    builtin.find_files { no_ignore = true }
-end)
+vim.keymap.set('n', '<Leader>fF', function() builtin.find_files { no_ignore = true } end)
 vim.keymap.set('n', '<Leader>fw', builtin.live_grep)
 vim.keymap.set('n', '<Leader>;', builtin.buffers)

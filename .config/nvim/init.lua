@@ -1,1 +1,1 @@
-require("gobidev")
+require('gobidev')

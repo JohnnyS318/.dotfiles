@@ -1,13 +1,13 @@
 -- space as leader key
-vim.g.mapleader = " "
+vim.g.mapleader = ' '
 
 -- Encoding
-vim.opt.fileencoding = "utf-8"
+vim.opt.fileencoding = 'utf-8'
 
 -- linenumber column
 vim.opt.nu = true
 vim.opt.relativenumber = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = 'yes'
 
 -- tabwidth
 vim.opt.tabstop = 4
@@ -30,7 +30,7 @@ vim.opt.wrap = false
 vim.cmd([[
     autocmd FileType markdown setlocal wrap
 ]])
-vim.opt.showbreak = "↪"
+vim.opt.showbreak = '↪'
 
 vim.opt.scrolloff = 8
 
@@ -38,16 +38,16 @@ vim.opt.scrolloff = 8
 vim.bo.undofile = true
 
 -- enable mouse support
-vim.opt.mouse = "a"
+vim.opt.mouse = 'a'
 
 -- use system clipboard
-vim.o.clipboard = "unnamedplus"
+vim.o.clipboard = 'unnamedplus'
 
 -- 24-bit colors
 vim.opt.termguicolors = true
 
 -- column at 120 characters to indicate max line width
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = '120'
 vim.cmd([[
      autocmd FileType gitcommit setlocal colorcolumn=72
     autocmd FileType python setlocal colorcolumn=79
@@ -62,9 +62,7 @@ vim.g.vim_markdown_folding_disabled = 1
 
 -- send osc52 sequence on yank
 local function copy()
-    if vim.v.event.operator == 'y' then
-        require('osc52').copy_register(vim.v.event.regname)
-    end
+    if vim.v.event.operator == 'y' then require('osc52').copy_register(vim.v.event.regname) end
 end
 
 vim.api.nvim_create_autocmd('TextYankPost', { callback = copy })

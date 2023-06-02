@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 local act = wezterm.action
 local config = {}
 
@@ -11,7 +11,7 @@ config.font_size = 10
 config.font_rules = {
     {
         intensity = 'Bold',
-        font = wezterm.font('JetBrains Mono', { weight = 'Bold' })
+        font = wezterm.font('JetBrains Mono', { weight = 'Bold' }),
     },
 }
 config.bold_brightens_ansi_colors = false
@@ -25,7 +25,7 @@ config.window_padding = {
 
 config.inactive_pane_hsb = {
     saturation = 1,
-    brightness = .97,
+    brightness = 0.97,
 }
 
 wezterm.on('gui-startup', function(cmd)
@@ -47,22 +47,22 @@ config.keys = {
     {
         key = 'h',
         mods = 'ALT',
-        action = act.ActivatePaneDirection 'Left',
+        action = act.ActivatePaneDirection('Left'),
     },
     {
         key = 'l',
         mods = 'ALT',
-        action = act.ActivatePaneDirection 'Right',
+        action = act.ActivatePaneDirection('Right'),
     },
     {
         key = 'k',
         mods = 'ALT',
-        action = act.ActivatePaneDirection 'Up',
+        action = act.ActivatePaneDirection('Up'),
     },
     {
         key = 'j',
         mods = 'ALT',
-        action = act.ActivatePaneDirection 'Down',
+        action = act.ActivatePaneDirection('Down'),
     },
     {
         key = 'H',
@@ -84,6 +84,6 @@ config.keys = {
         key = 'F11',
         action = wezterm.action.ToggleFullScreen,
     },
-};
+}
 
 return config

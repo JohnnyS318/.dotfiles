@@ -1,4 +1,4 @@
-require("gobidev.set")
-require("gobidev.packer")
-require("gobidev.lsp")
-require("gobidev.impatient")
+require('gobidev.set')
+require('gobidev.packer')
+require('gobidev.lsp')
+require('gobidev.impatient')

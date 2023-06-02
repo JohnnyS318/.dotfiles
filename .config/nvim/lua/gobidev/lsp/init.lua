@@ -1,7 +1,5 @@
-local status_ok, _ = pcall(require, "lspconfig")
-if not status_ok then
-	return
-end
+local status_ok, _ = pcall(require, 'lspconfig')
+if not status_ok then return end
 
-require("gobidev.lsp.configs")
-require("gobidev.lsp.handlers").setup()
+require('gobidev.lsp.configs')
+require('gobidev.lsp.handlers').setup()
