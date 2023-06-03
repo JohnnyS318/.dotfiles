@@ -61,11 +61,11 @@ vim.opt.showmode = false
 vim.g.vim_markdown_folding_disabled = 1
 
 -- send osc52 sequence on yank
-local function copy()
-    if vim.v.event.operator == 'y' then require('osc52').copy_register(vim.v.event.regname) end
-end
+-- local function copy()
+--     if vim.v.event.operator == 'y' then require('osc52').copy_register(vim.v.event.regname) end
+-- end
 
-vim.api.nvim_create_autocmd('TextYankPost', { callback = copy })
+-- vim.api.nvim_create_autocmd('TextYankPost', { callback = copy })
 
 vim.cmd([[
     " Highlight yanking
