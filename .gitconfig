@@ -9,10 +9,12 @@
     autoSetupRemote = true
 
 [pull]
-	rebase = false
+	rebase = true
 
 [commit]
     gpgsign = true
 
 [tag]
     gpgSign = true
+[rebase]
+	autoStash = true
