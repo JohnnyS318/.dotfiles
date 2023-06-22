@@ -93,6 +93,7 @@ return packer.startup(function(use)
     use('williamboman/mason.nvim')
     use('williamboman/mason-lspconfig.nvim')
     use('jayp0521/mason-null-ls.nvim')
+    use {'kaarmu/typst.vim', ft = {'typst'}}
     use('RubixDev/mason-update-all')
     use {
         'jose-elias-alvarez/null-ls.nvim',
