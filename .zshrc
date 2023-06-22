@@ -20,6 +20,9 @@ plugins=(
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 
+# disable zsh update prompt
+DISABLE_AUTO_UPDATE=true
+
 # load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
