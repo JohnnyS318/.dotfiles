@@ -2,7 +2,7 @@
 source ~/.config/env
 
 # set zsh theme
-ZSH_THEME="agnoster-custom" # modified version of agnoster theme, source in dotfiles repo
+ZSH_THEME="amuse" # modified version of agnoster theme, source in dotfiles repo
 
 # enable oh-my-zsh plugins
 plugins=(
@@ -48,9 +48,16 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # source aliasrc for aliases
 source ~/.config/aliasrc
 
+# launch gpg agent for gpg ssh keys if installed
+
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
+
 # more aliases for ctfs, disabled most of the time
 #source ~/.config/ctfrc
 
 # run pfetch after initialization if installed
 echo
 command -v pfetch >/dev/null && pfetch
+

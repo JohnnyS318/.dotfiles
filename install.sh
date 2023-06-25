@@ -84,6 +84,14 @@ install_file () {
     ln -s "$PWD/$src" "$dest"
 }
 
+
+########### GPG Install ###########
+install_file .gnupg/gpg.conf
+install_file .gnupg/gpg-agent.conf
+chmod 600 ~/.gnupg/gpg.conf
+
+
+
 # remove SpaceVim if installed
 [ -e ~/.SpaceVim ] && {
     curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall
@@ -114,4 +122,4 @@ install_file .config/nvim
 install_file .config/BetterDiscord/themes/nocturnal_gruvbox.theme.css
 
 # install custom zsh theme
-install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
+install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme 

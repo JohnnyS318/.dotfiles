@@ -1,13 +1,13 @@
 [user]
-    name = Adrian Groh
-    email = adrian.groh@t-online.de
-    signingkey = adrian.groh@t-online.de
+    name = Jonas Schneider
+    email = jonas.max.schneider@gmail.com
+    signingkey = 0x1B95684041835F5F
 
 [core]
 	editor = nvim
 [push]
     autoSetupRemote = true
-
+    
 [pull]
 	rebase = true
 
