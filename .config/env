@@ -24,3 +24,6 @@ export ZSH_CUSTOM="$ZSH/custom"
 
 # editor
 export EDITOR='nvim'
+
+#add cargo bin
+export PATH="$HOME/.cargo/bin:$PATH"
