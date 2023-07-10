@@ -27,3 +27,4 @@ export EDITOR='nvim'
 
 #add cargo bin
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:/opt/gurobi1002/linux64/bin"
