@@ -122,4 +122,12 @@ install_file .config/nvim
 install_file .config/BetterDiscord/themes/nocturnal_gruvbox.theme.css
 
 # install custom zsh theme
-install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme 
+install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
+
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+        echo "installed powerlevel10k"
+        echo "Run p10k configure"
+    else
+        echo "p10k already installed"
+fi

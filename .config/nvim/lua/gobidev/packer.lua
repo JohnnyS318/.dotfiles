@@ -130,6 +130,8 @@ return packer.startup(function(use)
     -- git
     use('lewis6991/gitsigns.nvim')
 
+    --colorizer
+    use('norcalli/nvim-colorizer.lua')
     -- clipboard
     -- use { 'ojroques/nvim-osc52' }
 end)

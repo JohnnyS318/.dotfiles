@@ -47,12 +47,12 @@ vim.o.clipboard = 'unnamedplus'
 vim.opt.termguicolors = true
 
 -- column at 120 characters to indicate max line width
-vim.opt.colorcolumn = '120'
+vim.opt.colorcolumn = '150'
 vim.cmd([[
      autocmd FileType gitcommit setlocal colorcolumn=72
-    autocmd FileType python setlocal colorcolumn=79
-    autocmd FileType markdown setlocal colorcolumn=80
-    autocmd FileType rust setlocal colorcolumn=100
+    autocmd FileType python setlocal colorcolumn=120
+    autocmd FileType markdown setlocal colorcolumn=150
+    autocmd FileType rust setlocal colorcolumn=120
 ]])
 
 -- disable mode display because it is handled by airline

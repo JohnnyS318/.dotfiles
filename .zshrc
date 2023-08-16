@@ -22,6 +22,7 @@ plugins=(
   vi-mode   # vi-keybinds
   zsh-autosuggestions
   zsh-syntax-highlighting
+  kubectl-autocomplete
 )
 
 # configure autosuggest plugin
@@ -73,6 +74,7 @@ source "$HOME/.cargo/env"
 #echo
 #command -v pfetch >/dev/null && pfetch
 
+export PATH="$(go env GOPATH)/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/home/jonas/.local/share/pnpm"
@@ -80,7 +82,14 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
+# pnpm edit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+
+export KEYID=0x1B95684041835F5F
+export PATH="$PATH:/home/jonas/.local/share/JetBrains/Toolbox/scripts"
