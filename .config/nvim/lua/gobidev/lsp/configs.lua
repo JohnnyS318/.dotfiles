@@ -59,7 +59,7 @@ require('lspconfig').lua_ls.setup(with_settings {
 require('lspconfig').pylsp.setup(default_opts)
 require('lspconfig').dockerls.setup(default_opts)
 -- require("lspconfig").golangci_lint_ls.setup(default_opts)
--- require("lspconfig").gopls.setup(default_opts)
+require("lspconfig").gopls.setup(default_opts)
 require('lspconfig').jdtls.setup(default_opts)
 require('lspconfig').kotlin_language_server.setup(default_opts)
 require('lspconfig').gdscript.setup(default_opts)
