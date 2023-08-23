@@ -4,7 +4,7 @@ env:
 font:
   normal:
     family: Jetbrains Mono
-  size: 10.0
+  size: 13.0
 
 window:
   startup_mode: Maximized
