@@ -8,7 +8,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
 # set zsh theme
 ZSH_THEME="powerlevel10k/powerlevel10k" # modified version of agnoster theme, source in dotfiles repo
 
@@ -24,6 +23,8 @@ plugins=(
   zsh-syntax-highlighting
   kubectl-autocomplete
 )
+
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 # configure autosuggest plugin
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -71,8 +72,8 @@ source "$HOME/.cargo/env"
 #source ~/.config/ctfrc
 
 # run pfetch after initialization if installed
-#echo
-#command -v pfetch >/dev/null && pfetch
+echo
+command -v pfetch >/dev/null && pfetch
 
 export PATH="$(go env GOPATH)/bin:$PATH"
 
@@ -93,3 +94,4 @@ gpgconf --launch gpg-agent
 
 export KEYID=0x1B95684041835F5F
 export PATH="$PATH:/home/jonas/.local/share/JetBrains/Toolbox/scripts"
+export CR_PAT="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"

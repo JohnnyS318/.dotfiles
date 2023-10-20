@@ -28,5 +28,10 @@ export EDITOR='nvim'
 #add cargo bin
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:/opt/gurobi1002/linux64/bin"
+export QT_STYLE_OVERRIDE=adwait
+
+export MOZ_ENABLE_WAYLAND=1
+export MUTTER_DEBUG_KMS_THREAD_TYPE="user"
+
 export PATH="/opt/flutter/bin:$PATH"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
