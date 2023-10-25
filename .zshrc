@@ -21,7 +21,7 @@ plugins=(
   vi-mode   # vi-keybinds
   zsh-autosuggestions
   zsh-syntax-highlighting
-  kubectl-autocomplete
+  kubectl
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -66,8 +66,7 @@ export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
 
 #rust
-source "$HOME/.cargo/env"
-
+#source "$HOME/.cargo/env"
 # more aliases for ctfs, disabled most of the time
 #source ~/.config/ctfrc
 
@@ -94,4 +93,5 @@ gpgconf --launch gpg-agent
 
 export KEYID=0x1B95684041835F5F
 export PATH="$PATH:/home/jonas/.local/share/JetBrains/Toolbox/scripts"
-export CR_PAT="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"
+
+source /usr/share/nvm/init-nvm.sh
