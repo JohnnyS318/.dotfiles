@@ -101,6 +101,7 @@ install_file .gitconfig
 install_file .config/env
 install_file .config/aliasrc
 install_file .config/ctfrc
+install_file .config/localrc
 
 install_file .config/tmux/tmux.conf
 install_file .config/paru/paru.conf

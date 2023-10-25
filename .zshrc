@@ -59,6 +59,9 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 # source aliasrc for aliases
 source ~/.config/aliasrc
 
+# source localrc
+source ~/.config/localrc
+
 # launch gpg agent for gpg ssh keys if installed
 
 export GPG_TTY="$(tty)"
