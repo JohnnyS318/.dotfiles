@@ -214,5 +214,3 @@ xconvertall() {
 crun() {
 	gcc -g -DDEBUG -Wall -Wextra -pedantic -std=c17 -o "$(basename "$1" .c).out" "$1" && ./"$(basename "$1" .c).out"
 }
-
-alias groot="cd $(git rev-parse --show-toplevel)"
