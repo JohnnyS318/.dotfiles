@@ -1,2 +1,2 @@
 .config/localrc
-lazy-lock.json
+.config/nvim/lazy-lock.json
