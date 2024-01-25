@@ -60,7 +60,7 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 source ~/.config/aliasrc
 
 # source localrc
-source ~/.config/localrc
+source ~/.config/localrc 2> /dev/null
 
 # launch gpg agent for gpg ssh keys if installed
 
@@ -97,4 +97,5 @@ gpgconf --launch gpg-agent
 export KEYID=0x1B95684041835F5F
 export PATH="$PATH:/home/jonas/.local/share/JetBrains/Toolbox/scripts"
 
-source /usr/share/nvm/init-nvm.sh
+
+source /usr/share/nvm/init-nvm.sh 2> /dev/null

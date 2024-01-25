@@ -126,4 +126,6 @@ install_file .gdbinit
 
 install_zsh_custom themes romkatv powerlevel10k
 echo "Run p10k configure"
-	
+
+install_file .config/discord/settings.json
+
