@@ -25,3 +25,5 @@
 	process = git-lfs filter-process
 [safe]
 	directory = /opt/flutter
+[credential]
+	helper = store
