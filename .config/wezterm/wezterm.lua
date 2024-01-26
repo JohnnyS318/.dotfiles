@@ -104,4 +104,5 @@ config.keys = {
     },
 }
 config.audible_bell = "Disabled"
+config.warn_about_missing_glyphs = false
 return config
