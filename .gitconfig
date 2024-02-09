@@ -27,3 +27,5 @@
 	directory = /opt/flutter
 [credential]
 	helper = store
+[status]
+	submoduleSummary = true

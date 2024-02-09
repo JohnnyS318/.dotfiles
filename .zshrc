@@ -1,3 +1,4 @@
+
 # source environment variables
 source ~/.config/env
 
@@ -8,6 +9,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 # set zsh theme
 ZSH_THEME="powerlevel10k/powerlevel10k" # modified version of agnoster theme, source in dotfiles repo
 
@@ -17,85 +19,70 @@ plugins=(
   cp  # define cpv command that uses rsync
   sudo  # press double escape to add sudo to command
   git   # git aliases
-  # have to be installed externally, handled by install.sh
+  kubectl #kubectl completion
+  helm #helm completion
   vi-mode   # vi-keybinds
-  zsh-autosuggestions
+  
+  # have to be installed externally, handled by install.sh
+  zsh-autocomplete
   zsh-syntax-highlighting
-  kubectl
+  F-Sy-H
+  #fast-syntax-highlighting #faster=better
+  zsh-autosuggestions
 )
 
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
-# configure autosuggest plugin
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-ZSH_AUTOSUGGEST_USE_ASYNC=1
-bindkey '^I' autosuggest-accept
-
-# disable zsh update prompt
-DISABLE_AUTO_UPDATE=true
-
-# load oh-my-zsh
+#load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# customize syntax highlighting colors
-ZSH_HIGHLIGHT_STYLES[arg0]=fg=4
-ZSH_HIGHLIGHT_STYLES[command]=fg=4
-ZSH_HIGHLIGHT_STYLES[alias]=fg=4
-ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=4
-ZSH_HIGHLIGHT_STYLES[precommand]=fg=4,bold
-ZSH_HIGHLIGHT_STYLES[builtin]=fg=6,bold
-ZSH_HIGHLIGHT_STYLES[default]=fg=12
-ZSH_HIGHLIGHT_STYLES[path]=fg=12
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]=fg=5
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]=fg=208,bold
-ZSH_HIGHLIGHT_STYLES[assign]=fg=14
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '^E' autosuggest-accept
 
-# Fix slow pasting with zsh-autosuggest
-zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+#revert back to default history ↑ and ↓.
+() {
+   local -a prefix=( '\e'{\[,O} )
+   local -a up=( ${^prefix}A ) down=( ${^prefix}B )
+   local key=
+   for key in $up[@]; do
+      bindkey "$key" up-line-or-history
+   done
+   for key in $down[@]; do
+      bindkey "$key" down-line-or-history
+   done
+}
 
 # Autojump
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
 
+#node version manager
+[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 2> /dev/null
+
 # source aliasrc for aliases
 source ~/.config/aliasrc
 
-# source localrc
+# source localrc for local config and tokens not shared to git
 source ~/.config/localrc 2> /dev/null
 
 # launch gpg agent for gpg ssh keys if installed
-
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
 command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
 
-#rust
-#source "$HOME/.cargo/env"
-# more aliases for ctfs, disabled most of the time
-#source ~/.config/ctfrc
+#add go path if installed
+command -v go > /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
 
-# run pfetch after initialization if installed
-echo
-command -v pfetch >/dev/null && pfetch
-
-export PATH="$(go env GOPATH)/bin:$PATH"
-
-# pnpm
+#pnpm setup
 export PNPM_HOME="/home/jonas/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm edit
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-
-export KEYID=0x1B95684041835F5F
-export PATH="$PATH:/home/jonas/.local/share/JetBrains/Toolbox/scripts"
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 
-source /usr/share/nvm/init-nvm.sh 2> /dev/null
+# run pfetch after initialization if installed
+echo
+command -v pfetch >/dev/null && pfetch

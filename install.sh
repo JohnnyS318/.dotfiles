@@ -55,9 +55,12 @@ install_zsh_custom() {
 }
 
 # install zsh plugins used in .zshrc
-install_zsh_custom plugins zsh-users zsh-autosuggestions
+install_zsh_custom plugins z-shell F-Sy-H
 install_zsh_custom plugins zsh-users zsh-syntax-highlighting
-#install_zsh_custom plugins jeffreytse zsh-vi-mode
+
+install_zsh_custom plugins zsh-users zsh-autosuggestions
+install_zsh_custom plugins marlonrichert zsh-autocomplete
+#install_zsh_custom plugins jeffreytse zsh-vi-mode # default oh-my-zsh plugin
 
 ########### dotfiles Installation ###########
 # create symlink of dotfiles, backup existing files if present
@@ -128,4 +131,3 @@ install_zsh_custom themes romkatv powerlevel10k
 echo "Run p10k configure"
 
 install_file .config/discord/settings.json
-

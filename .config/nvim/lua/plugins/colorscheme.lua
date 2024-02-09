@@ -8,6 +8,6 @@ return {
     lazy = true,
   },
   { "LazyVim/LazyVim", opts = {
-    colorscheme = "nordic",
+    colorscheme = "gruvbox",
   } },
 }
