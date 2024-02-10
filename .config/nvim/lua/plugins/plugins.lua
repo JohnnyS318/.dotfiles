@@ -12,4 +12,9 @@ return {
   {
     "isobit/vim-caddyfile",
   },
+  {
+    "kaarmu/typst.vim",
+    ft = "typst",
+    lazy = false,
+  },
 }
