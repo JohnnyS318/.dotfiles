@@ -20,8 +20,9 @@ if not ok then
     return
 end
 
-
 -- require core vim constants/options especially mapleader " "
 require("core.options")
 
 lazy.setup("plugins")
+
+require("core.color")
