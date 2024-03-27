@@ -1,4 +1,4 @@
 require("core.lazy")
 
-require("config.keymaps")
-
+-- global keymappings not dependent on some specific plugin
+require("config.global-keymaps")

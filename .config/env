@@ -39,3 +39,8 @@ export KEYID=0x1B95684041835F5F
 export VAULT_ADDR="https://vault.jonsch.eu:8200"
 export VAULT_API_ADDR="https://vault.jonsch.eu:8200"
 export VAULT_CLUSTER_ADDR="https://vault.jonsch.eu:8201"
+
+export EMAIL="jonas.max.schneider@gmail.com"
+
+#Ruby Gem Bin
+export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"

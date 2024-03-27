@@ -22,6 +22,7 @@ plugins=(
   kubectl #kubectl completion
   helm #helm completion
   vi-mode   # vi-keybinds
+  kubectl
   
   # have to be installed externally, handled by install.sh
   zsh-autocomplete
@@ -37,19 +38,20 @@ source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 bindkey '^E' autosuggest-accept
+bindkey '^J' autosuggest-accept
 
 #revert back to default history ↑ and ↓.
-() {
-   local -a prefix=( '\e'{\[,O} )
-   local -a up=( ${^prefix}A ) down=( ${^prefix}B )
-   local key=
-   for key in $up[@]; do
-      bindkey "$key" up-line-or-history
-   done
-   for key in $down[@]; do
-      bindkey "$key" down-line-or-history
-   done
-}
+# () {
+#    local -a prefix=( '\e'{\[,O} )
+#    local -a up=( ${^prefix}A ) down=( ${^prefix}B )
+#    local key=
+#    for key in $up[@]; do
+#       bindkey "$key" up-line-or-history
+#    done
+#    for key in $down[@]; do
+#       bindkey "$key" down-line-or-history
+#    done
+# }
 
 # Autojump
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
@@ -86,3 +88,6 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # run pfetch after initialization if installed
 echo
 command -v pfetch >/dev/null && pfetch
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/vault vault
