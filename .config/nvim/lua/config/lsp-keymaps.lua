@@ -1,9 +1,20 @@
 local M = {}
 
+-- These are the options keymap becoming available when a lsp attaches.
+-- These include standard vim.lsp stuff but Lspsaga and more...
+
 M.on_attach = function(client, buffer)
     -- Code Actions
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { silent = true, buffer = buffer, desc = "Rename" })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, buffer = buffer, desc = "Code Action" })
+    -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, buffer = buffer, desc = "Code Action" })
+
+    vim.keymap.set(
+        "n",
+        "<leader>ca",
+        "<CMD>Lspsaga code_action<CR>",
+        { silent = false, buffer = buffer, desc = "Code Action" }
+    )
+
     vim.keymap.set(
         "n",
         "<leader>cd",
@@ -35,8 +46,27 @@ M.on_attach = function(client, buffer)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { silent = true, buffer = buffer, desc = "Goto Declaration" })
 
     -- Documentation
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { silent = true, buffer = buffer, desc = "Hover Documentation" })
+    vim.keymap.set(
+        "n",
+        "K",
+        "<CMD>Lspsaga hover_doc<CR>",
+        { silent = true, buffer = buffer, desc = "Hover Documentation" }
+    )
     --vim.keymap.set("i", "<C-K>", vim.lsp.buf.hover, { silent = true, buffer = buffer, desc = "Hover Documentation" })
+
+    -- Diagnostics
+    vim.keymap.set(
+        "n",
+        "]d",
+        require("Lspsaga.diagnostic").goto_next(),
+        { silent = false, buffer = buffer, desc = "Goto Diagnostics" }
+    )
+    vim.keymap.set(
+        "n",
+        "[d",
+        require("Lspsaga.diagnostic").goto_prev(),
+        { silent = false, buffer = buffer, desc = "Goto Diagnostics" }
+    )
 end
 
 return M
