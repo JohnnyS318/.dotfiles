@@ -21,8 +21,13 @@ return {
                 end,
                 desc = "Delete Buffer",
             },
-			-- stylua: ignore
-			{ "<leader>bD", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+            {
+                "<leader>bD",
+                function()
+                    require("mini.bufremove").delete(0, true)
+                end,
+                desc = "Delete Buffer (Force)",
+            },
         },
     },
     {
@@ -32,6 +37,7 @@ return {
         opts = {},
     },
     -- TODO: Evaluate these keybindings
+    -- tpope/vim-surround ?
     {
         "echasnovski/mini.surround",
         opts = {

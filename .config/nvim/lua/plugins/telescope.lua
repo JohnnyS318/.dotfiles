@@ -8,21 +8,31 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
             "BurntSushi/ripgrep",
         },
-        config = function()
-            require("telescope").setup {}
+        opts = {
+            extensions = {
+                fzf = {
+                    fuzzy = true,
+                    override_generic_sorter = true,
+                    override_file_sorter = true,
+                    case_mode = "smart_case",
+                },
+            },
+        },
+        config = function(_, opts)
+            require("telescope").setup(opts)
 
             -- Enable telescope fzf native, if installed
-            pcall(require("telescope").load_extension, "fzf")
+            pcall(require("telescope").load_extension("fzf"))
 
             local builtin = require("telescope.builtin")
 
             vim.keymap.set(
                 "n",
-                "<leader>so",
+                "<leader>fo",
                 builtin.oldfiles,
                 { silent = true, desc = "Search Recently Open (Telescope)" }
             )
-            vim.keymap.set("n", "<leader>sf", builtin.find_files, { silent = true, desc = "Find Files (Telescope)" })
+            vim.keymap.set("n", "<leader>ff", builtin.find_files, { silent = true, desc = "Find Files (Telescope)" })
             vim.keymap.set(
                 "n",
                 "<leader><space>",
@@ -31,11 +41,17 @@ return {
             )
             vim.keymap.set(
                 "n",
-                "<leader>sw",
+                "<leader>fw",
                 builtin.grep_string,
                 { silent = true, desc = "Find Current Word (Telescope)" }
             )
-            vim.keymap.set("n", "<leader>sg", builtin.live_grep, { silent = true, desc = "Find Live Grep (Telescope)" })
+            vim.keymap.set(
+                "n",
+                "<leader>fw",
+                builtin.buffers,
+                { silent = true, desc = "Find Current Word (Telescope)" }
+            )
+            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { silent = true, desc = "Find Live Grep (Telescope)" })
         end,
     },
 }

@@ -1,6 +1,6 @@
--- map(local) leader 
+-- map(local) leader
 vim.g.mapleader = " " -- set `mapleader` before lazy for correct mappigng
-vim.g.maplocalleader = " " -- "\\"
+vim.g.maplocalleader = "\\" -- "\\"
 
 -- encoding
 vim.opt.fileencoding = "utf-8"
@@ -16,9 +16,6 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 
 vim.opt.smartindent = true
-
-
-
 
 -- gui features
 

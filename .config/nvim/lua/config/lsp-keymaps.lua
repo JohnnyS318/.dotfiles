@@ -55,17 +55,25 @@ M.on_attach = function(client, buffer)
     --vim.keymap.set("i", "<C-K>", vim.lsp.buf.hover, { silent = true, buffer = buffer, desc = "Hover Documentation" })
 
     -- Diagnostics
+
+    local diagnostic_goto = function(next, severity)
+        local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+        severity = severity and vim.diagnostic.severity[severity] or nil
+        return function()
+            go { severity = severity }
+        end
+    end
+
+    vim.keymap.set("n", "]d", diagnostic_goto(true), { silent = false, buffer = buffer, desc = "Next Diagnostics" })
+    vim.keymap.set("n", "[d", diagnostic_goto(false), { silent = false, buffer = buffer, desc = "Prev Diagnostics" })
+    vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"), { silent = false, buffer = buffer, desc = "Next Error" })
+    vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"), { silent = false, buffer = buffer, desc = "Prev Error" })
+    vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"), { silent = false, buffer = buffer, desc = "Next Warning" })
     vim.keymap.set(
         "n",
-        "]d",
-        require("Lspsaga.diagnostic").goto_next(),
-        { silent = false, buffer = buffer, desc = "Goto Diagnostics" }
-    )
-    vim.keymap.set(
-        "n",
-        "[d",
-        require("Lspsaga.diagnostic").goto_prev(),
-        { silent = false, buffer = buffer, desc = "Goto Diagnostics" }
+        "]w",
+        diagnostic_goto(false, "WARN"),
+        { silent = false, buffer = buffer, desc = "Prev Warning" }
     )
 end
 

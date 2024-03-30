@@ -23,9 +23,22 @@ return {
             },
             "RRethy/vim-illuminate",
             "hrsh7th/cmp-nvim-lsp",
+            "nvimdev/lspsaga.nvim",
+            "someone-stole-my-name/yaml-companion.nvim",
             --"ms-jpq/coq_nvim",
         },
         config = function()
+            ---Get opts table from the lazy plugin definition
+            ---@param name string
+            ---@return table
+            local getPluginOptions = function(name)
+                local plugin = require("lazy.core.config").plugins[name]
+                if not plugin then
+                    return {}
+                end
+                local Plugin = require("lazy.core.plugin")
+                return Plugin.values(plugin, "opts", false)
+            end
             require("mason").setup()
             require("mason-lspconfig").setup {
                 ensure_installed = {
@@ -45,7 +58,7 @@ return {
 
             -- Diagnostic config
             local config = {
-                virtual_text = false,
+                virtual_text = true,
                 signs = {
                     active = signs,
                 },
@@ -97,6 +110,17 @@ return {
                     },
                 },
             }
+
+            -- YAML
+            local cfg = require("yaml-companion").setup(getPluginOptions("yaml-companion.nvim"))
+            cfg.on_attach = function(client, buffer)
+                if cfg.on_attach then
+                    pcall(cfg.on_attach(client, buffer))
+                end
+                on_attach(client, buffer)
+            end
+            cfg.capabilities = capabilities
+            require("lspconfig").yamlls.setup(cfg)
 
             -- diagnostics
 
