@@ -97,6 +97,11 @@ return {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }
+            -- SVELTE
+            require("lspconfig").svelte.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
 
             -- LUA
             require("lspconfig").lua_ls.setup {
