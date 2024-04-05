@@ -1,5 +1,8 @@
 -- file for keymappings
 
+-- Map q: to a no-operation
+vim.api.nvim_set_keymap("n", "q:", "<NOP>", { noremap = true, silent = true })
+
 -- window stuff
 vim.keymap.set({ "n" }, "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 vim.keymap.set({ "n" }, "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })

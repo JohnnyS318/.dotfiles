@@ -23,3 +23,5 @@ vim.opt.mouse = "a"
 
 -- 24-bit colors
 vim.opt.termguicolors = true
+
+vim.opt.showtabline = 2

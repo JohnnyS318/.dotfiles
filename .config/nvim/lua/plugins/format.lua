@@ -1,8 +1,10 @@
+--return {}
+
 -- formatting & linter config
 
 return {
     "stevearc/conform.nvim",
-    event = { "BufWritePre" },
+    event = { "BufReadPre", "BufNewFile" },
     cmd = { "ConformInfo" },
     keys = {
         {
@@ -21,7 +23,16 @@ return {
         formatters_by_ft = {
             lua = { "stylua" },
             python = { "isort", "black" },
-            javascript = { { "prettierd", "prettier" } },
+            typescript = { "eslint_d", { "prettierd", "prettier" } },
+            typescriptreact = { "eslint_d", { "eslint_d", "prettierd", "prettier" } },
+            javascript = { "eslint_d", { "prettierd", "prettier" } },
+            javascriptreact = { "eslint_d", { "prettierd", "prettier" } },
+            svelte = { "eslint_d", { "prettierd", "prettier" } },
+            json = { { "prettierd", "prettier" } },
+            html = { { "prettierd", "prettier" } },
+            css = { { "prettierd", "prettier" } },
+            markdown = { { "prettierd", "prettier" } },
+            mdx = { { "prettierd", "prettier" } },
         },
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },

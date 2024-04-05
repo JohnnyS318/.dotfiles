@@ -63,6 +63,7 @@ return {
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     -- ["<C-space>"] = cmp.open_docs(),
+                    ["<C-space>"] = cmp.mapping.complete(), -- open completion on ctrl+space
                     ["<CR>"] = cmp.mapping.confirm {
                         -- behavior = cmp.ConfirmBehavior.Replace,
                         select = true,

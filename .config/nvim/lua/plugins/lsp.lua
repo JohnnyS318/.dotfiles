@@ -92,13 +92,41 @@ return {
             capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- USE IF using cmp
 
             -- ##### SETUP #####
-            -- Javascript
+            -- Javascript/Typescript(react)
+
+            local function organize_ts_imports()
+                local params = {
+                    command = "_typescript.organizeImports",
+                    arguments = { vim.api.nvim_buf_get_name(0) },
+                    title = "",
+                }
+                vim.lsp.buf.execute_command(params)
+            end
+
             require("lspconfig").tsserver.setup {
+                on_attach = require("config.lsp-keymaps").on_tsserver_attach(on_attach),
+                capabilities = capabilities,
+                commands = {
+                    OrganizeImports = {
+                        organize_ts_imports,
+                        description = "Organize Imports",
+                    },
+                },
+            }
+
+            require("lspconfig").tailwindcss.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }
+
             -- SVELTE
             require("lspconfig").svelte.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
+
+            -- TYPST
+            require("lspconfig").typst_lsp.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }

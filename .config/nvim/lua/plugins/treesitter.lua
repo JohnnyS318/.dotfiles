@@ -17,6 +17,13 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
         opts = {
+            indent = {
+                enable = true,
+            },
+            highlight = {
+                enable = true,
+            },
+            additional_vim_regex_highlighting = false, -- for now...
             textobjects = {
                 move = {
                     enable = true,
@@ -28,10 +35,35 @@ return {
             },
             autotag = {
                 enable = true,
+                enable_rename = true,
+                enable_close = true,
+                enable_close_on_slash = true,
+                filetypes = {
+                    "html",
+                    "javascript",
+                    "typescript",
+                    "javascriptreact",
+                    "typescriptreact",
+                    "svelte",
+                    "vue",
+                    "tsx",
+                    "jsx",
+                    "rescript",
+                    "xml",
+                    "php",
+                    "markdown",
+                    "astro",
+                    "glimmer",
+                    "handlebars",
+                    "hbs",
+                    "mdx", -- custom
+                },
             },
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
+
+            require("config.filetypes").treesitter_setup()
         end,
     },
 }
