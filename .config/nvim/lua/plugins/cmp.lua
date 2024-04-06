@@ -8,11 +8,12 @@ return {
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
         },
-        config = function()
+        config = function(_, opts)
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local has_words_before = function()
                 unpack = unpack or table.unpack
@@ -106,6 +107,10 @@ return {
                         return vim_item
                     end,
                 },
+                completion = {
+                    -- keyword_length  1,
+                    -- keyword_pattern = ".*",
+                },
                 experimental = {
                     ghost_text = {
                         hl_group = "CmpGhostText",
@@ -113,6 +118,7 @@ return {
                 },
                 sources = {
                     { name = "nvim_lsp" },
+                    { name = "nvim_lsp_signature_help" },
                     { name = "luasnip" },
                     { name = "buffer" },
                     { name = "path" },
