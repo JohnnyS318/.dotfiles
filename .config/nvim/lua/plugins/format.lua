@@ -28,7 +28,7 @@ return {
             javascript = { "eslint_d", { "prettierd", "prettier" } },
             javascriptreact = { "eslint_d", { "prettierd", "prettier" } },
             svelte = { "eslint_d", { "prettierd", "prettier" } },
-            json = { { "prettierd", "prettier" } },
+            json = { { "jq", "prettierd", "prettier" } },
             html = { { "prettierd", "prettier" } },
             css = { { "prettierd", "prettier" } },
             markdown = { { "prettierd", "prettier" } },

@@ -131,6 +131,38 @@ return {
                 capabilities = capabilities,
             }
 
+            -- YAML
+            require("lspconfig").yamlls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    yaml = {
+                        schemaStore = {
+                            enable = false,
+                            url = "",
+                        },
+                        schemas = require("schemastore").yaml.schemas(),
+                    },
+                },
+            }
+
+            -- JSON
+            require("lspconfig").jsonls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = {
+                    json = {
+                        schemas = require("schemastore").json.schemas(),
+                        format = {
+                            enable = true,
+                        },
+                        validate = {
+                            enable = true,
+                        },
+                    },
+                },
+            }
+
             -- LUA
             require("lspconfig").lua_ls.setup {
                 on_attach = on_attach,
