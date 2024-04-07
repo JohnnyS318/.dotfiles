@@ -33,6 +33,9 @@ return {
             css = { { "prettierd", "prettier" } },
             markdown = { { "prettierd", "prettier" } },
             mdx = { { "prettierd", "prettier" } },
+            -- clang-format is build into the lsp by default
+            -- c = { "clang-format" },
+            -- cpp = { "clang-format" },
         },
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },

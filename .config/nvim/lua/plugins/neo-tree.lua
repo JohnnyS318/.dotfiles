@@ -49,6 +49,22 @@ return {
                 enabled = true,
                 leave_dirs_open = true,
             },
+            filtered_items = {
+                hide_dotfiles = false,
+                hide_gitignored = false,
+                hide_by_name = {
+                    "node_modules",
+                },
+            },
+            find_command = "fd",
+            find_args = {
+                fd = {
+                    "--exclude",
+                    ".git",
+                    "--exclude",
+                    "node_modules",
+                },
+            },
         },
     },
     config = function(_, opts)

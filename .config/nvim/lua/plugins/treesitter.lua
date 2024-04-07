@@ -4,6 +4,7 @@ return {
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "windwp/nvim-ts-autotag",
+            "JoosepAlviste/nvim-ts-context-commentstring",
         },
         cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         build = ":TSUpdate",
@@ -23,6 +24,12 @@ return {
             highlight = {
                 enable = true,
             },
+            {
+                context_commentstring = {
+                    enable = true,
+                    enable_autocmd = false,
+                },
+            },
             additional_vim_regex_highlighting = false, -- for now...
             textobjects = {
                 move = {
@@ -32,6 +39,9 @@ return {
                     goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer" },
                     goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer" },
                 },
+            },
+            endwise = {
+                enable = true,
             },
             autotag = {
                 enable = true,

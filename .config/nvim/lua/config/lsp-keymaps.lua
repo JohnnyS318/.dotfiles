@@ -9,17 +9,6 @@ local M = {}
 -- These are the options keymap becoming available when a lsp attaches.
 -- These include standard vim.lsp stuff but Lspsaga and more...
 
---- Extends the tsserver_attach function and adds a custom keymap for organizing imports.
----@param on_attach function(client, buffer) The base on_attach function to extend.
----@return function(client, buffer) A function that executes the wrapped on_attach function and extends it.
-M.on_tsserver_attach = function(on_attach)
-    return function(client, buffer)
-        on_attach(client, buffer)
-
-        vim.keymap.set("n", "<leader>ci", "<CMD>OrganizeImports<CR>")
-    end
-end
-
 M.on_attach = function(client, buffer)
     -- Code Actions
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { silent = true, buffer = buffer, desc = "Rename" })

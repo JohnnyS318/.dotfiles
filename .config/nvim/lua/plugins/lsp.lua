@@ -21,7 +21,6 @@ return {
                 "j-hui/fidget.nvim",
                 event = "LspAttach",
             },
-            "RRethy/vim-illuminate",
             "hrsh7th/cmp-nvim-lsp",
             "nvimdev/lspsaga.nvim",
             "someone-stole-my-name/yaml-companion.nvim",
@@ -83,7 +82,6 @@ return {
                 vim.api.nvim_buf_create_user_command(buffer, "Format", function(_)
                     vim.lsp.buf.format()
                 end, { desc = "Format current buffer with LSP formatter" })
-                require("illuminate").on_attach(client)
             end
 
             -- broadcast additional completion capabilities to servers
@@ -92,47 +90,81 @@ return {
             capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- USE IF using cmp
 
             -- ##### SETUP #####
+            local lspconfig = require("lspconfig")
+
             -- Javascript/Typescript(react)
 
-            local function organize_ts_imports()
-                local params = {
-                    command = "_typescript.organizeImports",
-                    arguments = { vim.api.nvim_buf_get_name(0) },
-                    title = "",
-                }
-                vim.lsp.buf.execute_command(params)
-            end
-
-            require("lspconfig").tsserver.setup {
-                on_attach = require("config.lsp-keymaps").on_tsserver_attach(on_attach),
+            local tsserverconfig = require("plugins.lsp.tsserver")
+            lspconfig.tsserver.setup {
+                on_attach = tsserverconfig.on_tsserver_attach(on_attach),
                 capabilities = capabilities,
                 commands = {
                     OrganizeImports = {
-                        organize_ts_imports,
+                        tsserverconfig.organize_ts_imports,
                         description = "Organize Imports",
                     },
                 },
             }
 
-            require("lspconfig").tailwindcss.setup {
+            lspconfig.tailwindcss.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }
 
             -- SVELTE
-            require("lspconfig").svelte.setup {
+            lspconfig.svelte.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }
 
+            -- HASKEL
+            lspconfig.hls = function()
+                return true
+            end
+
+            -- C/C++
+            lspconfig.clangd.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+                filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp" },
+                cmd = {
+                    "clangd",
+                    "--background-index",
+                    "--clang-tidy",
+                    "--header-insertion=iwyu",
+                    "--completion-style=detailed",
+                    "--function-arg-placeholders",
+                    "--fallback-style=llvm",
+                },
+                root_dir = function(fname)
+                    return require("lspconfig.util").root_pattern(
+                        "Makefile",
+                        "configure.ac",
+                        "configure.in",
+                        "config.h.in",
+                        "meson.build",
+                        "meson_options.txt",
+                        "build.ninja"
+                    )(fname) or require("lspconfig.util").root_pattern(
+                        "compile_commands.json",
+                        "compile_flags.txt"
+                    )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+                end,
+                init_options = {
+                    usePlaceholders = true,
+                    completeUnimported = true,
+                    clangdFileStatus = true,
+                },
+            }
+
             -- TYPST
-            require("lspconfig").typst_lsp.setup {
+            lspconfig.typst_lsp.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
             }
 
             -- YAML
-            require("lspconfig").yamlls.setup {
+            lspconfig.yamlls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
@@ -147,7 +179,7 @@ return {
             }
 
             -- JSON
-            require("lspconfig").jsonls.setup {
+            lspconfig.jsonls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
@@ -164,7 +196,7 @@ return {
             }
 
             -- LUA
-            require("lspconfig").lua_ls.setup {
+            lspconfig.lua_ls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
@@ -185,12 +217,12 @@ return {
                 on_attach(client, buffer)
             end
             cfg.capabilities = capabilities
-            require("lspconfig").yamlls.setup(cfg)
+            lspconfig.yamlls.setup(cfg)
 
             -- diagnostics
 
             -- Setup diagnostics formaters and linters for non LSP provided files
-            require("lspconfig").diagnosticls.setup {
+            lspconfig.diagnosticls.setup {
                 on_attach = on_attach,
                 capabilities = capabilities,
                 cmd = { "diagnostic-languageserver", "--stdio" },

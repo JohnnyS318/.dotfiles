@@ -30,38 +30,43 @@ return {
             },
         },
     },
-    {
-        "echasnovski/mini.pairs",
-        version = "*",
-        event = "VeryLazy",
-        opts = {},
-    },
+    -- {
+    --     "echasnovski/mini.pairs",
+    --     version = "*",
+    --     event = "VeryLazy",
+    --     opts = {},
+    -- },
     -- TODO: Evaluate these keybindings
     -- tpope/vim-surround ?
-    {
-        "echasnovski/mini.surround",
-        opts = {
-            mappings = {
-                add = "<leader>csa",
-                delete = "<leader>csd",
-                find = "<leader>gsf",
-                find_left = "<leader>gsF",
-                highlight = "<leader>csh",
-                replace = "<leader>csr",
-                update_n_lines = "<leader>csn",
-            },
-        },
-    },
+    -- {
+    --     "echasnovski/mini.surround",
+    --     opts = {
+    --         mappings = {
+    --             add = "<leader>csa",
+    --             delete = "<leader>csd",
+    --             find = "<leader>gsf",
+    --             find_left = "<leader>gsF",
+    --             highlight = "<leader>csh",
+    --             replace = "<leader>csr",
+    --             update_n_lines = "<leader>csn",
+    --         },
+    --     },
+    -- },
     -- TODO: Switch to numTOStr/Comment.nvim and use
-    {
-        "echasnovski/mini.comment",
-        opts = {
-            mappings = {
-                comment = "<leader>cc",
-                comment_line = "<leader>cC",
-                comment_visual = "<leader>cc",
-                textobject = "<leader>cc",
-            },
-        },
-    },
+    -- {
+    --     "echasnovski/mini.comment",
+    --     opts = {
+    --         options = {
+    --             custom_commentstring = function()
+    --                 return require("ts_context_commentstring").calculate_commentstring() or vim.bo.commentstring
+    --             end,
+    --         },
+    --         mappings = {
+    --             comment = "<leader>cc",
+    --             comment_line = "<leader>cC",
+    --             comment_visual = "<leader>cc",
+    --             textobject = "<leader>cc",
+    --         },
+    --     },
+    -- },
 }

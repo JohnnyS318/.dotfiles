@@ -1,14 +1,14 @@
 -- first install lazy if it is not already installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim" -- path to lazy
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
+    vim.fn.system {
         "git",
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
         lazypath,
-    })                     -- install if not there
+    } -- install if not there
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -23,6 +23,6 @@ end
 -- require core vim constants/options especially mapleader " "
 require("core.options")
 
-lazy.setup("plugins")
+lazy.setup { { import = "plugins" }, { import = "plugins.langs" } }
 
 require("core.color")
