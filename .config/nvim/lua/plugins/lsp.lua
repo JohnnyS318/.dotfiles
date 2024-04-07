@@ -117,6 +117,12 @@ return {
                 capabilities = capabilities,
             }
 
+            -- GO
+            lspconfig.gopls.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
+
             -- HASKEL
             lspconfig.hls = function()
                 return true

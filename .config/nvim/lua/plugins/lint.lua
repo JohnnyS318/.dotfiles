@@ -9,6 +9,7 @@ return {
                 typescript = { "eslint_d" },
                 javascriptreact = { "eslint_d" },
                 typescriptreact = { "eslint_d" },
+                go = { "golangcilint" },
             }
 
             local function debounce(ms, fn)
@@ -21,6 +22,7 @@ return {
                     end)
                 end
             end
+
             -- the events can possibly (especially InsertLeaver) result in problems due to some linters
             -- being unable to lint --stdio inputs and just written files
             vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {

@@ -52,6 +52,12 @@ return {
                 { silent = true, desc = "Find Current Word (Telescope)" }
             )
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { silent = true, desc = "Find Live Grep (Telescope)" })
+            vim.keymap.set(
+                "n",
+                "<leader>fm",
+                builtin.keymaps,
+                { silent = false, desc = "Find / Search Keymaps (Telescope)" }
+            )
         end,
     },
 }
