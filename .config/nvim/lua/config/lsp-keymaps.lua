@@ -9,7 +9,7 @@ local M = {}
 -- These are the options keymap becoming available when a lsp attaches.
 -- These include standard vim.lsp stuff but Lspsaga and more...
 
-M.on_attach = function(client, buffer)
+M.on_attach = function(_, buffer)
     -- Code Actions
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { silent = true, buffer = buffer, desc = "Rename" })
     -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, buffer = buffer, desc = "Code Action" })

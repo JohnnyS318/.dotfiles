@@ -74,6 +74,9 @@ return {
                 },
             }
             vim.diagnostic.config(config)
+
+            local base_on_attach = function(client, buffer) end
+
             -- what happens at LSPAttach event... keymaps are set in configs
             local on_attach = function(client, buffer)
                 require("config.lsp-keymaps").on_attach(client, buffer)
@@ -92,11 +95,19 @@ return {
             -- ##### SETUP #####
             local lspconfig = require("lspconfig")
 
+            -- ON_ATTACH autocommand
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+                callback = function(event)
+                    on_attach({}, event.buf)
+                end,
+            })
+
             -- Javascript/Typescript(react)
 
             local tsserverconfig = require("plugins.lsp.tsserver")
             lspconfig.tsserver.setup {
-                on_attach = tsserverconfig.on_tsserver_attach(on_attach),
+                on_attach = tsserverconfig.on_tsserver_attach(base_on_attach),
                 capabilities = capabilities,
                 commands = {
                     OrganizeImports = {
@@ -107,27 +118,31 @@ return {
             }
 
             lspconfig.tailwindcss.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
             }
 
             -- SVELTE
             lspconfig.svelte.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
             }
 
             -- GO
             lspconfig.gopls.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
             }
 
-            -- HASKEL
+            -- HASKELL
+            -- Do not configure @see plugins/langs/haskell.lua
+
+            -- RUST
+            -- Do not configure @see plugins/langs/rust.lua
 
             -- C/C++
             lspconfig.clangd.setup {
-                on_attach = on_attach,
+                on_attach = require("plugins.lsp.clangd").on_clangd_attach(base_on_attach),
                 capabilities = capabilities,
                 filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp" },
                 cmd = {
@@ -161,20 +176,20 @@ return {
             }
 
             lspconfig.neocmake.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
             }
             -- TYPST
             lspconfig.typst_lsp.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
             }
 
             -- YAML
-            lspconfig.yamlls.setup(require("plugins.lsp.yaml").setup(on_attach, capabilities))
+            lspconfig.yamlls.setup(require("plugins.lsp.yaml").setup(base_on_attach, capabilities))
             -- JSON
             lspconfig.jsonls.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
                 settings = {
                     json = {
@@ -190,6 +205,8 @@ return {
             }
             --HELM
             lspconfig.helm_ls.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
                 logLevel = "info",
                 valuesFiles = {
                     mainValuesFile = "values.yaml",
@@ -214,33 +231,31 @@ return {
 
             -- LUA
             lspconfig.lua_ls.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
                 settings = {
                     Lua = {
                         diagnostics = {
                             globals = { "vim" },
                         },
+                        workspace = {
+                            library = {
+                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+                                [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+                            },
+                            maxPreload = 100000,
+                            preloadFileSize = 10000,
+                        },
                     },
                 },
             }
-
-            -- YAML
-            local cfg = require("yaml-companion").setup(getPluginOptions("yaml-companion.nvim"))
-            cfg.on_attach = function(client, buffer)
-                if cfg.on_attach then
-                    pcall(cfg.on_attach(client, buffer))
-                end
-                on_attach(client, buffer)
-            end
-            cfg.capabilities = capabilities
-            lspconfig.yamlls.setup(cfg)
 
             -- diagnostics
 
             -- Setup diagnostics formaters and linters for non LSP provided files
             lspconfig.diagnosticls.setup {
-                on_attach = on_attach,
+                on_attach = base_on_attach,
                 capabilities = capabilities,
                 cmd = { "diagnostic-languageserver", "--stdio" },
                 filetypes = {

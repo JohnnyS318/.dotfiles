@@ -36,8 +36,8 @@ return {
             go = { "goimports", "gofumpt" },
             cmake = { "cmake_format" },
             -- clang-format is build into the lsp by default
-            -- c = { "clang-format" },
-            -- cpp = { "clang-format" },
+            c = { "clang-format" },
+            cpp = { "clang-format" },
         },
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
