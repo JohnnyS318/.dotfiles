@@ -124,9 +124,6 @@ return {
             }
 
             -- HASKEL
-            lspconfig.hls = function()
-                return true
-            end
 
             -- C/C++
             lspconfig.clangd.setup {
@@ -163,6 +160,10 @@ return {
                 },
             }
 
+            lspconfig.neocmake.setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
             -- TYPST
             lspconfig.typst_lsp.setup {
                 on_attach = on_attach,

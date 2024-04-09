@@ -44,3 +44,6 @@ export EMAIL="jonas.max.schneider@gmail.com"
 
 #Ruby Gem Bin
 export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
+
+# HASKELL GHCUP
+export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"

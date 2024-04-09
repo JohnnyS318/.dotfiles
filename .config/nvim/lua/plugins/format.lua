@@ -34,6 +34,7 @@ return {
             markdown = { { "prettierd", "prettier" } },
             mdx = { { "prettierd", "prettier" } },
             go = { "goimports", "gofumpt" },
+            cmake = { "cmake_format" },
             -- clang-format is build into the lsp by default
             -- c = { "clang-format" },
             -- cpp = { "clang-format" },
