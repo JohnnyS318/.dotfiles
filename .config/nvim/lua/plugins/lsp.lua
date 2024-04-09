@@ -128,6 +128,24 @@ return {
                 capabilities = capabilities,
             }
 
+            --HTML
+            lspconfig.html.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+                settings = {
+                    html = {
+                        format = {
+                            templating = true,
+                            wrapAttributes = "auto",
+                        },
+                        hover = {
+                            documentation = true,
+                            references = true,
+                        },
+                    },
+                },
+            }
+
             -- GO
             lspconfig.gopls.setup {
                 on_attach = base_on_attach,
