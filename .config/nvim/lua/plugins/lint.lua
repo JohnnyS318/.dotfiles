@@ -4,7 +4,7 @@ return {
         "mfussenegger/nvim-lint",
         config = function(_, opts)
             require("lint").linters_by_ft = {
-                markdown = { "vale" },
+                --markdown = { "vale" },
                 javascript = { "eslint_d" },
                 typescript = { "eslint_d" },
                 javascriptreact = { "eslint_d" },

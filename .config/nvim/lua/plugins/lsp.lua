@@ -171,20 +171,7 @@ return {
             }
 
             -- YAML
-            lspconfig.yamlls.setup {
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    yaml = {
-                        schemaStore = {
-                            enable = false,
-                            url = "",
-                        },
-                        schemas = require("schemastore").yaml.schemas(),
-                    },
-                },
-            }
-
+            lspconfig.yamlls.setup(require("plugins.lsp.yaml").setup(on_attach, capabilities))
             -- JSON
             lspconfig.jsonls.setup {
                 on_attach = on_attach,
@@ -198,6 +185,29 @@ return {
                         validate = {
                             enable = true,
                         },
+                    },
+                },
+            }
+            --HELM
+            lspconfig.helm_ls.setup {
+                logLevel = "info",
+                valuesFiles = {
+                    mainValuesFile = "values.yaml",
+                    lintOverlayValuesFile = "values.lint.yaml",
+                    additionalValuesFilesGlobPattern = "values*.yaml",
+                },
+                yamlls = {
+                    enabled = true,
+                    diagnosticsLimit = 50,
+                    showDiagnosticsDirectly = false,
+                    path = "yaml-language-server",
+                    config = {
+                        schemas = {
+                            kubernetes = "templates/**",
+                        },
+                        completion = true,
+                        hover = true,
+                        -- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
                     },
                 },
             }
