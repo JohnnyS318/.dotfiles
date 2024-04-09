@@ -31,3 +31,5 @@
 	submoduleSummary = true
 [maintenance]
 	repo = /home/jonas/src/htwr-aachen.de
+[init]
+	defaultBranch = main
