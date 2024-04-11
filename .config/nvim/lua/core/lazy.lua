@@ -21,8 +21,8 @@ if not ok then
 end
 
 -- require core vim constants/options especially mapleader " "
-require("core.options")
+require("config.options")
 
 lazy.setup { { import = "plugins" }, { import = "plugins.langs" } }
 
-require("core.color")
+require("config.color")

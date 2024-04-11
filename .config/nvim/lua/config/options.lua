@@ -29,13 +29,9 @@ vim.opt.showtabline = 2
 --speedup loading
 vim.g.skip_ts_context_commmentstring_module = true
 
--- close quickfix menu after selecting choice
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "qf" },
-    command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]],
-})
-
-vim.api.nvim_create_autocmd(
-    "BufReadPost",
-    { pattern = "quickfix", command = [[nnoremap <buffer> <CR <CR>:cclose<CR>]] }
-)
+-- netrw
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+vim.g.loaded_netrw_gitignore = 1
