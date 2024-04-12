@@ -15,6 +15,7 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
+            "folke/neodev.nvim",
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             {
@@ -45,7 +46,8 @@ return {
                 },
             }
 
-            require("fidget").setup()
+            require("fidget").setup {}
+            require("neodev").setup {}
 
             -- ##### Diagnositcs #####
             -- Set up cool signs for diagnostics
@@ -153,6 +155,9 @@ return {
             }
 
             -- HASKELL
+            lspconfig.hls = function()
+                return true
+            end
             -- Do not configure @see plugins/langs/haskell.lua
 
             -- RUST

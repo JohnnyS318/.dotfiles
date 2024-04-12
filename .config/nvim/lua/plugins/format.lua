@@ -38,6 +38,7 @@ return {
             -- clang-format is build into the lsp by default
             c = { "clang-format" },
             cpp = { "clang-format" },
+            haskell = { "fourmolu" },
         },
         -- Set up format-on-save
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
