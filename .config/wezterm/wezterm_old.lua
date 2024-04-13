@@ -26,19 +26,19 @@ config.font = wezterm.font_with_fallback {
     "Material Design Icons",
 }
 
-config.font_rules = {
-    {
-        intensity = "Normal",
-        italic = false,
-        font = wezterm.font_with_fallback {
-            weight = "Light",
-            "Monaspace Neon",
-            "JetBrains Mono",
-            "Noto Color Emoji",
-            "Material Design Icons",
-        },
-    },
-}
+-- config.font_rules = {
+--     {
+--         intensity = "Normal",
+--         italic = false,
+--         font = wezterm.font_with_fallback {
+--             weight = "Light",
+--             "Monaspace Neon",
+--             "JetBrains Mono",
+--             "Noto Color Emoji",
+--             "Material Design Icons",
+--         },
+--     },
+-- }
 config.window_padding = {}
 
 config.inactive_pane_hsb = {
