@@ -46,7 +46,10 @@ return {
                 },
             }
 
-            require("fidget").setup {}
+            require("fidget").setup {
+                ignore_empty_message = true,
+            }
+
             require("neodev").setup {}
 
             -- ##### Diagnositcs #####
