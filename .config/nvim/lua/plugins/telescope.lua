@@ -45,12 +45,7 @@ return {
                 builtin.grep_string,
                 { silent = true, desc = "Find Current Word (Telescope)" }
             )
-            vim.keymap.set(
-                "n",
-                "<leader>fw",
-                builtin.buffers,
-                { silent = true, desc = "Find Current Word (Telescope)" }
-            )
+            vim.keymap.set("n", "<leader>fb", builtin.buffers, { silent = true, desc = "Find Buffers (Telescope)" })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { silent = true, desc = "Find Live Grep (Telescope)" })
             vim.keymap.set(
                 "n",
@@ -58,6 +53,7 @@ return {
                 builtin.keymaps,
                 { silent = false, desc = "Find / Search Keymaps (Telescope)" }
             )
+            vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume Last Picker" })
         end,
     },
 }

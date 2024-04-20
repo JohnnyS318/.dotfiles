@@ -27,6 +27,9 @@ return {
             "someone-stole-my-name/yaml-companion.nvim",
             --"ms-jpq/coq_nvim",
         },
+        opts = {
+            inlay_hints = { enabled = true },
+        },
         config = function()
             ---Get opts table from the lazy plugin definition
             ---@param name string
@@ -90,6 +93,13 @@ return {
                 vim.api.nvim_buf_create_user_command(buffer, "Format", function(_)
                     vim.lsp.buf.format()
                 end, { desc = "Format current buffer with LSP formatter" })
+
+                if client.server_capabilities then
+                    -- Inlay hints
+                    if client.server_capabilities.inlayHintProvider then
+                        vim.lsp.inlay_hint(buffer, true)
+                    end
+                end
             end
 
             -- broadcast additional completion capabilities to servers
