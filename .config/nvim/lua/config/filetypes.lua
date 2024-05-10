@@ -11,6 +11,9 @@ M.register_filetypes = function()
             mdx = "mdx",
         },
     }
+    vim.filetype.add {
+        pattern = { [".*/hyprland%.conf"] = "hyprlang" },
+    }
 end
 
 --- Setup treesitter config of new custom filetypes

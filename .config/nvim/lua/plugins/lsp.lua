@@ -1,5 +1,13 @@
 return {
     {
+        "j-hui/fidget.nvim",
+        opts = {
+            progress = {
+                ignore_empty_message = false,
+            },
+        },
+    },
+    {
         "folke/neodev.nvim",
     },
     {
@@ -47,10 +55,6 @@ return {
                 ensure_installed = {
                     "lua_ls",
                 },
-            }
-
-            require("fidget").setup {
-                ignore_empty_message = true,
             }
 
             require("neodev").setup {}
@@ -130,6 +134,7 @@ return {
                         description = "Organize Imports",
                     },
                 },
+                settings = require("plugins.lsp.tsserver").settings,
             }
 
             lspconfig.tailwindcss.setup {
@@ -174,7 +179,16 @@ return {
             -- Do not configure @see plugins/langs/haskell.lua
 
             -- RUST
+            lspconfig.rust_analyzer.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+                settings = {},
+            }
+
             -- Do not configure @see plugins/langs/rust.lua
+            --[[ lspconfig.rust_analyzer = function()
+                return true
+            end ]]
 
             -- C/C++
             lspconfig.clangd.setup {
@@ -239,6 +253,13 @@ return {
                     },
                 },
             }
+
+            -- BASH/ZSH/SH?
+            lspconfig.bashls = {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
             --HELM
             lspconfig.helm_ls.setup {
                 on_attach = base_on_attach,

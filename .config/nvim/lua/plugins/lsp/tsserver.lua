@@ -1,5 +1,14 @@
 local M = {}
 
+M.settings = {
+    typescript = {
+        preferences = {
+            includeInlayVariableTypeHints = true,
+            includeInlayFunctionParameterTypeHints = true,
+        },
+    },
+}
+
 M.filter = function(arr, fn)
     if type(arr) ~= "table" then
         return arr

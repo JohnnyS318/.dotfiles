@@ -1,7 +1,8 @@
 return {
-    {
-        "mrcjkb/rustaceanvim",
-        version = "^4",
-        ft = { "rust" },
-    },
+    -- {
+    --     "mrcjkb/rustaceanvim",
+    --     dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    --     version = "^4",
+    --     lazy = false,
+    -- },
 }

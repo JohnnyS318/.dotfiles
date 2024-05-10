@@ -47,3 +47,10 @@ export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # HASKELL GHCUP
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
+
+# ZINK OPENGL drivers
+# __GLX_VENDOR_LIBRARY_NAME=mesa
+# __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
+# MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink application
