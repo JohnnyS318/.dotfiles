@@ -5,13 +5,14 @@ source ~/.config/env
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 
 # set zsh theme
-ZSH_THEME="powerlevel10k/powerlevel10k" # modified version of agnoster theme, source in dotfiles repo
+ZSH_THEME="amuse"
+# modified version of agnoster theme, source in dotfiles repo
 
 # enable oh-my-zsh plugins
 plugins=(
@@ -37,8 +38,8 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-bindkey '^E' autosuggest-accept
-bindkey '^j' autosuggest-accept
+# bindkey '^E' autosuggest-accept
+# bindkey '^j' autosuggest-accept
 
 # revert back to default history ↑ and ↓.
 () {
@@ -57,7 +58,10 @@ bindkey '^j' autosuggest-accept
 [[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
 
 #node version manager
-[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 2> /dev/null
+#[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 2> /dev/null
+#
+# REPLACED with fnm
+eval "$(fnm env --use-on-cd)"
 
 # source aliasrc for aliases
 source ~/.config/aliasrc
@@ -82,8 +86,8 @@ esac
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # run pfetch after initialization if installed
 echo

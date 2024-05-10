@@ -26,13 +26,34 @@ return {
 
             local builtin = require("telescope.builtin")
 
+            function vim.find_files_from_project_git_root()
+                local function is_git_repo()
+                    vim.fn.system("git rev-parse --is-inside-work-tree")
+                    return vim.v.shell_error == 0
+                end
+                local function get_git_root()
+                    local dot_git_path = vim.fn.finddir(".git", ".;")
+                    return vim.fn.fnamemodify(dot_git_path, ":h")
+                end
+                local lopts = {
+                    hidden = true,
+                }
+                if is_git_repo() then
+                    lopts = {
+                        cwd = get_git_root(),
+                        hidden = true,
+                    }
+                end
+                require("telescope.builtin").find_files(lopts)
+            end
+
             vim.keymap.set(
                 "n",
                 "<leader>fo",
                 builtin.oldfiles,
                 { silent = true, desc = "Search Recently Open (Telescope)" }
             )
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, { silent = true, desc = "Find Files (Telescope)" })
+            vim.keymap.set("n", "<leader>ff", builtin.git_files, { silent = true, desc = "Find Files (Telescope)" })
             vim.keymap.set(
                 "n",
                 "<leader><space>",
