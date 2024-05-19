@@ -83,6 +83,7 @@ return {
                     ["<C-j>"] = cmp.mapping.select_next_item(),
                     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
+
                     -- ["<C-space>"] = cmp.open_docs(),
                     ["<C-space>"] = cmp.mapping.complete(), -- open completion on ctrl+space
                     --[[ ["<CR>"] = cmp.mapping.confirm {
@@ -90,10 +91,16 @@ return {
                         select = true,
                     }, ]]
 
-                    ["<CR>"] = cmp.mapping {
+                    ["<S-CR>"] = cmp.mapping {
                         i = function(fallback)
-                            if cmp.visible() and cmp.get_active_entry() then
-                                cmp.confirm { behavior = cmp.ConfirmBehavior.Replace, select = false }
+                            if cmp.visible() then
+                                if luasnip.expandable() then
+                                    luasnip.expand()
+                                else
+                                    cmp.confirm {
+                                        select = true,
+                                    }
+                                end
                             else
                                 fallback()
                             end

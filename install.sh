@@ -19,18 +19,18 @@ command_check zsh
 ########### ZSH ###########
 
 # install oh-my-zsh if not installed
-[ -e "${ZSH:-$HOME/.oh-my-zsh}" ] || {
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || exit 2
-  rm ~/.zshrc
-}
+# [ -e "${ZSH:-$HOME/.oh-my-zsh}" ] || {
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || exit 2
+#   rm ~/.zshrc
+# }
 
 # install zsh plugins used in .zshrc
-install_zsh_custom plugins z-shell F-Sy-H
-install_zsh_custom plugins zsh-users zsh-syntax-highlighting
-install_zsh_custom plugins zsh-users zsh-autosuggestions
-install_zsh_custom plugins marlonrichert zsh-autocomplete
-install_zsh_custom themes romkatv powerlevel10k
-install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
+# install_zsh_custom plugins z-shell F-Sy-H
+# install_zsh_custom plugins zsh-users zsh-syntax-highlighting
+# install_zsh_custom plugins zsh-users zsh-autosuggestions
+# install_zsh_custom plugins marlonrichert zsh-autocomplete
+# install_zsh_custom themes romkatv powerlevel10k
+# install_file .oh-my-zsh/custom/themes/agnoster-custom.zsh-theme
 #install_zsh_custom plugins jeffreytse zsh-vi-mode # default oh-my-zsh plugin
 
 install_file .zshrc

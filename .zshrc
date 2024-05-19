@@ -1,99 +1,87 @@
-
-# source environment variables
-source ~/.config/env
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-# fi
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# set zsh theme
-ZSH_THEME="amuse"
-# modified version of agnoster theme, source in dotfiles repo
+source "${HOME}/.config/env"
 
-# enable oh-my-zsh plugins
-plugins=(
-  # default oh-my-zsh plugins
-  cp  # define cpv command that uses rsync
-  sudo  # press double escape to add sudo to command
-  git   # git aliases
-  kubectl #kubectl completion
-  helm #helm completion
-  vi-mode   # vi-keybinds
-  kubectl
-  
-  # have to be installed externally, handled by install.sh
-  zsh-autocomplete
-  zsh-syntax-highlighting
-  F-Sy-H
-  #fast-syntax-highlighting #faster=better
-  #zsh-autosuggestions
-)
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-#load oh-my-zsh
-source $ZSH/oh-my-zsh.sh
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-# bindkey '^E' autosuggest-accept
-# bindkey '^j' autosuggest-accept
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-# revert back to default history ↑ and ↓.
-() {
-   local -a prefix=( '\e'{\[,O} )
-   local -a up=( ${^prefix}A ) down=( ${^prefix}B )
-   local key=
-   for key in $up[@]; do
-      bindkey "$key" up-line-or-history
-   done
-   for key in $down[@]; do
-      bindkey "$key" down-line-or-history
-   done
-}
+# Add in snippets
+zinit snippet OMZP::cp
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
 
-# Autojump
-[[ -s /usr/share/autojump/autojump.zsh ]] && source /usr/share/autojump/autojump.zsh
+# Load completions
+autoload -Uz compinit && compinit
 
-#node version manager
-#[[ -s /usr/share/nvm/init-nvm.sh ]] && source /usr/share/nvm/init-nvm.sh 2> /dev/null
-#
-# REPLACED with fnm
-eval "$(fnm env --use-on-cd)"
-
-# source aliasrc for aliases
-source ~/.config/aliasrc
-
-# source localrc for local config and tokens not shared to git
-source ~/.config/localrc 2> /dev/null
-
-# launch gpg agent for gpg ssh keys if installed
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
-command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
-
-#add go path if installed
-command -v go > /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
-
-#pnpm setup
-export PNPM_HOME="/home/jonas/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
+zinit cdreplay -q
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-# typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# run pfetch after initialization if installed
-echo
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+
+# Aliases
+source "${HOME}/.config/aliasrc"
+alias ls='ls --color'
+alias ..="cd .."
+alias ~="cd ~"
+
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+#LOCALs
+source ${HOME}/.config/localrc 2> /dev/null
+
+#FETCH
 command -v pfetch >/dev/null && pfetch
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/vault vault
-
-eval "$(zoxide init zsh)"

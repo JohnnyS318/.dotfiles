@@ -3,6 +3,9 @@
 # add .local/bin to PATH
 export PATH="$HOME/.local/bin:$PATH"
 
+#go path if installed
+command -v go > /dev/null && export PATH="$(go env GOPATH)/bin:$PATH"
+
 # always use all awailable cores for compiling
 procs="$(nproc)" # use variable due to shellcheck SC2155
 export MAKEFLAGS="-j$procs"
@@ -47,6 +50,13 @@ export PATH="$HOME/.local/share/gem/ruby/3.0.0/bin:$PATH"
 
 # HASKELL GHCUP
 export PATH="$HOME/.cabal/bin:$HOME/.ghcup/bin:$PATH"
+
+#pnpm setup
+export PNPM_HOME="/home/jonas/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
 
 export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 
