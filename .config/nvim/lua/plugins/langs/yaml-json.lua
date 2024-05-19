@@ -1,8 +1,6 @@
 return {
     {
         "b0o/SchemaStore.nvim",
-        lazy = true,
-        version = false,
     },
     {
         "someone-stole-my-name/yaml-companion.nvim",
@@ -12,7 +10,7 @@ return {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
-            { "<localleader>y", "<CMD>Telescope yaml_schema<CR>", desc = "Select YAML Schema" },
+            { "<leader>cy", "<CMD>Telescope yaml_schema<CR>", desc = "Select YAML Schema" },
         },
         config = function(_, opts)
             require("telescope").load_extension("yaml_schema")

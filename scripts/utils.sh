@@ -1,5 +1,5 @@
-source ./prompt.sh   # default prompts
-source ./commands.sh # command utils
+source ./scripts/prompt.sh   # default prompts
+source ./scripts/commands.sh # command utils
 
-source ./zsh.sh     # zsh plugin installs etc
-source ./dotfile.sh # zsh dotfile/directory installs etc
+source ./scripts/zsh.sh      # zsh plugin installs etc
+source ./scripts/dotfiles.sh # zsh dotfile/directory installs etc

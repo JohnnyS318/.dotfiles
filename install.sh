@@ -67,3 +67,8 @@ install_file .config/nvim
 install_file .gdbinit
 
 install_file .config/discord/settings.json
+
+########## HYPRLAND #############
+
+install_file .config/waybar
+install_file .config/hypr
