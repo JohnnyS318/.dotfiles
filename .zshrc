@@ -83,5 +83,10 @@ eval "$(zoxide init --cmd cd zsh)"
 #LOCALs
 source ${HOME}/.config/localrc 2> /dev/null
 
+# GPG 
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
+
 #FETCH
 command -v pfetch >/dev/null && pfetch
