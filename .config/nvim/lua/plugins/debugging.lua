@@ -31,7 +31,7 @@ return {
             "mfussenegger/nvim-dap",
         },
         opts = {
-            automatic_setup = true,
+            automatic_setup = false,
             handlers = {},
         },
     },
