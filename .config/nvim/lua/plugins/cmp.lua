@@ -14,6 +14,16 @@ return {
             "rafamadriz/friendly-snippets",
             "windwp/nvim-autopairs",
         },
+        opts = {
+            sources = {
+                { name = "nvim_lsp" },
+                { name = "nvim_lsp_signature_help" },
+                { name = "luasnip" },
+                { name = "buffer" },
+                { name = "path" },
+                { name = "lazydev", group_index = 1 },
+            },
+        },
         config = function(_, opts)
             vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local has_words_before = function()
@@ -134,6 +144,7 @@ return {
                     end, { "i", "s" }),
                 },
                 formatting = {
+                    expandable_indicator = true,
                     fields = { "kind", "abbr", "menu" },
                     format = function(entry, vim_item)
                         -- Kind icons
@@ -156,13 +167,7 @@ return {
                         hl_group = "CmpGhostText",
                     },
                 },
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lsp_signature_help" },
-                    { name = "luasnip" },
-                    { name = "buffer" },
-                    { name = "path" },
-                },
+                sources = opts.sources or {},
             }
 
             cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
