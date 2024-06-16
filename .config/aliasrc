@@ -222,3 +222,6 @@ timezsh() {
 }
 
 sha256check() { echo "$1  $2" | sha256sum -c; }
+
+# SSH Kitty terminal
+[ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"

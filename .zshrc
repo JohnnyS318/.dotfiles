@@ -79,6 +79,7 @@ alias ~="cd ~"
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(fnm env)"
 
 #LOCALs
 source ${HOME}/.config/localrc 2> /dev/null

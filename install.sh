@@ -72,3 +72,6 @@ install_file .config/discord/settings.json
 
 install_file .config/waybar
 install_file .config/hypr
+install_file .config/wofi
+install_file .config/rofi
+install_file .config/mako
