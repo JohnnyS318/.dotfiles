@@ -39,6 +39,7 @@ install_file .config/aliasrc
 install_file .config/ctfrc
 install_file .config/localrc
 install_file .p10k.zsh
+install_file .config/starship.toml
 
 ########### GPG Install ###########
 install_file .gnupg/gpg.conf
