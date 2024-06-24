@@ -19,6 +19,7 @@ $java\
 $kotlin\
 $haskell\
 $python\
+$helm\
 [](fg:color_blue)\
 $fill\
 [](color_orange)\
@@ -85,6 +86,7 @@ style = "fg:color_fg0 bg:color_yellow"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
+truncate_to_repo = false
 
 [directory.substitutions]
 "Documents" = "󰈙 "
@@ -100,7 +102,9 @@ format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
 
 [git_status]
 style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+#format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+#format = '\([[$state( $progress_current/$progress_total)](fg:color_fg0 bg:color_aqua)]($style)\) '
+format = "[$state( $progress_current / $progress_total)](fg:color_fg0 bg:color_aqua)"
 
 [nodejs]
 symbol = ""
@@ -156,6 +160,15 @@ format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
 style = "bg:color_bg3"
 format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
 
+[helm]
+symbol = ""
+style = "bg:color_bg3"
+
+[typst]
+symbol = "t"
+style = "bg:color_bg3"
+
+
 [time]
 disabled = false
 time_format = "%R"
@@ -165,7 +178,7 @@ format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
 [kubernetes]
 format= '[󱃾 $namespace]($style)'
 style = "bg:color_orange"
-disabled=false
+disabled = false
 detect_folders=["self-host"]
 
 [line_break]
