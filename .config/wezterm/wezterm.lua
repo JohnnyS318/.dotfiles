@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = {}
 
-config.enable_wayland = false
+config.enable_wayland = true
 
 config.color_scheme = "GruvboxDark"
 config.hide_tab_bar_if_only_one_tab = true
