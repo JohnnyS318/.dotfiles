@@ -15,7 +15,7 @@ command_check git
 command_check curl
 command_check zsh
 
-install_file .zshrc
+install_file .zshrc-server "$HOME/.zshrc"
 install_file .config/env
 install_file .config/aliasrc
 install_file .config/ctfrc
