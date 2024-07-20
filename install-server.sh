@@ -9,7 +9,7 @@
   exit 1
 }
 
-source ./scripts/utils.sh # include the common install functions
+. ./scripts/utils.sh # include the common install functions
 
 command_check git
 command_check curl
