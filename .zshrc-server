@@ -42,9 +42,6 @@ autoload -Uz compinit && compinit
 
 zinit cdreplay -q
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Keybindings
 bindkey -e
 bindkey '^p' history-beginning-search-backward
@@ -74,13 +71,14 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 command -v zoxide > /dev/null && zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Aliases
+alias l="ls --color --lahg"
 source "${HOME}/.config/aliasrc"
 alias ls='ls --color'
 alias ..="cd .."
 alias ~="cd ~"
 
 # Shell integrations
-eval "$(fzf --zsh)"
+eval "$(fzf)"
 command -v zoxide > /dev/null && eval "$(zoxide init --cmd cd zsh)"
 command -v fnm > /dev/null && eval "$(fnm env)"
 
