@@ -11,6 +11,7 @@ return {
                 typescriptreact = { "eslint_d" },
                 go = { "golangcilint" },
                 cmake = { "cmakelint" },
+                sql = { "sqlfluff" },
             }
 
             local function debounce(ms, fn)

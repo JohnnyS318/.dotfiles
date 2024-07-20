@@ -241,6 +241,12 @@ return {
                 capabilities = capabilities,
             }
 
+            -- SQL
+            lspconfig.sqls.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
             -- YAML
             lspconfig.yamlls.setup(require("plugins.lsp.yaml").setup(base_on_attach, capabilities))
             -- JSON
