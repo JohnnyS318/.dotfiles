@@ -33,8 +33,8 @@ M.setup = function(on_attach, capabilities)
                 uri = "https://json.schemastore.org/github-workflow.json",
             },
             {
-                name = "Kubernetes 1.29.4",
-                uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.29.4-standalone-strict/all.json",
+                name = "Kubernetes 1.30.2",
+                uri = "https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.30.2-standalone-strict/all.json",
             },
         },
         -- lspconfig = {
@@ -66,7 +66,16 @@ M.setup = function(on_attach, capabilities)
                         url = "https://www.schemastore.org/api/json/catalog.json",
                     },
                     schemaDownload = { enable = true },
-                    schemas = {},
+                    schemas = {
+                        kubernetes = "k8s-*.yaml",
+                        ["http://json.schemastore.org/github-workflow"] = ".github/workflows/*",
+                        ["http://json.schemastore.org/github-action"] = ".github/action.{yml,yaml}",
+                        ["http://json.schemastore.org/ansible-stable-2.9"] = "roles/tasks/**/*.{yml,yaml}",
+                        ["http://json.schemastore.org/prettierrc"] = ".prettierrc.{yml,yaml}",
+                        ["http://json.schemastore.org/kustomization"] = "kustomization.{yml,yaml}",
+                        ["http://json.schemastore.org/chart"] = "Chart.{yml,yaml}",
+                        ["http://json.schemastore.org/circleciconfig"] = ".circleci/**/*.{yml,yaml}",
+                    },
                     trace = { server = "debug" },
                 },
             },

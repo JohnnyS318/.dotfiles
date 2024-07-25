@@ -263,6 +263,11 @@ return {
                 on_attach = base_on_attach,
                 capabilities = capabilities,
             }
+
+            lspconfig.mesonlsp.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
             -- TYPST
             lspconfig.typst_lsp.setup {
                 on_attach = base_on_attach,
