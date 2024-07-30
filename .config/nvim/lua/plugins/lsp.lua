@@ -130,6 +130,12 @@ return {
 
             -- Javascript/Typescript(react)
 
+            -- Biome
+            lspconfig.biome.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
             local tsserverconfig = require("plugins.lsp.tsserver")
             lspconfig.tsserver.setup {
                 on_attach = tsserverconfig.on_tsserver_attach(base_on_attach),
