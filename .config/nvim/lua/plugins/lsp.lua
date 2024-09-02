@@ -93,7 +93,12 @@ return {
             }
             vim.diagnostic.config(config)
 
-            local base_on_attach = function(client, buffer) end
+            local base_on_attach = function(client, buffer)
+                if client.server_capabilities.inlayHintProvider then
+                    vim.g.inlay_hints_visible = true
+                    vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
+                end
+            end
 
             -- what happens at LSPAttach event... keymaps are set in configs
             local on_attach = function(client, buffer)
@@ -103,13 +108,6 @@ return {
                 vim.api.nvim_buf_create_user_command(buffer, "Format", function(_)
                     vim.lsp.buf.format()
                 end, { desc = "Format current buffer with LSP formatter" })
-
-                if client.server_capabilities then
-                    -- Inlay hints
-                    if client.server_capabilities.inlayHintProvider then
-                        vim.lsp.inlay_hint(buffer, true)
-                    end
-                end
             end
 
             -- broadcast additional completion capabilities to servers
@@ -210,6 +208,19 @@ return {
             lspconfig.gopls.setup {
                 on_attach = base_on_attach,
                 capabilities = capabilities,
+                settings = {
+                    gopls = {
+                        hints = {
+                            rangeVariableTypes = true,
+                            parameterNames = true,
+                            constantValues = true,
+                            assignVariableTypes = true,
+                            compositeLiteralFields = true,
+                            compositeLiteralTypes = true,
+                            functionTypeParameters = true,
+                        },
+                    },
+                },
             }
 
             -- HASKELL
@@ -263,6 +274,22 @@ return {
                     completeUnimported = true,
                     clangdFileStatus = true,
                 },
+                settings = {
+                    clangd = {
+                        Diagnostics = {
+                            MissingIncludes = "Strict",
+                        },
+                        InlayHints = {
+                            Designators = true,
+                            Enabled = true,
+                            ParameterNames = true,
+                            DeducedTypes = true,
+                            BlockEnd = true,
+                            TypenameLimit = 24,
+                        },
+                        fallbackFlags = { "-std=c++23" },
+                    },
+                },
             }
 
             lspconfig.neocmake.setup {
@@ -282,6 +309,17 @@ return {
 
             -- SQL
             lspconfig.sqls.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
+            -- PYTHON
+            lspconfig.ruff.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
+            lspconfig.pyright.setup {
                 on_attach = base_on_attach,
                 capabilities = capabilities,
             }
