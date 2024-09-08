@@ -41,10 +41,13 @@ return {
             go = { "goimports", "gofumpt" },
             cmake = { "cmake_format" },
             -- clang-format is build into the lsp by default
-            c = { "clang-format" },
-            cpp = { "clang-format" },
+            -- c = { "clang-format" },
+            -- cpp = { "clang-format" },
             haskell = { "fourmolu" },
             sql = { "sql-formatter" },
+            starlark = { "buildifier" },
+            bzl = { "buildifier" },
+            -- rust = { ""}
         },
         -- Set up format-on-save
         -- format_on_save = { timeout_ms = 500, lsp_fallback = true },
@@ -67,7 +70,7 @@ return {
         --     },
         --   },
     },
-    init = function()
+    --[[ init = function()
         -- If you want the formatexpr, here is the place to set it
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     end,
@@ -91,5 +94,30 @@ return {
         end, {
             desc = "Re-enable autoformat-on-save",
         })
+    end, ]]
+
+    config = function(_, opts)
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = vim.tbl_keys(require("conform").formatters_by_ft),
+            group = vim.api.nvim_create_augroup("conform_formatexpr", { clear = true }),
+            callback = function()
+                vim.opt_local.formatexpr = 'v:lua.require("conform").formatexpr()'
+            end,
+        })
+        vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+        require("conform").setup(opts)
+        vim.g.auto_conform_on_save = true
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*",
+            callback = function(args)
+                if vim.g.auto_conform_on_save then
+                    require("conform").format { bufnr = args.buf, timeout_ms = nil }
+                end
+            end,
+        })
+        vim.api.nvim_create_user_command("ConformToggleOnSave", function()
+            vim.g.auto_conform_on_save = not vim.g.auto_conform_on_save
+            vim.notify("Auto-Conform on save: " .. (vim.g.auto_conform_on_save and "Enabled" or "Disabled"))
+        end, {})
     end,
 }

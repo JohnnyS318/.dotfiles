@@ -230,11 +230,11 @@ return {
             -- Do not configure @see plugins/langs/haskell.lua
 
             -- RUST
-            lspconfig.rust_analyzer.setup {
-                on_attach = base_on_attach,
-                capabilities = capabilities,
-                settings = {},
-            }
+            -- lspconfig.rust_analyzer.setup {
+            --     on_attach = base_on_attach,
+            --     capabilities = capabilities,
+            --     settings = {},
+            -- }
 
             -- Do not configure @see plugins/langs/rust.lua
             --[[ lspconfig.rust_analyzer = function()
@@ -373,6 +373,17 @@ return {
                         -- any other config from https://github.com/redhat-developer/yaml-language-server#language-server-settings
                     },
                 },
+            }
+
+            -- starlark
+            lspconfig.starpls.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
+            lspconfig.bzl.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
             }
 
             -- LUA

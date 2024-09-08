@@ -17,6 +17,8 @@ return {
                 go = { "golangcilint" },
                 cmake = { "cmakelint" },
                 sql = { "sqlfluff" },
+                starlark = { "buildifier" },
+                bzl = { "buildifier" },
             }
 
             local function debounce(ms, fn)
@@ -34,7 +36,7 @@ return {
             -- being unable to lint --stdio inputs and just written files
             vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
                 group = vim.api.nvim_create_augroup("nvim-lint", { clear = true }),
-                callback = debounce(100, function()
+                callback = debounce(50, function()
                     require("lint").try_lint()
                 end),
             })
