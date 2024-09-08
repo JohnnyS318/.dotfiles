@@ -8,11 +8,13 @@
 		"hyprland/window"
 	],
 	"modules-right": [
-		"memory",
 		"cpu",
+		"memory",
 		"temperature",
 		"battery",
+		"disk",
 		"tray",
+		"wireplumber",
 		"bluetooth",
 		"clock"
 	],
@@ -39,8 +41,13 @@
 		}
 	},
 	"hyprland/window": {
-		"format": "{icon} {}",
+		"format": "👉 {icon} {title}",
 		"separate-outputs": true
+	},
+	"disk": {
+		"interval": 30,
+		"format": "{used} of {total} ",
+		"path": "/"
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",
@@ -58,11 +65,11 @@
 		"format": "   {:%a %d %b, %H:%M}"
 	},
 	"cpu": {
-		"format": "  {usage}%",
+		"format": "   {usage}%",
 		"tooltip": false
 	},
 	"memory": {
-		"format": "  {used} GIB"
+		"format": "   {used} GIB"
 	},
 	"temperature": {
 		"critical-threshold": 80,
@@ -91,7 +98,7 @@
 		"format-charging": " {capacity}%",
 		"format-plugged": " {capacity}%",
 		"format-alt": "{icon}  {time}",
-		"format-good": "", // An empty format will hide the module
+		// "format-good": "", // An empty format will hide the module
 		// "format-full": "",
 		"format-icons": [
 			" ",
@@ -113,21 +120,21 @@
 	},
 	"wireplumber": {
 		"scroll-step": 5, // %, can be a float
-		"format": "{icon} {volume}%",
-		"format-bluetooth": "{icon} {volume}% ",
-		"format-bluetooth-muted": " {icon}",
-		"format-muted": "",
+		"format": "{icon}  {volume}%",
+		"format-bluetooth": "{icon}  {volume}% ",
+		"format-bluetooth-muted": "  {icon}",
+		"format-muted": " ",
 		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
+			"headphone": " ",
+			"hands-free": " ",
+			"headset": " ",
+			"phone": " ",
+			"portable": " ",
+			"car": " ",
 			"default": [
-				"",
-				"",
-				""
+				" ",
+				" ",
+				" "
 			]
 		},
 		"on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
