@@ -100,3 +100,6 @@ command -v gpgconf >/dev/null && gpgconf --launch gpg-agent
 
 #FETCH
 command -v pfetch >/dev/null && pfetch
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/vault vault

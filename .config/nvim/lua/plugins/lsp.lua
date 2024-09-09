@@ -63,6 +63,12 @@ return {
                 ensure_installed = {
                     "lua_ls",
                 },
+                handlers = {
+                    -- FIX: Temporary fix for tsserver to ts_ls rename
+                    function(server_name)
+                        server_name = server_name == "tsserver" and "ts_ls" or server_name
+                    end,
+                },
             }
 
             -- ##### Diagnositcs #####
@@ -134,17 +140,17 @@ return {
                 capabilities = capabilities,
             }
 
-            local tsserverconfig = require("plugins.lsp.tsserver")
-            lspconfig.tsserver.setup {
-                on_attach = tsserverconfig.on_tsserver_attach(base_on_attach),
+            local ts_ls_config = require("plugins.lsp.ts_ls")
+            lspconfig.ts_ls.setup {
+                on_attach = ts_ls_config.on_tsserver_attach(base_on_attach),
                 capabilities = capabilities,
                 commands = {
                     OrganizeImports = {
-                        tsserverconfig.organize_ts_imports,
+                        ts_ls_config.organize_ts_imports,
                         description = "Organize Imports",
                     },
                 },
-                settings = require("plugins.lsp.tsserver").settings,
+                settings = require("plugins.lsp.ts_ls").settings,
             }
 
             lspconfig.tailwindcss.setup {

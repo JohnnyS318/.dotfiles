@@ -23,3 +23,12 @@ vim.keymap.set({ "n" }, "Y", ":m .-2<CR>==", { noremap = true, silent = true, de
 vim.keymap.set({ "n" }, "U", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move Line Down" })
 vim.keymap.set({ "v" }, "Y", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move Lines Up" })
 vim.keymap.set({ "v" }, "U", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move Lines Down" })
+
+-- todo
+vim.keymap.set("n", "]t", function()
+    require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+vim.keymap.set("n", "[t", function()
+    require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
