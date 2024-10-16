@@ -1,41 +1,50 @@
 return {}
 
 -- return {
--- 	{
--- 		"nvimdev/guard.nvim",
--- 		dependencies = {
--- 			"nvimdev/guard-collection",
--- 		},
+--     {
+--         "nvimdev/guard.nvim",
+--         dependencies = {
+--             "nvimdev/guard-collection",
+--         },
 --
--- 		keys = {
+--         layz = false,
 --
--- 			{
--- 				-- Customize or remove this keymap to your liking
--- 				"<leader>cf",
--- 				"<CMD>GuardFmt<CR>",
--- 				mode = "n",
--- 				desc = "Format buffer",
--- 			},
--- 		},
--- 		opts = {
--- 			fmt_on_save = true,
--- 			lsp_as_default_formatter = true,
--- 		},
--- 		config = function(_, opts)
--- 			local ft = require("guard.filetype")
+--         keys = {
+--             {
+--                 -- Customize or remove this keymap to your liking
+--                 "<leader>cf",
+--                 "<CMD>GuardFmt<CR>",
+--                 mode = "n",
+--                 desc = "Format buffer",
+--             },
+--         },
+--         opts = {
+--             fmt_on_save = true,
+--             lsp_as_default_formatter = true,
+--         },
+--         config = function(_, opts)
+--             local ft = require("guard.filetype")
 --
--- 			-- lua
--- 			ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
+--             -- lua
+--             ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
 --
--- 			-- javascript/typescript
--- 			ft("typescript,javascript,typescriptreact"):fmt({
--- 				cmd = "prettierd",
--- 				args = { "--stdin-filepath" },
--- 				fname = true,
--- 				stdin = true,
--- 			}):lint("eslint_d")
--- 			--
--- 			require("guard").setup(opts)
--- 		end,
--- 	},
+--             -- javascript/typescript
+--             ft("typescript,javascript,typescriptreact,javascriptreact"):fmt({
+--                 cmd = "prettierd",
+--                 args = { "--stdin-filepath" },
+--                 fname = true,
+--                 stdin = true,
+--             }):lint("eslint_d")
+--
+--             --c
+--             ft("c"):fmt("clang-format"):lint("clang-tidy")
+--
+--             ft("cpp"):fmt("clang-format"):lint("clang-tidy")
+--
+--             --codespell
+--             ft("*"):lint("codespell")
+--
+--             vim.g.guard_config = opts
+--         end,
+--     },
 -- }

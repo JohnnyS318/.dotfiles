@@ -10,4 +10,27 @@ M.on_clangd_attach = function(on_attach)
     end
 end
 
+M.cmd = {
+    "clangd",
+    "--background-index",
+    "--clang-tidy",
+    "--completion-style=detailed",
+}
+M.settings = {
+    clangd = {
+        InlayHints = {
+            Designators = true,
+            Enabled = true,
+            ParameterNames = true,
+            DeducedTypes = true,
+            BlockEnd = true,
+            TypenameLimit = 24,
+        },
+    },
+}
+
+M.init_options = {
+    fallbackFlags = { "-std=c++23" },
+}
+
 return M

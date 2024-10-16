@@ -26,7 +26,7 @@ return {
         end,
         dependencies = {
             "nvim-treesitter/nvim-treesitter", -- optional
-            "nvim-tree/nvim-web-devicons", -- optional
+            "nvim-tree/nvim-web-devicons",     -- optional
         },
     },
     {
@@ -38,9 +38,9 @@ return {
                 "j-hui/fidget.nvim",
                 event = "LspAttach",
             },
-            "hrsh7th/cmp-nvim-lsp",
             "nvimdev/lspsaga.nvim",
             "someone-stole-my-name/yaml-companion.nvim",
+            --"hrsh7th/cmp-nvim-lsp",
             --"ms-jpq/coq_nvim",
         },
         opts = {
@@ -71,9 +71,9 @@ return {
                 },
             }
 
-            -- ##### Diagnositcs #####
+            -- ##### Diagnostics #####
             -- Set up cool signs for diagnostics
-            local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+            local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
             for type, icon in pairs(signs) do
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -118,8 +118,9 @@ return {
 
             -- broadcast additional completion capabilities to servers
             local capabilities = vim.lsp.protocol.make_client_capabilities()
+
             -- capabilities = require("coq").lsp_ensure_capabilities(capabilities) -- USE IF using coq
-            capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- USE IF using cmp
+            -- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- USE IF using cmp
 
             -- ##### SETUP #####
             local lspconfig = require("lspconfig")
@@ -140,16 +141,10 @@ return {
                 capabilities = capabilities,
             }
 
-            local ts_ls_config = require("plugins.lsp.ts_ls")
             lspconfig.ts_ls.setup {
-                on_attach = ts_ls_config.on_tsserver_attach(base_on_attach),
+                on_attach = require("plugins.lsp.ts_ls").on_tsserver_attach(base_on_attach),
                 capabilities = capabilities,
-                commands = {
-                    OrganizeImports = {
-                        ts_ls_config.organize_ts_imports,
-                        description = "Organize Imports",
-                    },
-                },
+                commands = require("plugins.lsp.ts_ls").commands,
                 settings = require("plugins.lsp.ts_ls").settings,
             }
 
@@ -251,52 +246,59 @@ return {
             lspconfig.clangd.setup {
                 on_attach = require("plugins.lsp.clangd").on_clangd_attach(base_on_attach),
                 capabilities = capabilities,
-                filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp" },
-                cmd = {
-                    "clangd",
-                    "--background-index",
-                    "--clang-tidy",
-                    "--header-insertion=iwyu",
-                    "--completion-style=detailed",
-                    "--function-arg-placeholders",
-                    "--fallback-style=llvm",
-                },
-                root_dir = function(fname)
-                    return require("lspconfig.util").root_pattern(
-                        "Makefile",
-                        "configure.ac",
-                        "configure.in",
-                        "config.h.in",
-                        "meson.build",
-                        "meson_options.txt",
-                        "build.ninja"
-                    )(fname) or require("lspconfig.util").root_pattern(
-                        "compile_commands.json",
-                        "compile_flags.txt"
-                    )(fname) or require("lspconfig.util").find_git_ancestor(fname)
-                end,
-                init_options = {
-                    usePlaceholders = true,
-                    completeUnimported = true,
-                    clangdFileStatus = true,
-                },
-                settings = {
-                    clangd = {
-                        Diagnostics = {
-                            MissingIncludes = "Strict",
-                        },
-                        InlayHints = {
-                            Designators = true,
-                            Enabled = true,
-                            ParameterNames = true,
-                            DeducedTypes = true,
-                            BlockEnd = true,
-                            TypenameLimit = 24,
-                        },
-                        fallbackFlags = { "-std=c++23" },
-                    },
-                },
+                cmd = require("plugins.lsp.clangd").cmd,
+                settings = require("plugins.lsp.clangd").settings,
+                init_options = require("plugins.lsp.clangd").init_options,
             }
+            -- lspconfig.clangd.setup {
+            --     on_attach = require("plugins.lsp.clangd").on_clangd_attach(base_on_attach),
+            --     capabilities = capabilities,
+            --     filetypes = { "h", "c", "cpp", "cc", "objc", "objcpp" },
+            --     cmd = {
+            --         "clangd",
+            --         "--background-index",
+            --         "--clang-tidy",
+            --         "--header-insertion=iwyu",
+            --         "--completion-style=detailed",
+            --         "--function-arg-placeholders",
+            --         "--fallback-style=llvm",
+            --     },
+            --     root_dir = function(fname)
+            --         return require("lspconfig.util").root_pattern(
+            --             "Makefile",
+            --             "configure.ac",
+            --             "configure.in",
+            --             "config.h.in",
+            --             "meson.build",
+            --             "meson_options.txt",
+            --             "build.ninja"
+            --         )(fname) or require("lspconfig.util").root_pattern(
+            --             "compile_commands.json",
+            --             "compile_flags.txt"
+            --         )(fname) or require("lspconfig.util").find_git_ancestor(fname)
+            --     end,
+            --     init_options = {
+            --         usePlaceholders = true,
+            --         completeUnimported = true,
+            --         clangdFileStatus = true,
+            --     },
+            --     settings = {
+            --         clangd = {
+            --             Diagnostics = {
+            --                 MissingIncludes = "Strict",
+            --             },
+            --             InlayHints = {
+            --                 Designators = true,
+            --                 Enabled = true,
+            --                 ParameterNames = true,
+            --                 DeducedTypes = true,
+            --                 BlockEnd = true,
+            --                 TypenameLimit = 24,
+            --             },
+            --             fallbackFlags = { "-std=c++23" },
+            --         },
+            --     },
+            -- }
 
             lspconfig.neocmake.setup {
                 on_attach = base_on_attach,
@@ -381,6 +383,12 @@ return {
                 },
             }
 
+            -- hyprls
+            lspconfig.hyprls.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
             -- starlark
             lspconfig.starpls.setup {
                 on_attach = base_on_attach,
@@ -414,86 +422,86 @@ return {
                 },
             }
 
-            -- diagnostics
+            -- diagnostics we use nvim-lint and conform
 
             -- Setup diagnostics formaters and linters for non LSP provided files
-            lspconfig.diagnosticls.setup {
-                on_attach = base_on_attach,
-                capabilities = capabilities,
-                cmd = { "diagnostic-languageserver", "--stdio" },
-                filetypes = {
-                    "lua",
-                    "sh",
-                    "markdown",
-                    "json",
-                    "yaml",
-                    "toml",
-                },
-                init_options = {
-                    linters = {
-                        shellcheck = {
-                            command = "shellcheck",
-                            debounce = 100,
-                            args = { "--format", "json", "-" },
-                            sourceName = "shellcheck",
-                            parseJson = {
-                                line = "line",
-                                column = "column",
-                                endLine = "endLine",
-                                endColumn = "endColumn",
-                                message = "${message} [${code}]",
-                                security = "level",
-                            },
-                            securities = {
-                                error = "error",
-                                warning = "warning",
-                                info = "info",
-                                style = "hint",
-                            },
-                        },
-                        markdownlint = {
-                            command = "markdownlint",
-                            isStderr = true,
-                            debounce = 100,
-                            args = { "--stdin" },
-                            offsetLine = 0,
-                            offsetColumn = 0,
-                            sourceName = "markdownlint",
-                            formatLines = 1,
-                            formatPattern = {
-                                "^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$",
-                                {
-                                    line = 1,
-                                    column = 3,
-                                    message = { 4 },
-                                },
-                            },
-                        },
-                    },
-                    filetypes = {
-                        sh = "shellcheck",
-                        markdown = "markdownlint",
-                    },
-                    formatters = {
-                        shfmt = {
-                            command = "shfmt",
-                            args = { "-i", "2", "-bn", "-ci", "-sr" },
-                        },
-                        prettier = {
-                            command = "prettier",
-                            args = { "--stdin-filepath", "%filepath" },
-                        },
-                    },
-                    formatFiletypes = {
-                        sh = "shfmt",
-                        json = "prettier",
-                        yaml = "prettier",
-                        toml = "prettier",
-                        markdown = "prettier",
-                        lua = "prettier",
-                    },
-                },
-            }
+            -- lspconfig.diagnosticls.setup {
+            --     on_attach = base_on_attach,
+            --     capabilities = capabilities,
+            --     cmd = { "diagnostic-languageserver", "--stdio" },
+            --     filetypes = {
+            --         "lua",
+            --         "sh",
+            --         "markdown",
+            --         "json",
+            --         "yaml",
+            --         "toml",
+            --     },
+            --     init_options = {
+            --         linters = {
+            --             shellcheck = {
+            --                 command = "shellcheck",
+            --                 debounce = 100,
+            --                 args = { "--format", "json", "-" },
+            --                 sourceName = "shellcheck",
+            --                 parseJson = {
+            --                     line = "line",
+            --                     column = "column",
+            --                     endLine = "endLine",
+            --                     endColumn = "endColumn",
+            --                     message = "${message} [${code}]",
+            --                     security = "level",
+            --                 },
+            --                 securities = {
+            --                     error = "error",
+            --                     warning = "warning",
+            --                     info = "info",
+            --                     style = "hint",
+            --                 },
+            --             },
+            --             markdownlint = {
+            --                 command = "markdownlint",
+            --                 isStderr = true,
+            --                 debounce = 100,
+            --                 args = { "--stdin" },
+            --                 offsetLine = 0,
+            --                 offsetColumn = 0,
+            --                 sourceName = "markdownlint",
+            --                 formatLines = 1,
+            --                 formatPattern = {
+            --                     "^.*?:\\s?(\\d+)(:(\\d+)?)?\\s(MD\\d{3}\\/[A-Za-z0-9-/]+)\\s(.*)$",
+            --                     {
+            --                         line = 1,
+            --                         column = 3,
+            --                         message = { 4 },
+            --                     },
+            --                 },
+            --             },
+            --         },
+            --         filetypes = {
+            --             sh = "shellcheck",
+            --             markdown = "markdownlint",
+            --         },
+            --         formatters = {
+            --             shfmt = {
+            --                 command = "shfmt",
+            --                 args = { "-i", "2", "-bn", "-ci", "-sr" },
+            --             },
+            --             prettier = {
+            --                 command = "prettier",
+            --                 args = { "--stdin-filepath", "%filepath" },
+            --             },
+            --         },
+            --         formatFiletypes = {
+            --             sh = "shfmt",
+            --             json = "prettier",
+            --             yaml = "prettier",
+            --             toml = "prettier",
+            --             markdown = "prettier",
+            --             lua = "prettier",
+            --         },
+            --     },
+            -- }
         end,
     },
 }

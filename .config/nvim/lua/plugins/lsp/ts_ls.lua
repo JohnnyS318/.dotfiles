@@ -47,6 +47,13 @@ M.organize_ts_imports = function()
     vim.lsp.buf.execute_command(params)
 end
 
+M.commands = {
+    OrganizeImports = {
+        M.organize_ts_imports,
+        description = "Organize Imports",
+    },
+}
+
 --- Extends the tsserver_attach function and adds a custom keymap for organizing imports.
 ---@param on_attach function(client, buffer) The base on_attach function to extend.
 ---@return function(client, buffer) A function that executes the wrapped on_attach function and extends it.
