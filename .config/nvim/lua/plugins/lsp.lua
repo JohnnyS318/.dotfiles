@@ -135,17 +135,46 @@ return {
 
             -- Javascript/Typescript(react)
 
-            -- Biome
-            lspconfig.biome.setup {
+            -- lspconfig.ts_ls.setup {
+            --     on_attach = require("plugins.lsp.ts_ls").on_tsserver_attach(base_on_attach),
+            --     capabilities = capabilities,
+            --     commands = require("plugins.lsp.ts_ls").commands,
+            --     settings = require("plugins.lsp.ts_ls").settings,
+            -- }
+
+            lspconfig.vtsls.setup {
                 on_attach = base_on_attach,
                 capabilities = capabilities,
-            }
-
-            lspconfig.ts_ls.setup {
-                on_attach = require("plugins.lsp.ts_ls").on_tsserver_attach(base_on_attach),
-                capabilities = capabilities,
-                commands = require("plugins.lsp.ts_ls").commands,
-                settings = require("plugins.lsp.ts_ls").settings,
+                filetypes = {
+                    "javascript",
+                    "javascriptreact",
+                    "javascript.jsx",
+                    "typescript",
+                    "typescriptreact",
+                    "typescript.tsx",
+                    "svelte"
+                },
+                settings = {
+                    complete_function_calls = true,
+                    vtsls = {
+                        enableMoveToFileCodeAction = true,
+                        autoUseWorkspaceTsdk = true,
+                    },
+                    typescript = {
+                        updateImportsOnFileMove = { enabled = "always" },
+                        suggest = {
+                            completeFunctionCalls = true,
+                        },
+                        inlayHints = {
+                            enumMemberValues = { enabled = true },
+                            functionLikeReturnTypes = { enabled = true },
+                            parameterNames = { enabled = "literals" },
+                            parameterTypes = { enabled = true },
+                            propertyDeclarationTypes = { enabled = true },
+                            variableTypes = { enabled = true },
+                        },
+                    },
+                }
             }
 
             lspconfig.tailwindcss.setup {
@@ -231,11 +260,39 @@ return {
             -- Do not configure @see plugins/langs/haskell.lua
 
             -- RUST
-            -- lspconfig.rust_analyzer.setup {
-            --     on_attach = base_on_attach,
-            --     capabilities = capabilities,
-            --     settings = {},
-            -- }
+            lspconfig.rust_analyzer.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+                settings = {
+                    ['rust-analyzer'] = {
+                        diagnostics = {
+                            enable = true,
+                        },
+                        check = {
+                            command = "clippy"
+                        },
+                        inlayHints = {
+                            chainingHints = {
+                                enable = true,
+                            },
+                            genericParameterHints = {
+                                lifetime = {
+                                    enable = true,
+                                },
+                                type = {
+                                    enable = true,
+                                },
+                            },
+                            paramterHints = {
+                                enable = true
+                            },
+                            typeHints = {
+                                enable = true,
+                            }
+                        }
+                    }
+                },
+            }
 
             -- Do not configure @see plugins/langs/rust.lua
             --[[ lspconfig.rust_analyzer = function()
@@ -396,6 +453,17 @@ return {
             }
 
             lspconfig.bzl.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
+            -- tex
+            lspconfig.texlab.setup {
+                on_attach = base_on_attach,
+                capabilities = capabilities,
+            }
+
+            lspconfig.vale_ls.setup {
                 on_attach = base_on_attach,
                 capabilities = capabilities,
             }

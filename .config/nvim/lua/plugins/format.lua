@@ -1,88 +1,44 @@
-return {}
-
 -- formatting configuration
 -- either using guard.nvim or conform.nvim
 
--- return {
---     "stevearc/conform.nvim",
---     event = { "BufReadPre", "BufNewFile", "BufWritePre" },
---     cmd = { "ConformInfo" },
---     keys = {
---         {
---             -- Customize or remove this keymap to your liking
---             "<leader>cf",
---             function()
---                 require("conform").format { async = true, lsp_fallback = true }
---             end,
---             mode = "",
---             desc = "Format buffer",
---         },
---     },
---     -- Everything in opts will be passed to setup()
---     opts = {
---         -- Define your formatters
---         formatters_by_ft = {
---             lua = { "stylua" },
---             python = { "isort", "black" },
---             --[[ typescript = { "eslint_d", { "prettierd", "prettier" } },
---             typescriptreact = { "eslint_d", { "eslint_d", "prettierd", "prettier" } },
---             javascript = { "eslint_d", { "prettierd", "prettier" } },
---             javascriptreact = { "eslint_d", { "prettierd", "prettier" } },
---             svelte = { "eslint_d", { "prettierd", "prettier" } }, ]]
---             typescript = { "biome" },
---             typescriptreact = { "biome" },
---             javascript = { "biome" },
---             javascriptreact = { "biome" },
---             svelte = { "biome" },
---             json = { { "jq", "prettierd", "prettier" } },
---             html = { { "prettierd", "prettier" } },
---             css = { { "prettierd", "prettier" } },
---             markdown = { { "prettierd", "prettier" } },
---             mdx = { { "prettierd", "prettier" } },
---             go = { "goimports", "gofumpt" },
---             cmake = { "cmake_format" },
---             haskell = { "fourmolu" },
---             sql = { "sql-formatter" },
---             starlark = { "buildifier" },
---             bzl = { "buildifier" },
---         },
---         -- Set up format-on-save
---         -- format_on_save = { timeout_ms = 500, lsp_fallback = true },
---
---         format_on_save = function(buffer)
---             local ignore_filetypes = { "markdown" }
---             if vim.tbl_contains(ignore_filetypes, vim.bo[buffer].filetype) then
---                 return
---             end
---             if vim.g.disable_autoformat or vim.b[buffer].disable_autoformat then
---                 return
---             end
---             return { timeout_ms = 500, lsp_fallback = true }
---         end,
---     },
---
---     config = function(_, opts)
---         vim.api.nvim_create_autocmd("FileType", {
---             pattern = vim.tbl_keys(require("conform").formatters_by_ft),
---             group = vim.api.nvim_create_augroup("conform_formatexpr", { clear = true }),
---             callback = function()
---                 vim.opt_local.formatexpr = 'v:lua.require("conform").formatexpr()'
---             end,
---         })
---         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
---         require("conform").setup(opts)
---         vim.g.auto_conform_on_save = true
---         vim.api.nvim_create_autocmd("BufWritePre", {
---             pattern = "*",
---             callback = function(args)
---                 if vim.g.auto_conform_on_save then
---                     require("conform").format { bufnr = args.buf, timeout_ms = nil }
---                 end
---             end,
---         })
---         vim.api.nvim_create_user_command("ConformToggleOnSave", function()
---             vim.g.auto_conform_on_save = not vim.g.auto_conform_on_save
---             vim.notify("Auto-Conform on save: " .. (vim.g.auto_conform_on_save and "Enabled" or "Disabled"))
---         end, {})
---     end,
--- }
+return {
+	{
+		"stevearc/conform.nvim",
+		event = { "BufWritePre" },
+		cmd = { "ConformInfo" },
+		keys = {
+			{ "<leader>cf", function() require("conform").format() end, desc = "Format Buffer Conform" }
+		},
+		opts = {
+			formatters_by_ft = {
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				javascript = { "prettier" },
+				javascriptreact = { "prettier" },
+				svelte = { "prettier" },
+				css = { "prettier" },
+				cpp = { "clang-format" },
+				c = { "clang-format" },
+				rust = { "rustfmt" },
+				tex = { "texfmt" },
+				latex = { "texfmt" },
+				--latex = { "latexindent" },
+				--tex = { "latexindent" },
+			},
+			format_on_save = {
+				timeout_ms = 250,
+				lsp_format = "fallback"
+			},
+			default_format_opts = {
+				lsp_format = "fallback",
+			},
+			formatters = {
+				texfmt = {
+					command = "tex-fmt",
+					args = { "--stdin" },
+					stdin = true,
+				}
+			}
+		}
+	},
+}

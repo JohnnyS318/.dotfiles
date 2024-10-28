@@ -7,9 +7,9 @@ return {
     {
         -- I use nvim-lint for now but maybe tranfer to only diagnostic-lsp later down the line
         "mfussenegger/nvim-lint",
+        event = { "BufWritePost", "BufNewFile" },
         config = function(_, opts)
             require("lint").linters_by_ft = {
-                --markdown = { "vale" },
                 javascript = { "eslint_d" },
                 typescript = { "eslint_d" },
                 javascriptreact = { "eslint_d" },
@@ -25,6 +25,8 @@ return {
                 sql = { "sqlfluff" },
                 starlark = { "buildifier" },
                 bzl = { "buildifier" },
+                --markdown = { "vale" },
+                --tex = { "vale" },
                 --cpp = { "cpplint" },
             }
 

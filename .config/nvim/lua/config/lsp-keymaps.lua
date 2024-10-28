@@ -12,6 +12,10 @@ local M = {}
 M.on_attach = function(_, buffer)
     -- Code Actions
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { silent = true, buffer = buffer, desc = "Rename" })
+    vim.keymap.set("n", "<F2>", "<CMD>Lspsaga rename<CR>",
+        { silent = true, buffer = buffer, desc = "Rename Project Wide" })
+    vim.keymap.set("n", "<leader>cR", "<CMD>Lspsaga rename<CR>",
+        { silent = true, buffer = buffer, desc = "Rename Project Wide" })
     -- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { silent = true, buffer = buffer, desc = "Code Action" })
 
     vim.keymap.set(
@@ -58,7 +62,24 @@ M.on_attach = function(_, buffer)
         "<CMD>Lspsaga hover_doc<CR>",
         { silent = true, buffer = buffer, desc = "Hover Documentation" }
     )
-    --vim.keymap.set("i", "<C-K>", vim.lsp.buf.hover, { silent = true, buffer = buffer, desc = "Hover Documentation" })
+
+    vim.keymap.set("i", "<C-K>", vim.lsp.buf.signature_help,
+        { silent = true, buffer = buffer, desc = "Hover Signature Help" })
+
+    -- Other Information
+
+    vim.keymap.set(
+        "n",
+        "<leader>ch",
+        "<CMD>Lspsaga incoming_calls<CR>",
+        { silent = true, buffer = buffer, desc = "Hover Documentation" }
+    )
+    vim.keymap.set(
+        "n",
+        "<leader>ch",
+        "<CMD>Lspsaga outgoing_calls<CR>",
+        { silent = true, buffer = buffer, desc = "Hover Documentation" }
+    )
 
     -- Diagnostics
 
