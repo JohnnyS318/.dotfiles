@@ -11,6 +11,7 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
+				markdown = { "markdownfmt" },
 				typescript = { "prettier" },
 				typescriptreact = { "prettier" },
 				javascript = { "prettier" },
@@ -22,6 +23,7 @@ return {
 				rust = { "rustfmt" },
 				tex = { "texfmt" },
 				latex = { "texfmt" },
+				yaml = { "yamlfmt" },
 				--latex = { "latexindent" },
 				--tex = { "latexindent" },
 			},

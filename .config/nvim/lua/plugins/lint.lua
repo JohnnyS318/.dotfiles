@@ -25,6 +25,7 @@ return {
                 sql = { "sqlfluff" },
                 starlark = { "buildifier" },
                 bzl = { "buildifier" },
+                dockerfile = { "hadolint" }
                 --markdown = { "vale" },
                 --tex = { "vale" },
                 --cpp = { "cpplint" },

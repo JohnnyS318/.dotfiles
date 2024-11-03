@@ -33,4 +33,15 @@ M.init_options = {
     fallbackFlags = { "-std=c++23" },
 }
 
+
+M.setup = function(base_on_attach, capabilities)
+    return {
+        on_attach = M.on_clangd_attach(base_on_attach),
+        capabilities = capabilities,
+        cmd = M.cmd,
+        settings = M.settings,
+        init_options = M.init_options,
+    }
+end
+
 return M
