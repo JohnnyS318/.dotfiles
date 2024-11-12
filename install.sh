@@ -76,3 +76,6 @@ install_file .config/hypr
 install_file .config/wofi
 install_file .config/rofi
 install_file .config/mako
+#install_file .config/xdg-desktop-portal
+install_file .config/electron-flags.conf
+install_file .config/Kvantum
