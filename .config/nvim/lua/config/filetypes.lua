@@ -46,6 +46,14 @@ M.register_filetypes = function()
             [".*/compose%.ya?ml"] = "yaml.docker-compose"
         }
     }
+
+
+    -- FIX: Since openTofu have no language server themselvs revert to terraform
+    vim.filetype.add {
+        extension = {
+            tf = "terraform"
+        }
+    }
 end
 
 --- Setup treesitter config of new custom filetypes

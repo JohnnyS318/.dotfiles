@@ -1,12 +1,12 @@
 -- map(local) leader
-vim.g.mapleader = " " -- set `mapleader` before lazy for correct mappigng
+vim.g.mapleader = " "       -- set `mapleader` before lazy for correct mappigng
 vim.g.maplocalleader = "\\" -- "\\"
 
 -- encoding
 vim.opt.fileencoding = "utf-8"
 
 -- linenumbers
-vim.opt.nu = true -- enable line numbers
+vim.opt.nu = true              -- enable line numbers
 vim.opt.relativenumber = false -- hate them
 vim.opt.signcolumn = "yes"
 
@@ -36,3 +36,6 @@ vim.g.skip_ts_context_commmentstring_module = true
 -- vim.g.loaded_netrwSettings = 1
 -- vim.g.loaded_netrwFileHandlers = 1
 -- vim.g.loaded_netrw_gitignore = 1
+
+-- clipboard
+vim.opt.clipboard = "unnamedplus"

@@ -200,8 +200,6 @@ return {
 			lspconfig.gitlab_ci_ls.setup(require("plugins.lsp.gitlab_ci_ls").setup(
 				base_on_attach, capabilities))
 
-
-
 			--HELM
 			lspconfig.helm_ls.setup(require("plugins.lsp.helm_ls").setup(base_on_attach, capabilities))
 
@@ -210,6 +208,8 @@ return {
 				on_attach = base_on_attach,
 				capabilities = capabilities,
 			}
+
+			lspconfig.terraformls.setup(require("plugins.lsp.terraformls").setup(base_on_attach, capabilities))
 
 
 			--- OTHER:
