@@ -11,24 +11,25 @@ alias srm="shred -u -n 1"                           # shred and deallocate file
 command -v exa &> /dev/null && { alias l="exa -lahg --icons --octal-permissions" && alias ll="exa -lhg --icons --octal-permissions"; }
 
 # lf based on installed file manager (joshuto -> lf -> ranger)
-if command -v joshuto &> /dev/null; then function lf {
-  local cmd_file code
-  cmd_file=$(mktemp)
-  joshuto --output-file "$cmd_file" "$@"
-  code=$?
-
-  case "$code" in
-    # regular exit
-    0) ;;
-    # output contains current directory
-    101)
-      cd "$(< "$cmd_file")" || return 1
-      ;;
-    # output selected files
-    102) ;;
-    *) return "$code" ;;
-  esac
-} elif ! command -v lf &> /dev/null; then if command -v ranger &> /dev/null; then alias lf="ranger"; fi; fi
+# if command -v joshuto &> /dev/null; then function lf {
+#   local cmd_file code
+#   cmd_file=$(mktemp)
+#   joshuto --output-file "$cmd_file" "$@"
+#   code=$?
+#
+#   case "$code" in
+#     # regular exit
+#     0) ;;
+#     # output contains current directory
+#     101)
+#       cd "$(< "$cmd_file")" || return 1
+#       ;;
+#     # output selected files
+#     102) ;;
+#     *) return "$code" ;;
+#   esac
+# } elif ! command -v lf &> /dev/null; then if command -v ranger &> /dev/null; then alias lf="ranger"; fi; fi
+command -v yazi > /dev/null && alias lf="yazi"
 
 # git aliases
 command -v dunk > /dev/null && alias gdd="git diff | dunk | less -R"

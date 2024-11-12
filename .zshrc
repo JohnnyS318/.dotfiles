@@ -38,7 +38,7 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::kubectl
 zinit snippet OMZP::kubectx
 zinit snippet OMZP::command-not-found
-zinit load 'zsh-users/zsh-history-substring-search'
+zinit light 'zsh-users/zsh-history-substring-search'
 zinit ice wait atload'_history_substring_search_config'
 
 

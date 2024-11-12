@@ -30,7 +30,6 @@ export EDITOR='nvim'
 
 #add cargo bin
 export PATH="$HOME/.cargo/bin:$PATH"
-export QT_STYLE_OVERRIDE=adwait
 
 export PATH="/opt/flutter/bin:$PATH"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
@@ -64,3 +63,8 @@ export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 # __GLX_VENDOR_LIBRARY_NAME=mesa
 # __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
 # MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink application
+
+export PATH="/opt/scorep/bin:$PATH"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/scorep/lib"
+
+export QT_QPA_PLATFORMTHEME=qt6ct
