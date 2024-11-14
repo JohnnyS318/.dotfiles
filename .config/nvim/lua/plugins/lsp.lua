@@ -7,6 +7,7 @@ return {
 		config = function()
 			require("lspsaga").setup {}
 		end,
+		event = "LspAttach",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter", -- optional
 			"nvim-tree/nvim-web-devicons",  -- optional
@@ -230,6 +231,7 @@ return {
 			--     on_attach = base_on_attach,
 			--     capabilities = capabilities,
 			-- }
+			lspconfig.harper_ls.setup(require("plugins.lsp.harper_ls").setup(base_on_attach, capabilities))
 
 			-- LUA
 			lspconfig.lua_ls.setup {

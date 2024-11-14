@@ -57,6 +57,7 @@ bindkey '^n' history-beginning-search-forward
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey '^[w' kill-region
+bindkey '^z' 'fg'
 
 # History
 HISTSIZE=5000

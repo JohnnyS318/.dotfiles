@@ -22,14 +22,18 @@ export CARGO_TARGET_DIR="$XDG_CACHE_HOME/cargo"
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 # oh-my-zsh
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$ZSH/custom"
+#export ZSH="$HOME/.oh-my-zsh"
+#export ZSH_CUSTOM="$ZSH/custom"
 
 # editor
 export EDITOR='nvim'
 
 #add cargo bin
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# QT Config
+#export QT_STYLE_OVERRIDE=adwaita
+export QT_QPA_PLATFORMTHEME="qt6ct"
 
 export PATH="/opt/flutter/bin:$PATH"
 export CHROME_EXECUTABLE="/usr/bin/google-chrome-stable"
@@ -59,12 +63,11 @@ esac
 
 export ELECTRON_OZONE_PLATFORM_HINT="wayland"
 
+export PATH="/opt/google-cloud-cli/bin:$PATH"
+
 # ZINK OPENGL drivers
 # __GLX_VENDOR_LIBRARY_NAME=mesa
 # __EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json
 # MESA_LOADER_DRIVER_OVERRIDE=zink GALLIUM_DRIVER=zink application
 
 export PATH="/opt/scorep/bin:$PATH"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/opt/scorep/lib"
-
-export QT_QPA_PLATFORMTHEME=qt6ct
