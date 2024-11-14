@@ -1,3 +1,8 @@
 -- require("onedark").load()
 
-vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme posterpole-term")
+vim.cmd("colorscheme kanagawa-dragon")
+
+
+-- CUSTOM
+vim.api.nvim_set_hl(0, "BlinkCmpGhostText", { fg = "#737c73" })

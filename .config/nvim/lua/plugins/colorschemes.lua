@@ -11,4 +11,8 @@ return {
     {
         "catppuccin/nvim",
     },
+    {
+        "ilof2/posterpole.nvim",
+        priority = 1000,
+    }
 }

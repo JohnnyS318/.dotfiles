@@ -3,17 +3,6 @@ return {
 		"j-hui/fidget.nvim",
 	},
 	{
-		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-		opts = {
-			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-			},
-		},
-	},
-	{
 		"nvimdev/lspsaga.nvim",
 		config = function()
 			require("lspsaga").setup {}

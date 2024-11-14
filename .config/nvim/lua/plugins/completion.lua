@@ -5,7 +5,10 @@ return {
 		"saghen/blink.cmp",
 		lazy = false, -- lazy loading handled internally
 		-- optional: provides snippets for the snippet source
-		dependencies = "rafamadriz/friendly-snippets",
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"mikavilpas/blink-ripgrep.nvim",
+		},
 
 		-- use a release tag to download pre-built binaries
 		--version = 'v0.*',
@@ -15,6 +18,34 @@ return {
 		-- build = 'RUSTFLAGS="-C target-feature=-crt-static" cargo build --release',
 
 		opts = {
+			sources = {
+				enabled_providers = {
+					"lsp",
+					"path",
+					"snippets",
+					"buffer",
+					"lazydev",
+					"ripgrep",
+				}
+			},
+			providers = {
+				lsp = { fallback_for = { "lazydev" } },
+				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+				ripgrep = {
+					module = "blink-ripgrep",
+					name = "Ripgrep",
+					-- the options below are optional, some default values are shown
+					---@module "blink-ripgrep"
+					---@type blink-ripgrep.Options
+					opts = {
+						-- the minimum length of the current word to start searching
+						-- (if the word is shorter than this, the search will not start)
+						prefix_min_len = 3,
+						-- The number of lines to show around each match in the preview window
+						context_size = 5,
+					},
+				}
+			},
 			highlight = {
 				-- sets the fallback highlight groups to nvim-cmp's highlight groups
 				-- useful for when your theme doesn't support blink.cmp
@@ -48,8 +79,12 @@ return {
 
 				['<Tab>'] = { 'snippet_forward', 'fallback' },
 				['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+			},
+			windows = {
+				ghost_text = {
+					enabled = true,
+				}
 			}
-
 		}
 	},
 	-- {
