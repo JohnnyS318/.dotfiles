@@ -21,11 +21,11 @@ return {
 				cpp = { "clang-format" },
 				c = { "clang-format" },
 				rust = { "rustfmt" },
-				tex = { "texfmt" },
-				latex = { "texfmt" },
+				--tex = { "texfmt" },
+				--latex = { "texfmt" },
 				yaml = { "yamlfmt" },
-				--latex = { "latexindent" },
-				--tex = { "latexindent" },
+				latex = { "latexindent" },
+				tex = { "latexindent" },
 			},
 			format_on_save = function(bufnr)
 				if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
@@ -43,6 +43,11 @@ return {
 				texfmt = {
 					command = "tex-fmt",
 					args = { "--stdin" },
+					stdin = true,
+				},
+				latexindent = {
+					command = "latexindent",
+					args = { "-l=.latexindent.yaml", "-" },
 					stdin = true,
 				}
 			}
