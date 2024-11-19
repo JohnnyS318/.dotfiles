@@ -227,6 +227,8 @@ return {
 				capabilities = capabilities,
 			}
 
+			lspconfig.ltex.setup(require("plugins.lsp.ltex").setup(base_on_attach, capabilities))
+
 			-- lspconfig.vale_ls.setup {
 			--     on_attach = base_on_attach,
 			--     capabilities = capabilities,
