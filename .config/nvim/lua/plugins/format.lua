@@ -47,7 +47,7 @@ return {
 				},
 				latexindent = {
 					command = "latexindent",
-					args = { "-l=.latexindent.yaml", "-" },
+					args = { "-m", "-l=.latexindent.yaml", "-" },
 					stdin = true,
 				}
 			}
