@@ -20,10 +20,15 @@ return {
             "nvim-lua/plenary.nvim",
             -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
+            { "nvim-telescope/telescope-fzy-native.nvim" },
             "BurntSushi/ripgrep",
         },
         opts = {
             extensions = {
+                fzy_native = {
+                    override_generic_sorter = true,
+                    override_file_sorter = true
+                },
                 fzf = {
                     fuzzy = true,
                     override_generic_sorter = true,
@@ -36,7 +41,8 @@ return {
             require("telescope").setup(opts)
 
             -- Enable telescope fzf native, if installed
-            pcall(require("telescope").load_extension("fzf"))
+            --pcall(require("telescope").load_extension("fzf"))
+            require("telescope").load_extension("fzy_native")
 
             local builtin = require("telescope.builtin")
 

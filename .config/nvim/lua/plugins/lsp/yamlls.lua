@@ -27,8 +27,9 @@ M.setup = function(base_on_attach, capabilities)
 					url = "",
 				},
 				schemas = {
-					Kubernetes = "*yaml",
-					["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+					["https://www.talos.dev/v1.8/schemas/config.schema.json"] = "talos_*.yaml",
+					["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+					kubernetes = "*yaml",
 				}
 			}
 		}

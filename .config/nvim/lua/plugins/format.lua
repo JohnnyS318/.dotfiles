@@ -5,7 +5,7 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre" },
-		cmd = { "ConformInfo" },
+		cmd = { "ConformInfo", "FormatDisable", "FormatEnable" },
 		keys = {
 			{ "<leader>cf", function() require("conform").format() end, desc = "Format Buffer Conform" }
 		},
