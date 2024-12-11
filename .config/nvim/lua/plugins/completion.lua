@@ -19,48 +19,47 @@ return {
 
 		opts = {
 			sources = {
-				enabled_providers = {
+				default = {
 					"lsp",
 					"path",
 					"snippets",
 					"buffer",
-					"lazydev",
-					"ripgrep",
-				}
+					-- "lazydev",
+					-- "ripgrep",
+				},
+				providers = {
+					-- lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+					-- ripgrep = {
+					-- 	module = "blink-ripgrep",
+					-- 	name = "Ripgrep",
+					-- 	-- the options below are optional, some default values are shown
+					-- 	---@module "blink-ripgrep"
+					-- 	---@type blink-ripgrep.Options
+					-- 	opts = {
+					-- 		-- the minimum length of the current word to start searching
+					-- 		-- (if the word is shorter than this, the search will not start)
+					-- 		prefix_min_len = 3,
+					-- 		-- The number of lines to show around each match in the preview window
+					-- 		context_size = 5,
+					-- 	},
+					-- }
+				},
 			},
-			providers = {
-				lsp = { fallback_for = { "lazydev" } },
-				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
-				ripgrep = {
-					module = "blink-ripgrep",
-					name = "Ripgrep",
-					-- the options below are optional, some default values are shown
-					---@module "blink-ripgrep"
-					---@type blink-ripgrep.Options
-					opts = {
-						-- the minimum length of the current word to start searching
-						-- (if the word is shorter than this, the search will not start)
-						prefix_min_len = 3,
-						-- The number of lines to show around each match in the preview window
-						context_size = 5,
-					},
-				}
-			},
-			highlight = {
+			appearance = {
 				-- sets the fallback highlight groups to nvim-cmp's highlight groups
 				-- useful for when your theme doesn't support blink.cmp
 				-- will be removed in a future release, assuming themes add support
 				use_nvim_cmp_as_default = true,
+				-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+				-- adjusts spacing to ensure icons are aligned
+				nerd_font_variant = "mono",
 			},
-			-- set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-			-- adjusts spacing to ensure icons are aligned
-			nerd_font_variant = "normal",
 
-			-- experimental auto-brackets support
-			accept = { auto_brackets = { enabled = true } },
 
 			-- experimental signature help support
-			trigger = { signature_help = { enabled = true } },
+			signature = {
+				enabled = true,
+			},
 
 			keymap = {
 				['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
@@ -79,12 +78,18 @@ return {
 				['<Tab>'] = { 'snippet_forward', 'fallback' },
 				['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 			},
-			windows = {
+			completion = {
+				-- experimental auto-brackets support
+				accept = { auto_brackets = { enabled = true } },
 				ghost_text = {
 					enabled = true,
 				}
 			}
-		}
+		},
+		-- allows extending the providers array elsewhere in your config
+		-- without having to redefine it
+		opts_extend = { "sources.default" }
+
 	},
 	-- {
 	--     "hrsh7th/nvim-cmp",
