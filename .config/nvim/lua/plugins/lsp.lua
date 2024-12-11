@@ -89,11 +89,9 @@ return {
 
 			-- broadcast additional completion capabilities to servers
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-			local blink_capabilities = require("blink.cmp").get_lsp_capabilities() -- USE If using blink.cmp
+			capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 			-- capabilities = require("coq").lsp_ensure_capabilities(capabilities) -- USE IF using coq
 			-- capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities) -- USE IF using cmp
-			capabilities = vim.tbl_deep_extend('force', capabilities, blink_capabilities);
 			capabilities = vim.tbl_deep_extend('force', capabilities, {
 				offsetEncoding = { 'utf-16' },
 				general = {
@@ -237,6 +235,8 @@ return {
 			}
 
 			lspconfig.ltex.setup(require("plugins.lsp.ltex").setup(base_on_attach, capabilities))
+
+			-- lspconfig.ltex_plus.setup(require("plugins.lsp.ltex_plus").setup(base_on_attach, capabilities))
 
 			-- lspconfig.vale_ls.setup {
 			--     on_attach = base_on_attach,
