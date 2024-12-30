@@ -79,3 +79,4 @@ install_file .config/mako
 #install_file .config/xdg-desktop-portal
 install_file .config/electron-flags.conf
 install_file .config/Kvantum
+install_file .config/ghostty
