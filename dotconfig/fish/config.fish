@@ -22,9 +22,12 @@ function fish_greeting
 	command -v pfetch >/dev/null && pfetch
 end
 
-fish_vi_key_bindings
-bind -M insert \cE accept-autosuggestion
-
 set -gx SHELL /usr/bin/fish
 set -gx VISUAL /usr/bin/nvim
 set -gx EDITOR $VISUAL
+
+## OTHER BINDS
+function fish_user_key_bindings
+	fish_vi_key_bindings insert
+	bind -M insert \cE accept-autosuggestion
+end
