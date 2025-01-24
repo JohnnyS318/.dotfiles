@@ -98,5 +98,13 @@ onedrive_skip_dir=[
 	"Pictures/SD Card"
 ]
 
+[dev]
+depends=["cargo"]
+
+[cargo.files]
+"dotcargo/config.toml" = "~/.cargo/config.toml"
+
+### SETTINGS ###
+
 [settings]
 default_target_type = "automatic"

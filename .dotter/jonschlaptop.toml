@@ -1,5 +1,5 @@
 includes = []
-packages = ["default", "kitty", "ghostty", "cmd", "pipewire", "hyprland", "onedrive", "lemurs"]
+packages = ["default", "kitty", "ghostty", "cmd", "pipewire", "hyprland", "onedrive", "lemurs", "dev"]
 
 [files]
 "dotconfig/hypr/jonschlaptop-hyprland.conf"= "~/.config/hypr/hyprland.conf"
