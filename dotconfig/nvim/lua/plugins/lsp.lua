@@ -139,7 +139,7 @@ return {
 			end
 
 			-- RUST
-			lspconfig.rust_analyzer.setup(require("plugins.lsp.rust_analyzer").setup(base_on_attach, capabilities))
+			--lspconfig.rust_analyzer.setup(require("plugins.lsp.rust_analyzer").setup(base_on_attach, capabilities))
 
 			-- C/C++
 			lspconfig.clangd.setup(require("plugins.lsp.clangd").setup(base_on_attach, capabilities))
